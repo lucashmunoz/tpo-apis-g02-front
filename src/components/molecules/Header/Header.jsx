@@ -23,7 +23,7 @@ const Header = () => {
                 Sobre Nosotros
               </Link>
             </li>
-            <li className="text-gray-800 font-semibold">
+            <li className="text-gray-800 font-semibold cursor-pointer">
               Servicios
               <span className="ml-2">
                 <svg

@@ -10,11 +10,13 @@ function App() {
     <>
       <Router>
         <Header />
-        <Routes>
-          <Route path="/comofunciona" element={<ComoFunciona />} />
-          <Route path="/sobrenosotros" element={<SobreNosotros />} />
-          <Route path="/" element={<Home />} />
-        </Routes>
+        <main className="min-h-screen">
+          <Routes>
+            <Route path="/comofunciona" element={<ComoFunciona />} />
+            <Route path="/sobrenosotros" element={<SobreNosotros />} />
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </main>
         <Footer />
       </Router>
     </>
