@@ -1,5 +1,11 @@
+import QuickSearch from "components/molecules/QuickSearch";
+
 const Home = () => {
-  return <div className="min-h-500 w-full bg-red-200">Home</div>;
+  return (
+    <div>
+      <QuickSearch></QuickSearch>
+    </div>
+  );
 };
 
 export default Home;
