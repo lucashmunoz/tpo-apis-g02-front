@@ -23,7 +23,7 @@ const QuickSearch = () => {
         <div>
           <p className="text-sm">
             Encontrar profesor nunca fue tan fácil. Simplemente ingresa lo que
-            desees aprender y elige tu próximo tutor !
+            desees aprender y elige tu próximo tutor!
           </p>
         </div>
       </div>

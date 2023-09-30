@@ -1,94 +1,68 @@
+import styled from "styled-components";
+import instagramLogo from "assets/redes/instagram.svg";
+import facebookLogo from "assets/redes/facebook.svg";
+import linkedinLogo from "assets/redes/linkedin.svg";
+import tiktokLogo from "assets/redes/tiktok.svg";
+
+const LogoImg = styled.img`
+  height: 24px;
+  width: 24px;
+  color: #096227;
+`;
+
+const LinkRedes = styled.a`
+  margin: 0 10px;
+`;
+
+const LogoEmpresa = styled.p`
+  color: #096227;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  text-align: CENTER;
+`;
+
+const HorizontalLine = styled.hr`
+  background-color: #096227;
+  height: 3px;
+  margin: 10px 120px 0 120px;
+`;
+
 const Footer = () => {
   return (
-    <footer class="bg-white text-gray-900 py-8 mt-auto">
-      <div class="text-center">
-        <p class="text-lg font-bold">Educate</p>
+    <footer className="bg-white text-gray-900 py-8 mt-auto">
+      <LogoEmpresa>NOMBRE EMPRESA</LogoEmpresa>
+      <div className="flex justify-center mt-4">
+        <LinkRedes
+          href="https://www.instagram.com/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <LogoImg src={instagramLogo} alt="instagram page" />
+        </LinkRedes>
+        <LinkRedes
+          href="https://www.facebook.com/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <LogoImg src={facebookLogo} alt="facebook page" />
+        </LinkRedes>
+        <LinkRedes
+          href="https://www.linkedin.com/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <LogoImg src={linkedinLogo} alt="linkedin page" />
+        </LinkRedes>
+        <LinkRedes
+          href="https://www.tiktok.com/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <LogoImg src={tiktokLogo} alt="tiktok page" />
+        </LinkRedes>
       </div>
-      <div class="flex justify-center mt-4">
-        <a href="#" class="text-gray-400 hover:text-white mx-4">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16m-7 6h7"
-            ></path>
-          </svg>
-        </a>
-        <a href="#" class="text-gray-400 hover:text-white mx-4">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-            ></path>
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M15 8a5 5 0 00-5-5M2 12h4m4 0h6m4 0h4M6 4v16"
-            ></path>
-          </svg>
-        </a>
-        <a href="#" class="text-gray-400 hover:text-white mx-4">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M21 15.816V8a2 2 0 00-2-2H5a2 2 0 00-2 2v7.816a2 2 0 001.29 1.903l7 2.333a2 2 0 001.42 0l7-2.333a2 2 0 001.29-1.903z"
-            ></path>
-          </svg>
-        </a>
-        <a href="#" class="text-gray-400 hover:text-white mx-4">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 14l9-5-9-5-9 5 9 5z"
-            ></path>
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 14l9-5-9-5-9 5 9 5z"
-            ></path>
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 14l9-5-9-5-9 5 9 5z"
-            ></path>
-          </svg>
-        </a>
-      </div>
-      <hr class="border-gray-700 my-4 mx-8" />
+      <HorizontalLine />
     </footer>
   );
 };
