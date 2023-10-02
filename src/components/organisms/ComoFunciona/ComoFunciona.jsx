@@ -7,7 +7,8 @@ import StepCard from "./StepCard";
 
 const ComoFuncionaContainer = styled.div`
   background-color: white;
-  padding: 60px;
+  padding: 60px 20px;
+  margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,29 +38,27 @@ const StepCardsWrapper = styled.div`
 
 const ComoFunciona = () => {
   return (
-    <>
-      <ComoFuncionaContainer>
-        <Titulo>¿Cómo funciona?</Titulo>
-        <Subtitulo>Con “nombre sitio” aprender nunca fue tan simple </Subtitulo>
-        <StepCardsWrapper>
-          <StepCard
-            img={stepOne}
-            title="Selecciona el tema"
-            text="Texto que explica cómo generar el tema"
-          />
-          <StepCard
-            img={stepTwo}
-            title="Elige tu próximo profesor"
-            text="Texto que explica cómo elegir el próximo profesor"
-          />
-          <StepCard
-            img={stepThree}
-            title="Contáctalo y ¡a aprender!"
-            text="Texto que explica cómo contactar al profesor"
-          />
-        </StepCardsWrapper>
-      </ComoFuncionaContainer>
-    </>
+    <ComoFuncionaContainer>
+      <Titulo>¿Cómo funciona?</Titulo>
+      <Subtitulo>Con “nombre sitio” aprender nunca fue tan simple </Subtitulo>
+      <StepCardsWrapper>
+        <StepCard
+          img={stepOne}
+          title="Selecciona el tema"
+          text="Texto que explica cómo generar el tema"
+        />
+        <StepCard
+          img={stepTwo}
+          title="Elige tu próximo profesor"
+          text="Texto que explica cómo elegir el próximo profesor"
+        />
+        <StepCard
+          img={stepThree}
+          title="Contáctalo y ¡a aprender!"
+          text="Texto que explica cómo contactar al profesor"
+        />
+      </StepCardsWrapper>
+    </ComoFuncionaContainer>
   );
 };
 
