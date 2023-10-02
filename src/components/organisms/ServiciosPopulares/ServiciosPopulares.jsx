@@ -8,7 +8,8 @@ import ServiceCard from "./ServiceCard";
 
 const WrapperServicios = styled.div`
   background-color: #f3f4f6;
-  padding: 60px 120px;
+  padding: 60px 20px;
+  margin: auto;
   display: block;
   text-align: center;
 `;
