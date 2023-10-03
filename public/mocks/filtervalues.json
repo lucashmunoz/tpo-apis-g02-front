@@ -1,0 +1,56 @@
+{
+  "categories": [
+    {
+      "label": "Idiomas",
+      "value": "LANGUAGE"
+    },
+    {
+      "label": "Música",
+      "value": "MUSIC"
+    },
+    {
+      "label": "Multimedia",
+      "value": "MULTIMEDIA"
+    },
+    {
+      "label": "Diseño",
+      "value": "DISENO"
+    },
+    {
+      "label": "Programación",
+      "value": "PROGRAMACION"
+    },
+    {
+      "label": "Deportes",
+      "value": "DEPORTES"
+    },
+    {
+      "label": "Cocina",
+      "value": "COCINA"
+    }
+  ],
+  "frequencies": [
+    {
+      "label": "Única",
+      "value": "UNICA"
+    },
+    {
+      "label": "Semanal",
+      "value": "SEMANAL"
+    },
+    {
+      "label": "Mensual",
+      "value": "Mensual"
+    }
+  ],
+  "classTypes": [
+    {
+      "label": "Individual",
+      "value": "INDIVIDUAL"
+    },
+    {
+      "label": "Grupal",
+      "value": "GRUPAL"
+    }
+  ]
+}

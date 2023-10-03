@@ -62,25 +62,7 @@ const Header = () => {
               <DesktopLink to="/sobrenosotros">Sobre Nosotros</DesktopLink>
             </DesktopLinkItem>
             <DesktopLinkItem>
-              <DesktopLink to="/servicios">
-                Servicios
-                <span className="ml-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    className="w-4 h-4 inline-block"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </span>
-              </DesktopLink>
+              <DesktopLink to="/services">Servicios</DesktopLink>
             </DesktopLinkItem>
           </DesktopLinksList>
         </nav>
