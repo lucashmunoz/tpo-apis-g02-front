@@ -62,7 +62,7 @@ const Header = () => {
               <DesktopLink to="/sobrenosotros">Sobre Nosotros</DesktopLink>
             </DesktopLinkItem>
             <DesktopLinkItem>
-              <DesktopLink to="/servicios">
+              <DesktopLink to="/services">
                 Servicios
                 <span className="ml-2">
                   <svg
