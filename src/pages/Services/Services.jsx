@@ -16,9 +16,10 @@ const Wrapper = styled.div`
 const FiltersContainer = styled.div`
   border-right: 1px solid grey;
   height: 100vh;
-  width: 600px;
+  width: 450px;
   padding: 60px 20px;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
 
   @media (max-width: 768px) {
     height: auto;
