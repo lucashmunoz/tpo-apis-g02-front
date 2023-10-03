@@ -14,11 +14,17 @@ const Select = styled.select`
   border-radius: 5px;
 `;
 
-const Dropdown = ({ id, labelText, options, placeholderLabel }) => {
+const Dropdown = ({
+  id,
+  labelText,
+  options,
+  placeholderLabel,
+  onChangeHandler
+}) => {
   return (
     <Wrapper>
       <Label htmlFor={id}>{labelText}</Label>
-      <Select id={id}>
+      <Select id={id} onChange={onChangeHandler}>
         {placeholderLabel && (
           <option value disabled defaultValue>
             {placeholderLabel}

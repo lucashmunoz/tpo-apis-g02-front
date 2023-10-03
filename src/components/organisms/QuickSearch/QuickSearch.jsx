@@ -87,6 +87,7 @@ const QuickSearch = () => {
             <SearchInput
               type="text"
               placeholder="Ingresa lo que quieres aprender"
+              inputType="primary"
             />
           </SearchInputWrapper>
           <SearchButton buttonType="primary">BUSCAR PROFESOR</SearchButton>

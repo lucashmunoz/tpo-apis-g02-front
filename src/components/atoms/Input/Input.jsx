@@ -1,10 +1,28 @@
-const Input = ({ placeholder }) => {
+import styled from "styled-components";
+
+const Label = styled.label``;
+
+const InputTag = styled.input`
+  margin-top: 5px;
+  border: 2px solid
+    ${(props) => (props.$inputType === "primary" ? " #22c55e" : " black")};
+  width: 100%;
+  border-radius: 5px;
+  padding: 8px 16px;
+`;
+
+const Input = ({ id, placeholder, labelText, inputType, onChangeHandler }) => {
   return (
-    <input
-      type="text"
-      className="border py-2 px-4 w-full border-green-500 rounded-md focus:outline-none focus:border-green-600"
-      placeholder={placeholder}
-    />
+    <>
+      <Label htmlFor={id}>{labelText}</Label>
+      <InputTag
+        id={id}
+        type="text"
+        placeholder={placeholder}
+        $inputType={inputType}
+        onChange={onChangeHandler}
+      />
+    </>
   );
 };
 
