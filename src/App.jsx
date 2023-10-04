@@ -4,6 +4,7 @@ import Header from "components/molecules/Header";
 import Home from "pages/Home";
 import SobreNosotros from "pages/SobreNosotros";
 import Services from "pages/Services";
+import ServiceDetail from "pages/ServiceDetail";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Routes>
             <Route path="/sobrenosotros" element={<SobreNosotros />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/service/:id" element={<ServiceDetail />} />
             <Route path="/" element={<Home />} />
           </Routes>
         </main>

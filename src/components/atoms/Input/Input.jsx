@@ -4,8 +4,8 @@ const Label = styled.label``;
 
 const InputTag = styled.input`
   margin-top: 5px;
-  border: 2px solid
-    ${(props) => (props.$inputType === "primary" ? " #22c55e" : " black")};
+  border: solid
+    ${(props) => (props.$inputType === "primary" ? "2px #22c55e" : "1px black")};
   width: 100%;
   border-radius: 5px;
   padding: 8px 16px;
