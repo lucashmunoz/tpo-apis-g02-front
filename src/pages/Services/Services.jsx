@@ -1,6 +1,7 @@
 import ServiceCard from "./ServiceCard";
 import styled from "styled-components";
-import linkedinLogo from "assets/redes/linkedin.svg";
+import profilePicture1 from "assets/mock-imgs/profile-picture-1.png";
+import profilePicture2 from "assets/mock-imgs/profile-picture-2.jpg";
 import Filtros from "./Filtros";
 import { useEffect, useState } from "react";
 
@@ -31,7 +32,6 @@ const FiltersContainer = styled.div`
 const ServicesContainer = styled.div`
   margin-top: 50px;
   width: 100%;
-
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 10px;
@@ -125,7 +125,22 @@ const Services = () => {
   // Llamamos a fetchServices en el mount del componente
   useEffect(() => {
     setServiciosFiltrados(updateServicesWithFilters);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters, servicios]);
+
+  const getFrequencyLabel = (frequencyValue) => {
+    console.log({ frequencyValue });
+    switch (frequencyValue) {
+      case "UNICA":
+        return "Única";
+      case "SEMANAL":
+        return "Semanal";
+      case "MENSUAL":
+        return "Mensual";
+      default:
+        return "";
+    }
+  };
 
   return (
     <Wrapper>
@@ -133,7 +148,7 @@ const Services = () => {
         <Filtros setFilters={setFilters} filters={filters} />
       </FiltersContainer>
       <ServicesContainer>
-        {serviciosFiltrados.map((servicio) => {
+        {serviciosFiltrados.map((servicio, index) => {
           const {
             id,
             profilePhoto,
@@ -142,15 +157,19 @@ const Services = () => {
             price,
             frequency,
             rate,
-            classType
+            nombreProfesor
           } = servicio;
 
           return (
             <ServiceCard
               key={id}
-              img={linkedinLogo}
+              profilePhoto={index % 2 === 0 ? profilePicture1 : profilePicture2}
               title={title}
-              text={summaryDescription}
+              summaryDescription={summaryDescription}
+              price={price}
+              frequency={getFrequencyLabel(frequency)}
+              rate={rate}
+              nombreProfesor={nombreProfesor}
             />
           );
         })}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import StarRate from "./StarRate";
 import styled from "styled-components";
+import StarRate from "./StarRate";
 import Dropdown from "components/atoms/Dropdown";
 import Input from "components/atoms/Input";
 
