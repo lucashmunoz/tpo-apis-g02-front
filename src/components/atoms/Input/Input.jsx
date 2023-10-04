@@ -11,7 +11,14 @@ const InputTag = styled.input`
   padding: 8px 16px;
 `;
 
-const Input = ({ id, placeholder, labelText, inputType, onChangeHandler }) => {
+const Input = ({
+  id,
+  placeholder,
+  labelText,
+  inputType,
+  onChangeHandler,
+  value
+}) => {
   return (
     <>
       <Label htmlFor={id}>{labelText}</Label>
@@ -21,6 +28,7 @@ const Input = ({ id, placeholder, labelText, inputType, onChangeHandler }) => {
         placeholder={placeholder}
         $inputType={inputType}
         onChange={onChangeHandler}
+        value={value}
       />
     </>
   );

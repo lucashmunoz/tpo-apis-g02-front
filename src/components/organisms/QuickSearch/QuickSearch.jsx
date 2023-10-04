@@ -1,5 +1,6 @@
-import React from "react";
+import { useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import Input from "components/atoms/Input";
 import promoImg1 from "assets/promo-imgs/promo-imgs-banner_1.jpg";
 import Button from "components/atoms/Button";
@@ -55,6 +56,11 @@ const SearchButton = styled(Button)`
   }
 `;
 
+const SearchLink = styled(Link)`
+  width: 100%;
+  height: 100%;
+`;
+
 const SearchPromoText = styled.p`
   font-size: 14px;
   text-align: justify;
@@ -78,6 +84,8 @@ const PromoImg = styled.img`
 `;
 
 const QuickSearch = () => {
+  const [searchValue, setSearchValue] = useState("");
+
   return (
     <QuickSearchWrapper>
       <SearchBoxContainer>
@@ -88,9 +96,19 @@ const QuickSearch = () => {
               type="text"
               placeholder="Ingresa lo que quieres aprender"
               inputType="primary"
+              onChangeHandler={(e) => {
+                setSearchValue(e.target.value);
+              }}
             />
           </SearchInputWrapper>
-          <SearchButton buttonType="primary">BUSCAR PROFESOR</SearchButton>
+          <SearchButton buttonType="primary">
+            <SearchLink
+              to="/services"
+              state={{ subject: searchValue.toString() }}
+            >
+              BUSCAR PROFESOR
+            </SearchLink>
+          </SearchButton>
         </SearchControls>
         <SearchPromoText>
           Encontrar profesor nunca fue tan fácil. Simplemente ingresa lo que
