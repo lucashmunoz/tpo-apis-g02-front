@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import StarRate from "./StarRate";
 import styled from "styled-components";
 import Dropdown from "components/atoms/Dropdown";
@@ -17,26 +18,37 @@ const ControlContainer = styled.div`
   margin-top: 15px;
 `;
 
-const Filtros = ({ setFilters }) => {
+const Filtros = ({ filters, setFilters }) => {
   const [opcionesCategorias, setOpcionesCategorias] = useState([]);
   const [opcionesTipoClase, setOpcionesTipoClase] = useState([]);
   const [opcionesFrecuencias, setOpcionesFrecuencias] = useState([]);
+
+  // Desde state recibieremos la búsqueda ingresada en home
+  const { state: linkState } = useLocation();
 
   /**
    * Obtiene los filtros de busqueda del componente
    */
   const fetchFilters = async () => {
     const response = await fetch("mocks/filtervalues.json");
-    const filters = await response.json();
+    const filtersValues = await response.json();
 
-    setOpcionesCategorias(filters.categories);
-    setOpcionesTipoClase(filters.classTypes);
-    setOpcionesFrecuencias(filters.frequencies);
+    setOpcionesCategorias(filtersValues.categories);
+    setOpcionesTipoClase(filtersValues.classTypes);
+    setOpcionesFrecuencias(filtersValues.frequencies);
   };
 
   // Llamamos a fetchFilters en el mount del componente
   useEffect(() => {
     fetchFilters();
+
+    if (linkState?.subject && linkState?.subject.length > 0) {
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        subject: linkState.subject
+      }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -89,6 +101,7 @@ const Filtros = ({ setFilters }) => {
           labelText="Tema"
           placeholder="Tema"
           inputType="secondary"
+          value={filters.subject}
           onChangeHandler={(e) =>
             setFilters((prevFilters) => ({
               ...prevFilters,

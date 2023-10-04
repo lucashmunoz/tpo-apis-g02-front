@@ -80,28 +80,28 @@ const Services = () => {
 
     // Filtramos por categoria si hay elegida
     if (filters.category && filters.category.length !== 0) {
-      filteredServices = servicios.filter(
+      filteredServices = filteredServices.filter(
         (servicio) => servicio.category === filters.category
       );
     }
 
     // Filtramos por Tipo de Clase
     if (filters.classType && filters.classType.length !== 0) {
-      filteredServices = servicios.filter(
+      filteredServices = filteredServices.filter(
         (servicio) => servicio.classType === filters.classType
       );
     }
 
     // Filtramos por Frecuencia
     if (filters.frequency && filters.frequency.length !== 0) {
-      filteredServices = servicios.filter(
+      filteredServices = filteredServices.filter(
         (servicio) => servicio.frequency === filters.frequency
       );
     }
 
     // Filtramos por Tema
     if (filters.subject && filters.subject.length !== 0) {
-      filteredServices = servicios.filter(
+      filteredServices = filteredServices.filter(
         (servicio) =>
           eliminarTildes(
             servicio.summaryDescription.toLocaleLowerCase()
@@ -114,7 +114,7 @@ const Services = () => {
 
     // Filtramos por Calificación
     if (filters.rate > 0) {
-      filteredServices = servicios.filter(
+      filteredServices = filteredServices.filter(
         (servicio) => servicio.rate >= filters.rate
       );
     }
@@ -125,12 +125,12 @@ const Services = () => {
   // Llamamos a fetchServices en el mount del componente
   useEffect(() => {
     setServiciosFiltrados(updateServicesWithFilters);
-  }, [filters]);
+  }, [filters, servicios]);
 
   return (
     <Wrapper>
       <FiltersContainer>
-        <Filtros setFilters={setFilters} />
+        <Filtros setFilters={setFilters} filters={filters} />
       </FiltersContainer>
       <ServicesContainer>
         {serviciosFiltrados.map((servicio) => {
