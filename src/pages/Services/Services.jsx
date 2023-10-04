@@ -39,25 +39,101 @@ const ServicesContainer = styled.div`
 
 const Services = () => {
   const [servicios, setServicios] = useState([]);
+  const [serviciosFiltrados, setServiciosFiltrados] = useState([]);
 
-  const fetchFilters = async () => {
+  const [filters, setFilters] = useState({
+    category: "",
+    frequency: "",
+    classType: "",
+    rate: 0,
+    subject: ""
+  });
+
+  /**
+   * Obtiene los servicios totales ofrecidos
+   */
+  const fetchServices = async () => {
     const response = await fetch("mocks/services.json");
     const { services } = await response.json();
 
     setServicios(services);
+    setServiciosFiltrados(services);
   };
 
+  // Llamamos a fetchServices en el mount del componente
   useEffect(() => {
-    fetchFilters();
+    fetchServices();
   }, []);
+
+  const eliminarTildes = (str) => {
+    return str
+      .replace("á", "a")
+      .replace("é", "e")
+      .replace("í", "i")
+      .replace("ó", "o")
+      .replace("ú", "u")
+      .replace("ü", "u");
+  };
+
+  const updateServicesWithFilters = () => {
+    let filteredServices = servicios;
+
+    // Filtramos por categoria si hay elegida
+    if (filters.category && filters.category.length !== 0) {
+      filteredServices = servicios.filter(
+        (servicio) => servicio.category === filters.category
+      );
+    }
+
+    // Filtramos por Tipo de Clase
+    if (filters.classType && filters.classType.length !== 0) {
+      filteredServices = servicios.filter(
+        (servicio) => servicio.classType === filters.classType
+      );
+    }
+
+    // Filtramos por Frecuencia
+    if (filters.frequency && filters.frequency.length !== 0) {
+      filteredServices = servicios.filter(
+        (servicio) => servicio.frequency === filters.frequency
+      );
+    }
+
+    // Filtramos por Tema
+    if (filters.subject && filters.subject.length !== 0) {
+      filteredServices = servicios.filter(
+        (servicio) =>
+          eliminarTildes(
+            servicio.summaryDescription.toLocaleLowerCase()
+          ).includes(eliminarTildes(filters.subject.toLocaleLowerCase())) ||
+          eliminarTildes(servicio.title.toLocaleLowerCase()).includes(
+            eliminarTildes(filters.subject.toLocaleLowerCase())
+          )
+      );
+    }
+
+    // Filtramos por Calificación
+    if (filters.rate > 0) {
+      filteredServices = servicios.filter(
+        (servicio) => servicio.rate >= filters.rate
+      );
+    }
+
+    return filteredServices;
+  };
+
+  // Llamamos a fetchServices en el mount del componente
+  useEffect(() => {
+    setServiciosFiltrados(updateServicesWithFilters);
+  }, [filters]);
 
   return (
     <Wrapper>
       <FiltersContainer>
-        <Filtros />
+        <Filtros setFilters={setFilters} />
       </FiltersContainer>
       <ServicesContainer>
-        {servicios.map((servicio) => {
+        {serviciosFiltrados.map((servicio) => {
           const {
             id,
             profilePhoto,

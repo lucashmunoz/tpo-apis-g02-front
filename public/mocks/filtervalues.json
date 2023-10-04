@@ -1,6 +1,10 @@
 {
   "categories": [
     {
+      "label": "Materias Escolares",
+      "value": "ESCOLARES"
+    },
+    {
       "label": "Idiomas",
       "value": "LANGUAGE"
     },
@@ -18,7 +22,7 @@
     },
     {
       "label": "Programación",
-      "value": "PROGRAMACION"
+      "value": "PROGRAMMING"
     },
     {
       "label": "Deportes",

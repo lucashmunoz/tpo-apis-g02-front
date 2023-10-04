@@ -26,7 +26,7 @@ const Dropdown = ({
       <Label htmlFor={id}>{labelText}</Label>
       <Select id={id} onChange={onChangeHandler}>
         {placeholderLabel && (
-          <option value disabled defaultValue>
+          <option value="" defaultValue selected>
             {placeholderLabel}
           </option>
         )}

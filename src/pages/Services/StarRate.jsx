@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import CheckedStar from "assets/icons/star-filled.svg";
 import UncheckedStar from "assets/icons/star-no-filled.svg";
@@ -19,11 +20,14 @@ const StarImg = styled.img`
   height: 24px;
 `;
 
-const StarRate = ({ selectedRate, setSelectedRate }) => {
+const StarRate = ({ onChangeHandler }) => {
+  const [selectedRate, setSelectedRate] = useState(0);
+
   const handleRateChange = (e, newRate) => {
     // Si se selecciona o deselecciona 1 estrella, el rate a asignar sera 1
     if (newRate === 1) {
       setSelectedRate(1);
+      onChangeHandler(1);
       return;
     }
 
@@ -33,11 +37,13 @@ const StarRate = ({ selectedRate, setSelectedRate }) => {
      */
     if (selectedRate === newRate) {
       setSelectedRate(newRate - 1);
+      onChangeHandler(newRate - 1);
       return;
     }
 
     // Si el rate seleccionado no lo estaba previamente, será el nuevo valor a asignar
     setSelectedRate(newRate);
+    onChangeHandler(newRate);
   };
 
   return (

@@ -5,7 +5,8 @@
       "profilePhoto": "url_de_la_foto1.jpg",
       "title": "Matemáticas",
       "summaryDescription": "Aprende matemáticas de forma efectiva con clases personalizadas",
-      "price": "$30",
+      "category": "ESCOLARES",
+      "price": "30",
       "frequency": "SEMANAL",
       "rate": 4,
       "classType": "INDIVIDUAL"
@@ -15,7 +16,8 @@
       "profilePhoto": "url_de_la_foto2.jpg",
       "title": "Inglés",
       "summaryDescription": "Mejora tus habilidades en inglés con nuestras clases personalizadas.",
-      "price": "$25",
+      "category": "LANGUAGE",
+      "price": "25",
       "frequency": "MENSUAL",
       "rate": 5,
       "classType": "INDIVIDUAL"
@@ -25,7 +27,8 @@
       "profilePhoto": "url_de_la_foto3.jpg",
       "title": "Programación",
       "summaryDescription": "Aprende a programar desde cero o mejora tus habilidades existentes.",
-      "price": "$40",
+      "category": "PROGRAMMING",
+      "price": "40",
       "frequency": "SEMANAL",
       "rate": 4.5,
       "classType": "GRUPAL"
@@ -35,7 +38,8 @@
       "profilePhoto": "url_de_la_foto4.jpg",
       "title": "Historia",
       "summaryDescription": "Explora el pasado a través de fascinantes clases de historia.",
-      "price": "$35",
+      "category": "ESCOLARES",
+      "price": "35",
       "frequency": "SEMANAL",
       "rate": 4.2,
       "classType": "INDIVIDUAL"
@@ -43,9 +47,10 @@
     {
       "id": 4,
       "profilePhoto": "url_de_la_foto5.jpg",
-      "title": "Ciencias",
+      "title": "Biología",
       "summaryDescription": "Descubre el mundo de las ciencias con nuestras clases especializadas.",
-      "price": "$30",
+      "category": "ESCOLARES",
+      "price": "30",
       "frequency": "MENSUAL",
       "rate": 4.8,
       "classType": "GRUPAL"
@@ -53,9 +58,10 @@
     {
       "id": 5,
       "profilePhoto": "url_de_la_foto6.jpg",
-      "title": "Arte",
-      "summaryDescription": "Desarrolla tu creatividad a través de clases de arte.",
-      "price": "$45",
+      "title": "Photoshop",
+      "summaryDescription": "Desarrolla tu creatividad a través Photoshop.",
+      "category": "DISENO",
+      "price": "45",
       "frequency": "SEMANAL",
       "rate": 4.7,
       "classType": "INDIVIDUAL"
@@ -63,9 +69,10 @@
     {
       "id": 6,
       "profilePhoto": "url_de_la_foto7.jpg",
-      "title": "Economía",
+      "title": "Cocina hogareña",
       "summaryDescription": "Comprende los principios económicos con nuestras clases especializadas.",
-      "price": "$35",
+      "category": "COCINA",
+      "price": "35",
       "frequency": "MENSUAL",
       "rate": 1.4,
       "classType": "GRUPAL"
@@ -75,8 +82,9 @@
       "profilePhoto": "url_de_la_foto8.jpg",
       "title": "Física",
       "summaryDescription": "Explora las leyes fundamentales del universo con clases de física.",
-      "price": "$40",
-      "frequency": "SEMANAL",
+      "category": "ESCOLARES",
+      "price": "40",
+      "frequency": "UNICA",
       "rate": 4.6,
       "classType": "INDIVIDUAL"
     },
@@ -85,8 +93,9 @@
       "profilePhoto": "url_de_la_foto9.jpg",
       "title": "Química",
       "summaryDescription": "Sumérgete en el mundo de la química con clases especializadas.",
-      "price": "$35",
-      "frequency": "MENSUAL",
+      "category": "ESCOLARES",
+      "price": "35",
+      "frequency": "UNICA",
       "rate": 4.3,
       "classType": "GRUPAL"
     },
@@ -95,7 +104,8 @@
       "profilePhoto": "url_de_la_foto10.jpg",
       "title": "Piano",
       "summaryDescription": "Explora el piano y desarrolla tus habilidades musicales con nuestras clases especializadas.",
-      "price": "$45",
+      "category": "MUSIC",
+      "price": "45",
       "frequency": "SEMANAL",
       "rate": 3.9,
       "classType": "INDIVIDUAL"
@@ -105,7 +115,8 @@
       "profilePhoto": "url_de_la_foto11.jpg",
       "title": "Geografía",
       "summaryDescription": "Descubre el mundo a través de clases de geografía.",
-      "price": "$30",
+      "category": "ESCOLARES",
+      "price": "30",
       "frequency": "SEMANAL",
       "rate": 4.2,
       "classType": "INDIVIDUAL"
@@ -113,9 +124,10 @@
     {
       "id": 11,
       "profilePhoto": "url_de_la_foto12.jpg",
-      "title": "Biología",
+      "title": "Pescados y Mariscos",
       "summaryDescription": "Aprende sobre la vida y la naturaleza con clases de biología.",
-      "price": "$35",
+      "category": "COCINA",
+      "price": "35",
       "frequency": "MENSUAL",
       "rate": 2.7,
       "classType": "GRUPAL"
