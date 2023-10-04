@@ -4,6 +4,10 @@ import facebookLogo from "assets/redes/facebook.svg";
 import linkedinLogo from "assets/redes/linkedin.svg";
 import tiktokLogo from "assets/redes/tiktok.svg";
 
+const FooterWrapper = styled.footer`
+  border-top: 1px solid grey;
+`;
+
 const LogoImg = styled.img`
   height: 24px;
   width: 24px;
@@ -30,7 +34,7 @@ const HorizontalLine = styled.hr`
 
 const Footer = () => {
   return (
-    <footer className="bg-white text-gray-900 py-8 mt-auto">
+    <FooterWrapper className="bg-white text-gray-900 py-8 mt-auto">
       <LogoEmpresa>NOMBRE EMPRESA</LogoEmpresa>
       <div className="flex justify-center mt-4">
         <LinkRedes
@@ -63,7 +67,7 @@ const Footer = () => {
         </LinkRedes>
       </div>
       <HorizontalLine />
-    </footer>
+    </FooterWrapper>
   );
 };
 

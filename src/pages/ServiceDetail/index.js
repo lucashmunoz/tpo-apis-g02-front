@@ -1,3 +1,3 @@
-import ServicesDetail from "./ServicesDetail";
+import ServiceDetail from "./ServiceDetail";
 
-export default ServicesDetail;
+export default ServiceDetail;

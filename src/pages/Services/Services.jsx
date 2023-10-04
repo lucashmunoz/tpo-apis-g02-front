@@ -1,9 +1,10 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ServiceCard from "./ServiceCard";
 import styled from "styled-components";
 import profilePicture1 from "assets/mock-imgs/profile-picture-1.png";
 import profilePicture2 from "assets/mock-imgs/profile-picture-2.jpg";
 import Filtros from "./Filtros";
-import { useEffect, useState } from "react";
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,8 +16,7 @@ const Wrapper = styled.div`
 `;
 
 const FiltersContainer = styled.div`
-  border-right: 1px solid grey;
-  height: 100vh;
+  height: auto;
   width: 450px;
   padding: 60px 20px;
   margin-left: auto;
@@ -48,6 +48,9 @@ const Services = () => {
     rate: 0,
     subject: ""
   });
+
+  const navigate = useNavigate();
+  const goToServiceDetail = (serviceId) => navigate(`/service/${serviceId}`);
 
   /**
    * Obtiene los servicios totales ofrecidos
@@ -129,7 +132,6 @@ const Services = () => {
   }, [filters, servicios]);
 
   const getFrequencyLabel = (frequencyValue) => {
-    console.log({ frequencyValue });
     switch (frequencyValue) {
       case "UNICA":
         return "Única";
@@ -170,6 +172,7 @@ const Services = () => {
               frequency={getFrequencyLabel(frequency)}
               rate={rate}
               nombreProfesor={nombreProfesor}
+              onClickHandler={() => goToServiceDetail(id)}
             />
           );
         })}
