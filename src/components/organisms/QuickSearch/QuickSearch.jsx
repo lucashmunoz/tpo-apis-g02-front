@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Input from "components/atoms/Input";
 import promoImg1 from "assets/promo-imgs/promo-imgs-banner_1.jpg";
-import Button from "components/atoms/Button";
+import PrimaryButton from "components/atoms/PrimaryButton";
 
 const QuickSearchWrapper = styled.div`
   background-color: #f3f4f6;
@@ -53,7 +53,7 @@ const SearchButtonContainer = styled.div`
   width: 186px;
 `;
 
-const SearchButton = styled(Button)`
+const SearchButton = styled(PrimaryButton)`
   margin-left: 20px;
 
   @media (max-width: 768px) {
@@ -107,7 +107,7 @@ const QuickSearch = () => {
             />
           </SearchInputWrapper>
           <SearchButtonContainer>
-            <SearchButton buttonType="primary">
+            <SearchButton>
               <SearchLink
                 to="/services"
                 state={{ subject: searchValue.toString() }}

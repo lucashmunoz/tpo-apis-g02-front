@@ -6,14 +6,25 @@ import tiktokLogo from "assets/redes/tiktok.svg";
 
 const FooterWrapper = styled.footer`
   border-top: 1px solid grey;
+  display: flex;
+  flex-direction: column;
   height: 20px;
   width: 100%;
+  padding: 50px 0;
 `;
 
 const LogoImg = styled.img`
   height: 24px;
   width: 24px;
   color: #096227;
+`;
+
+const LinksContainer = styled.div`
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 `;
 
 const LinkRedes = styled.a`
@@ -31,14 +42,14 @@ const LogoEmpresa = styled.p`
 const HorizontalLine = styled.hr`
   background-color: #096227;
   height: 3px;
-  margin: 10px 120px 0 120px;
+  margin: 20px 120px 0 120px;
 `;
 
 const Footer = () => {
   return (
     <FooterWrapper>
       <LogoEmpresa>NOMBRE EMPRESA</LogoEmpresa>
-      <div className="flex justify-center mt-4">
+      <LinksContainer>
         <LinkRedes
           href="https://www.instagram.com/"
           target="_blank"
@@ -67,7 +78,7 @@ const Footer = () => {
         >
           <LogoImg src={tiktokLogo} alt="tiktok page" />
         </LinkRedes>
-      </div>
+      </LinksContainer>
       <HorizontalLine />
     </FooterWrapper>
   );

@@ -50,19 +50,19 @@ const StarRate = ({ onChangeHandler, labelText }) => {
     <Wrapper>
       {labelText && <label>{labelText}</label>}
       <Rates>
-        <Star name="1" onClick={(e) => handleRateChange(e, 1)}>
+        <Star type="button" name="1" onClick={(e) => handleRateChange(e, 1)}>
           <StarImg src={selectedRate >= 1 ? CheckedStar : UncheckedStar} />
         </Star>
-        <Star name="2" onClick={(e) => handleRateChange(e, 2)}>
+        <Star type="button" name="2" onClick={(e) => handleRateChange(e, 2)}>
           <StarImg src={selectedRate >= 2 ? CheckedStar : UncheckedStar} />
         </Star>
-        <Star name="3" onClick={(e) => handleRateChange(e, 3)}>
+        <Star type="button" name="3" onClick={(e) => handleRateChange(e, 3)}>
           <StarImg src={selectedRate >= 3 ? CheckedStar : UncheckedStar} />
         </Star>
-        <Star name="4" onClick={(e) => handleRateChange(e, 4)}>
+        <Star type="button" name="4" onClick={(e) => handleRateChange(e, 4)}>
           <StarImg src={selectedRate >= 4 ? CheckedStar : UncheckedStar} />
         </Star>
-        <Star name="5" onClick={(e) => handleRateChange(e, 5)}>
+        <Star type="button" name="5" onClick={(e) => handleRateChange(e, 5)}>
           <StarImg src={selectedRate >= 5 ? CheckedStar : UncheckedStar} />
         </Star>
       </Rates>
