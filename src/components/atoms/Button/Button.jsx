@@ -1,3 +1,9 @@
+import styled from "styled-components";
+
+const ButtonElement = styled.button`
+  width: 100%;
+`;
+
 const Button = ({ children, buttonType, onClick }) => {
   const getButtonClassName = () => {
     const classNamePrimary =
@@ -16,9 +22,9 @@ const Button = ({ children, buttonType, onClick }) => {
   };
 
   return (
-    <button className={getButtonClassName()} onClick={onClick}>
+    <ButtonElement className={getButtonClassName()} onClick={onClick}>
       {children}
-    </button>
+    </ButtonElement>
   );
 };
 

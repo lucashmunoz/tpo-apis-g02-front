@@ -5,20 +5,25 @@ import Home from "pages/Home";
 import SobreNosotros from "pages/SobreNosotros";
 import Services from "pages/Services";
 import ServiceDetail from "pages/ServiceDetail";
+import styled from "styled-components";
+
+const Main = styled.main`
+  position: relative;
+`;
 
 function App() {
   return (
     <>
       <Router>
         <Header />
-        <main className="min-h-screen">
+        <Main>
           <Routes>
             <Route path="/sobrenosotros" element={<SobreNosotros />} />
             <Route path="/services" element={<Services />} />
             <Route path="/service/:id" element={<ServiceDetail />} />
             <Route path="/" element={<Home />} />
           </Routes>
-        </main>
+        </Main>
         <Footer />
       </Router>
     </>

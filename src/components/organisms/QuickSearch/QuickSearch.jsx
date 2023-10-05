@@ -31,6 +31,7 @@ const SearchBoxTitle = styled.h2`
 const SearchControls = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 16px 0;
 
   @media (max-width: 768px) {
@@ -47,6 +48,10 @@ const SearchInputWrapper = styled.div`
 `;
 
 const SearchInput = styled(Input)``;
+
+const SearchButtonContainer = styled.div`
+  width: 186px;
+`;
 
 const SearchButton = styled(Button)`
   margin-left: 20px;
@@ -101,14 +106,16 @@ const QuickSearch = () => {
               }}
             />
           </SearchInputWrapper>
-          <SearchButton buttonType="primary">
-            <SearchLink
-              to="/services"
-              state={{ subject: searchValue.toString() }}
-            >
-              BUSCAR PROFESOR
-            </SearchLink>
-          </SearchButton>
+          <SearchButtonContainer>
+            <SearchButton buttonType="primary">
+              <SearchLink
+                to="/services"
+                state={{ subject: searchValue.toString() }}
+              >
+                BUSCAR PROFESOR
+              </SearchLink>
+            </SearchButton>
+          </SearchButtonContainer>
         </SearchControls>
         <SearchPromoText>
           Encontrar profesor nunca fue tan fácil. Simplemente ingresa lo que

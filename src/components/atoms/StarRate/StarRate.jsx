@@ -20,7 +20,7 @@ const StarImg = styled.img`
   height: 24px;
 `;
 
-const StarRate = ({ onChangeHandler }) => {
+const StarRate = ({ onChangeHandler, labelText }) => {
   const [selectedRate, setSelectedRate] = useState(0);
 
   const handleRateChange = (e, newRate) => {
@@ -48,7 +48,7 @@ const StarRate = ({ onChangeHandler }) => {
 
   return (
     <Wrapper>
-      <label>Calificación</label>
+      {labelText && <label>{labelText}</label>}
       <Rates>
         <Star name="1" onClick={(e) => handleRateChange(e, 1)}>
           <StarImg src={selectedRate >= 1 ? CheckedStar : UncheckedStar} />

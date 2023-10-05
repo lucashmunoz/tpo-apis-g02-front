@@ -5,13 +5,15 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const Label = styled.label``;
-
 const Select = styled.select`
   margin-top: 5px;
   padding: 10px 0;
-  border: 1px solid grey;
+  border: 1px solid #ebded5;
   border-radius: 5px;
+
+  &:hover {
+    border: 1px solid #22c55e;
+  }
 `;
 
 const Dropdown = ({
@@ -23,7 +25,7 @@ const Dropdown = ({
 }) => {
   return (
     <Wrapper>
-      <Label htmlFor={id}>{labelText}</Label>
+      <label htmlFor={id}>{labelText}</label>
       <Select id={id} onChange={onChangeHandler}>
         {placeholderLabel && (
           <option value="" defaultValue>

@@ -67,7 +67,6 @@ const SummaryDescription = styled.label`
 `;
 
 const FrequencyRatePrice = styled.div`
-  margin-top: 40px;
   margin-top: auto;
   width: 100%;
   display: flex;

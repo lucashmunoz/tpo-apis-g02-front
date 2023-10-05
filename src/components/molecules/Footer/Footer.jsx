@@ -6,6 +6,8 @@ import tiktokLogo from "assets/redes/tiktok.svg";
 
 const FooterWrapper = styled.footer`
   border-top: 1px solid grey;
+  height: 20px;
+  width: 100%;
 `;
 
 const LogoImg = styled.img`
@@ -34,7 +36,7 @@ const HorizontalLine = styled.hr`
 
 const Footer = () => {
   return (
-    <FooterWrapper className="bg-white text-gray-900 py-8 mt-auto">
+    <FooterWrapper>
       <LogoEmpresa>NOMBRE EMPRESA</LogoEmpresa>
       <div className="flex justify-center mt-4">
         <LinkRedes

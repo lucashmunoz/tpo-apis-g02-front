@@ -5,6 +5,7 @@ import logo from "assets/logo.png";
 import BurgerMenuIcon from "assets/icons/menu-burger.svg";
 
 const HeaderDesktop = styled.header`
+  position: relative;
   display: flex;
   padding: 16px 20px;
   margin: auto;
@@ -31,6 +32,7 @@ const DesktopLink = styled(Link)`
 `;
 
 const HeaderMobile = styled.header`
+  position: relative;
   display: none;
   padding: 16px 20px;
   margin: auto;
