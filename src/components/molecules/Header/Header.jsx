@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Button from "components/atoms/Button";
+import PrimaryButton from "components/atoms/PrimaryButton";
 import logo from "assets/logo.png";
 import BurgerMenuIcon from "assets/icons/menu-burger.svg";
 
@@ -69,7 +69,7 @@ const Header = () => {
           </DesktopLinksList>
         </nav>
         <div>
-          <Button buttonType="primary">Iniciar Sesion</Button>
+          <PrimaryButton>Iniciar Sesion</PrimaryButton>
         </div>
       </HeaderDesktop>
 

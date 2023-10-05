@@ -1,10 +1,10 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import profilePicture1 from "assets/mock-imgs/profile-picture-1.png";
 import CheckedStar from "assets/icons/star-filled.svg";
-import { useState } from "react";
 import StarRate from "components/atoms/StarRate";
-import Button from "components/atoms/Button";
+import PrimaryButton from "components/atoms/PrimaryButton";
 import Dropdown from "components/atoms/Dropdown";
 
 const Wrapper = styled.div`
@@ -172,6 +172,8 @@ const UserCommentText = styled.p`
   margin-top: 8px;
 `;
 
+const RealizarNuevoComentarioForm = styled.form``;
+
 const NewCommentNameContainer = styled.div`
   display: flex;
   margin-left: 15px;
@@ -234,12 +236,11 @@ const SubmitCommentButtonContainer = styled.div`
   }
 `;
 
-const SubmitCommentButton = styled(Button)`
+const SubmitCommentButton = styled(PrimaryButton)`
   float: right;
 `;
 
-// derecha
-const ContratarContainer = styled.div`
+const ContratarContainer = styled.form`
   width: calc((100% / 12) * 4);
   background-color: #f3f4f6;
   float: left;
@@ -300,7 +301,7 @@ const SubmitSolicitudButtonContainer = styled.div`
   margin-top: 10px;
 `;
 
-const SubmitSolicitudButton = styled(Button)``;
+const SubmitSolicitudButton = styled(PrimaryButton)``;
 
 const comentariosCursoMatematicas = [
   {
@@ -368,6 +369,8 @@ const ServiceDetail = () => {
     comment: "",
     rate: 0
   });
+  const [isSubmitNuevoComentarioDisabled, setIsSubmitNuevoComentarioDisabled] =
+    useState(false);
 
   const [solicitudContratacion, setNewsolicitudContratacion] = useState({
     name: "",
@@ -375,6 +378,29 @@ const ServiceDetail = () => {
     comment: "",
     contactHours: ""
   });
+  const [isSubmitSolicitudDisabled, setIsSubmitSolicitudDisabled] =
+    useState(false);
+
+  useEffect(() => {
+    const { name, comment, rate } = nuevoComentario;
+
+    const disableSubmitNuevoComentario =
+      name.length === 0 || comment.length === 0 || rate === 0;
+
+    setIsSubmitNuevoComentarioDisabled(disableSubmitNuevoComentario);
+  }, [nuevoComentario]);
+
+  useEffect(() => {
+    const { name, phoneNumber, comment, contactHours } = solicitudContratacion;
+
+    const disableSolicitarContratacion =
+      name.length === 0 ||
+      phoneNumber.length === 0 ||
+      comment.length === 0 ||
+      contactHours.length === 0;
+
+    setIsSubmitSolicitudDisabled(disableSolicitarContratacion);
+  }, [solicitudContratacion]);
 
   // Get the service id param from the URL.
   const { id: servideId } = useParams();
@@ -395,9 +421,10 @@ const ServiceDetail = () => {
     }`;
   };
 
-  const handleMakeNewComment = () => {
-    // Llamar a la api de publiacion de nuevo comentario para el id de servicio
+  const handleMakeNewComment = (e) => {
+    e.preventDefault();
 
+    // Llamar a la api de publiacion de nuevo comentario para el id de servicio
     console.log(
       "Nuevo comentario enviado y en espera de revision!",
       nuevoComentario
@@ -405,15 +432,16 @@ const ServiceDetail = () => {
 
     setNuevoComentario({
       name: "",
-      commentDate: "",
+      commentDate: Date.now(),
       comment: "",
       rate: 0
     });
   };
 
-  const handleMakeNewSolicitud = () => {
-    // Llamar a la api de solicitud de nueva contratacion
+  const handleMakeNewSolicitud = (e) => {
+    e.preventDefault();
 
+    // Llamar a la api de solicitud de nueva contratacion
     console.log(
       "Nuevo solicitud enviada y en espera de aceptación!",
       nuevoComentario
@@ -498,66 +526,67 @@ const ServiceDetail = () => {
               );
             })}
             <CommentsHR />
-            <CommentsLabel>Realizar comentario</CommentsLabel>
-            <Comentario>
-              <UserCommentLogoContainer>
-                <UserCommentLogo>
-                  {getCommentNmeInitials(nuevoComentario.name)}
-                </UserCommentLogo>
-              </UserCommentLogoContainer>
-              <UserComment>
-                <NewCommentRateAndName>
-                  <UserCommentRate>
-                    <StarRate
-                      onChangeHandler={(newRate) =>
-                        setNuevoComentario((prevCommentState) => ({
-                          ...prevCommentState,
-                          rate: newRate
-                        }))
-                      }
-                    />
-                  </UserCommentRate>
-                  <NewCommentNameContainer>
-                    <label htmlFor="nombre-usuario-comentario">Nobre</label>
-                    <NewUserNameInput
-                      id="nombre-usuario-comentario"
-                      placeholder="Nombre"
-                      value={nuevoComentario.name}
-                      onChange={(e) =>
-                        setNuevoComentario((prevCommentState) => ({
-                          ...prevCommentState,
-                          name: e.target.value
-                        }))
-                      }
-                    />
-                  </NewCommentNameContainer>
-                </NewCommentRateAndName>
-                <NewCommentText
-                  maxLength="280"
-                  placeholder="Comenta que te pareció el curso!"
-                  value={nuevoComentario.comment}
-                  onChange={(e) =>
-                    setNuevoComentario((prevCommentState) => ({
-                      ...prevCommentState,
-                      comment: e.target.value
-                    }))
-                  }
-                />
-                <SubmitCommentButtonContainer>
-                  <SubmitCommentButton
-                    buttonType="primary"
-                    onClick={handleMakeNewComment}
-                  >
-                    Comentar
-                  </SubmitCommentButton>
-                </SubmitCommentButtonContainer>
-              </UserComment>
-            </Comentario>
+            <RealizarNuevoComentarioForm onSubmit={handleMakeNewComment}>
+              <CommentsLabel>Realizar comentario</CommentsLabel>
+              <Comentario>
+                <UserCommentLogoContainer>
+                  <UserCommentLogo>
+                    {getCommentNmeInitials(nuevoComentario.name)}
+                  </UserCommentLogo>
+                </UserCommentLogoContainer>
+                <UserComment>
+                  <NewCommentRateAndName>
+                    <UserCommentRate>
+                      <StarRate
+                        onChangeHandler={(newRate) =>
+                          setNuevoComentario((prevCommentState) => ({
+                            ...prevCommentState,
+                            rate: newRate
+                          }))
+                        }
+                      />
+                    </UserCommentRate>
+                    <NewCommentNameContainer>
+                      <label htmlFor="nombre-usuario-comentario">Nobre</label>
+                      <NewUserNameInput
+                        id="nombre-usuario-comentario"
+                        placeholder="Nombre"
+                        value={nuevoComentario.name}
+                        onChange={(e) =>
+                          setNuevoComentario((prevCommentState) => ({
+                            ...prevCommentState,
+                            name: e.target.value
+                          }))
+                        }
+                      />
+                    </NewCommentNameContainer>
+                  </NewCommentRateAndName>
+                  <NewCommentText
+                    maxLength="280"
+                    placeholder="Comenta que te pareció el curso!"
+                    value={nuevoComentario.comment}
+                    onChange={(e) =>
+                      setNuevoComentario((prevCommentState) => ({
+                        ...prevCommentState,
+                        comment: e.target.value
+                      }))
+                    }
+                  />
+                  <SubmitCommentButtonContainer>
+                    <SubmitCommentButton
+                      isDisabled={isSubmitNuevoComentarioDisabled}
+                    >
+                      Comentar
+                    </SubmitCommentButton>
+                  </SubmitCommentButtonContainer>
+                </UserComment>
+              </Comentario>
+            </RealizarNuevoComentarioForm>
           </CommentsContainer>
         </DescriptionContent>
       </DescripcionContainer>
 
-      <ContratarContainer>
+      <ContratarContainer onSubmit={handleMakeNewSolicitud}>
         <PedirContratacion>Solicitar contratacion</PedirContratacion>
         <MensajeAProveedor
           maxLength="280"
@@ -591,6 +620,7 @@ const ServiceDetail = () => {
             Tel:
           </LabelSimpleSolicitudAlumno>
           <InputSimpleSolicitudAlumno
+            required
             id="telefono-alumno-solicitud"
             placeholder="Número de teléfono"
             type=""
@@ -621,9 +651,8 @@ const ServiceDetail = () => {
         </InputSimpleSolicitudAlumnoContainer>
         <SubmitSolicitudButtonContainer>
           <SubmitSolicitudButton
-            buttonType="primary"
-            onClick={handleMakeNewSolicitud}
-            disabled
+            type="submit"
+            isDisabled={isSubmitSolicitudDisabled}
           >
             Solicitar
           </SubmitSolicitudButton>
