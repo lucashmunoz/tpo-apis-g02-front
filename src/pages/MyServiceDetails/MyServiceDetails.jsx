@@ -321,7 +321,7 @@ const MyServiceDetails = () => {
             />
             <ProfileDescription>
               <NombrePrecioContainer>
-                <NombreTutor>MARÍA</NombreTutor>
+                <NombreTutor>Juan</NombreTutor>
                 <ContainerPrecioTutor>
                   <PrecioTutor
                     value={`$${parseFloat(datosPublicacion.precio).toFixed(2)}`}

@@ -702,7 +702,8 @@ const ServiceDetail = () => {
       name: "",
       phoneNumber: "",
       comment: "",
-      contactHours: ""
+      contactHours: "",
+      email: ""
     });
   };
 
@@ -906,6 +907,7 @@ const ServiceDetail = () => {
             id="dropdown-horario-contacto"
             options={opcionesHorarioContacto}
             placeholderLabel="Categoría"
+            value={solicitudContratacion.contactHours}
             onChangeHandler={(e) =>
               setNewsolicitudContratacion((prevSolicitudContratacion) => ({
                 ...prevSolicitudContratacion,
