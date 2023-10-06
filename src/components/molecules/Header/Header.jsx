@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import PrimaryButton from "components/atoms/PrimaryButton";
-import logo from "assets/logo.png";
+import logo from "assets/smlogo.png";
 import BurgerMenuIcon from "assets/icons/menu-burger.svg";
 
 const HeaderDesktop = styled.header`

@@ -40,22 +40,22 @@ const ComoFunciona = () => {
   return (
     <ComoFuncionaContainer>
       <Titulo>¿Cómo funciona?</Titulo>
-      <Subtitulo>Con “nombre sitio” aprender nunca fue tan simple </Subtitulo>
+      <Subtitulo>Con SkillMentor aprender nunca fue tan simple </Subtitulo>
       <StepCardsWrapper>
         <StepCard
           img={stepOne}
           title="Selecciona el tema"
-          text="Texto que explica cómo generar el tema"
+          text="Primero deberas elegir sobre que tema buscas aprender, ¡No te limites en SkillMentor tenemos una amplia variedad de topicos para aprender!"
         />
         <StepCard
           img={stepTwo}
           title="Elige tu próximo profesor"
-          text="Texto que explica cómo elegir el próximo profesor"
+          text="Encuentra el profesor que más se adecue tus necesidades. Te daremos toda la información posible para que puedas elegir correctamente."
         />
         <StepCard
           img={stepThree}
           title="Contáctalo y ¡a aprender!"
-          text="Texto que explica cómo contactar al profesor"
+          text="Ya seleccionado el profesor solo queda contactarlo por nuestra plataforma y ahora a agendar las clases."
         />
       </StepCardsWrapper>
     </ComoFuncionaContainer>
