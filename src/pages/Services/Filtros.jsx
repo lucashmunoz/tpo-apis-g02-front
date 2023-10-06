@@ -44,6 +44,8 @@ const Filtros = ({ filters, setFilters }) => {
         subject: linkState.subject
       }));
     }
+
+    window.history.replaceState({}, document.title);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -111,9 +111,11 @@ const Services = () => {
         (servicio) =>
           eliminarTildes(
             servicio.summaryDescription.toLocaleLowerCase()
-          ).includes(eliminarTildes(filters.subject.toLocaleLowerCase())) ||
+          ).includes(
+            eliminarTildes(filters.subject.trim().toLocaleLowerCase())
+          ) ||
           eliminarTildes(servicio.title.toLocaleLowerCase()).includes(
-            eliminarTildes(filters.subject.toLocaleLowerCase())
+            eliminarTildes(filters.subject.trim().toLocaleLowerCase())
           )
       );
     }
