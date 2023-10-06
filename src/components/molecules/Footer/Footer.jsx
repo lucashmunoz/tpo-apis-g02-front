@@ -48,7 +48,7 @@ const HorizontalLine = styled.hr`
 const Footer = () => {
   return (
     <FooterWrapper>
-      <LogoEmpresa>NOMBRE EMPRESA</LogoEmpresa>
+      <LogoEmpresa>SkillMentor</LogoEmpresa>
       <LinksContainer>
         <LinkRedes
           href="https://www.instagram.com/"
