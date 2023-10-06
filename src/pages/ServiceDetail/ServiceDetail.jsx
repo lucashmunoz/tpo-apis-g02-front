@@ -50,8 +50,15 @@ const PerfilTutor = styled.div`
   }
 `;
 
+const ProfileImgContainer = styled.div`
+  @media (max-width: 768px) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+`;
+
 const ProfileImg = styled.img`
-  width: 160px;
   height: 160px;
 `;
 
@@ -70,6 +77,10 @@ const NombrePrecioContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 768px) {
+    margin: 20px 0;
+  }
 `;
 
 const NombreTutor = styled.p`
@@ -87,7 +98,6 @@ const TitulosTutor = styled.label`
 `;
 
 const Rate = styled.div`
-  margin-top: auto;
   display: flex;
   color: black;
 `;
@@ -290,6 +300,27 @@ const InputSimpleSolicitudAlumno = styled.input`
   &:hover {
     border: 1px solid #22c55e;
   }
+`;
+
+const FrequencyRateContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  color: grey;
+
+  margin-top: auto;
+
+  @media (max-width: 768px) {
+    margin-top: 10px;
+  }
+`;
+
+const Frequency = styled.div`
+  background-color: #d1d1d1;
+  width: 90px;
+  padding: 2px 8px;
+  border-radius: 8px;
+  color: #505050;
 `;
 
 const DropdownHorarioContacto = styled(Dropdown)`
@@ -675,28 +706,34 @@ const ServiceDetail = () => {
     });
   };
 
-  console.log(serviceDetail);
-
   return (
     <Wrapper>
       <DescripcionContainer>
         <DescriptionContent>
           <TituloServicio>{serviceDetail.titulo}</TituloServicio>
           <PerfilTutor>
-            <ProfileImg
-              src={serviceDetail.profilePhoto}
-              alt="foto de perfil del profesor"
-            />
+            <ProfileImgContainer>
+              <ProfileImg
+                src={serviceDetail.profilePhoto}
+                alt="foto de perfil del profesor"
+              />
+            </ProfileImgContainer>
             <ProfileDescription>
               <NombrePrecioContainer>
                 <NombreTutor>{serviceDetail.tutor}</NombreTutor>
-                <PrecioTutor>${serviceDetail.precio}</PrecioTutor>
+                <PrecioTutor>
+                  ${parseFloat(serviceDetail.precio).toFixed(2)}
+                </PrecioTutor>
               </NombrePrecioContainer>
               <TitulosTutor>{serviceDetail.establecimiento}</TitulosTutor>
-              <Rate>
-                <StarImg src={CheckedStar} />
-                {serviceDetail.rate}
-              </Rate>
+              <FrequencyRateContainer>
+                <Rate>
+                  <StarImg src={CheckedStar} />
+                  {serviceDetail.rate}
+                </Rate>
+
+                <Frequency>{serviceDetail.frequency}</Frequency>
+              </FrequencyRateContainer>
             </ProfileDescription>
           </PerfilTutor>
           <AcercaDe>

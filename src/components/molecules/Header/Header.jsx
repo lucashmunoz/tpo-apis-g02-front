@@ -61,7 +61,7 @@ const ActionButton = styled(PrimaryButton)`
 const LoggedUserMenuContainer = styled.div`
   position: absolute;
   right: 20px;
-  z-index: 2;
+  z-index: 20;
 
   display: ${(props) => (props.$isUserMenuVisible ? "flex" : "none")};
 
