@@ -1,0 +1,94 @@
+{
+  "users": [
+    {
+      "email": "icesarani@uade.edu.ar",
+      "password": "Aa123456",
+      "name": "Ignacio",
+      "lastname": "Cesarani",
+      "phone": "1149278722",
+      "workExperience": [
+        {
+          "title": "Programador",
+          "desc": "Programador FullStack .NET y React",
+          "timeMonths": 12
+        }
+      ]
+    },
+    {
+      "email": "jlopez@uade.edu.ar",
+      "password": "Bb789012",
+      "name": "Juan",
+      "lastname": "Lopez",
+      "phone": "1156784321",
+      "workExperience": [
+        {
+          "title": "Analista",
+          "desc": "Analista de datos con Python y SQL",
+          "timeMonths": 18
+        },
+        {
+          "title": "Docente",
+          "desc": "Docente de programación en UADE",
+          "timeMonths": 6
+        }
+      ]
+    },
+    {
+      "email": "mgonzalez@uade.edu.ar",
+      "password": "Cc345678",
+      "name": "María",
+      "lastname": "Gonzalez",
+      "phone": "1165432987",
+      "workExperience": [
+        {
+          "title": "Diseñadora",
+          "desc": "Diseñadora gráfica con Photoshop e Illustrator",
+          "timeMonths": 24
+        }
+      ]
+    },
+    {
+      "email": "pferrari@uade.edu.ar",
+      "password": "Dd901234",
+      "name": "Pedro",
+      "lastname": "Ferrari",
+      "phone": "1176543219",
+      "workExperience": [
+        {
+          "title": "Consultor",
+          "desc": "Consultor de negocios con SAP y Power BI",
+          "timeMonths": 36
+        },
+        {
+          "title": "Gerente",
+          "desc": "Gerente de proyectos de software en IBM",
+          "timeMonths": 12
+        }
+      ]
+    },
+    {
+      "email": "lrodriguez@uade.edu.ar",
+      "password": "Ee123456",
+      "name": "Lucía",
+      "lastname": "Rodriguez",
+      "phone": "1187654329",
+      "workExperience": [
+        {
+          "title": "Desarrolladora",
+          "desc": "Desarrolladora web con HTML, CSS y JavaScript",
+          "timeMonths": 15
+        },
+        {
+          "title": "Tester",
+          "desc": "Tester de software con Selenium y JUnit",
+          "timeMonths": 9
+        },
+        {
+          "title": "Líder",
+          "desc": "Líder de equipo de desarrollo en Accenture",
+          "timeMonths": 6
+        }
+      ]
+    }
+  ]
+}

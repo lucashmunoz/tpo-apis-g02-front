@@ -22,7 +22,8 @@ const Input = ({
   labelText,
   inputType,
   onChangeHandler,
-  value
+  value,
+  type = "text"
 }) => {
   return (
     <>
@@ -30,7 +31,7 @@ const Input = ({
       {labelText && <HorizontalSpace />}
       <InputTag
         id={id}
-        type="text"
+        type={type}
         placeholder={placeholder}
         $inputType={inputType}
         onChange={onChangeHandler}
