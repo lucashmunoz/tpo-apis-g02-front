@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ServiceCard from "./ServiceCard";
 import AgregarServicioCard from "./AgregarServicioCard";
 import styled from "styled-components";
-import profilePicture1 from "../../assets/mock-imgs/ana.png";
+import UserContext from "user-context";
 
 const Wrapper = styled.div`
   display: flex;
@@ -29,6 +29,8 @@ const ServicesContainer = styled.div`
 const MisServicios = () => {
   const [servicios, setServicios] = useState([]);
 
+  const [loggedUser, setLoggedUser] = useContext(UserContext);
+
   const navigate = useNavigate();
   const goToServiceDetail = (serviceId) => navigate(`/myservices/${serviceId}`);
 
@@ -40,7 +42,7 @@ const MisServicios = () => {
     const { services } = await response.json();
 
     setServicios(
-      services.filter((servicio) => servicio.nombreProfesor === "María")
+      services.filter((servicio) => servicio.nombreProfesor === "Juan")
     );
   };
 
@@ -81,7 +83,7 @@ const MisServicios = () => {
           return (
             <ServiceCard
               key={id}
-              profilePhoto={profilePicture1}
+              profilePhoto={loggedUser.profilePhoto}
               title={title}
               summaryDescription={summaryDescription}
               price={price}

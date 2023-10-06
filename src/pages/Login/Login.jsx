@@ -100,6 +100,14 @@ const Login = () => {
   const [errorPass, setErrorPass] = useState("");
   const [users, setUsers] = useState([]);
 
+  const [disableLoginButton, setDisableLoginButton] = useState(true);
+
+  useEffect(() => {
+    const disableLoginButton =
+      loginMail.length === 0 || loginPassword.length === 0;
+    setDisableLoginButton(disableLoginButton);
+  }, [loginMail, loginPassword]);
+
   const [loggedUser, setLoggedUser] = useContext(UserContext);
 
   const checkMail = (cadena) => {
@@ -193,7 +201,11 @@ const Login = () => {
           />
         </ActionContainer>
         <ActionContainer>
-          <LogInButton buttonType="primary" type="submit">
+          <LogInButton
+            buttonType="primary"
+            type="submit"
+            isDisabled={disableLoginButton}
+          >
             Log In
           </LogInButton>
         </ActionContainer>

@@ -139,7 +139,7 @@ const NewService = () => {
           <ContainerTituloServicio>
             <TituloServicio
               value={datosPublicacion.nombrePublicacion.toUpperCase()}
-              placeholder="Titulo servicio"
+              placeholder="Título servicio"
               onChangeHandler={(e) =>
                 setDatosPublicacion((prevDatos) => ({
                   ...prevDatos,

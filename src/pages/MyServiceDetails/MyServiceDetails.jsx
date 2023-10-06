@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import UserContext from "user-context";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import profilePicture1 from "../../assets/mock-imgs/ana.png";
 import CheckedStar from "assets/icons/star-filled.svg";
 import Input from "components/atoms/Input";
 import PrimaryButton from "components/atoms/PrimaryButton";
@@ -262,13 +262,13 @@ const comentariosCursoMatematicas = [
 ];
 
 const datosInicialesPublicacion = {
-  nombrePublicacion: "Matemáticas",
-  tituloTutor: "Ingeniera en UADE",
-  precio: "30.00",
+  nombrePublicacion: "Inglés",
+  tituloTutor: "Facultad de Lenguas, Universidad Nacional de Córdoba",
+  precio: "25.00",
   sobreElServicio:
-    "¿Quieres dominar las matemáticas de una vez por todas? ¡Bienvenido al Curso de Matemáticas de Excelencia, tu puerta de entrada a un mundo de conocimiento y habilidades matemáticas sobresalientes!",
+    "Mejora tus habilidades en inglés con nuestras clases personalizadas. Nuestro enfoque se centra en la conversación, la gramática y la comprensión auditiva. Ofrecemos material auténtico y situaciones de la vida real para que te sientas cómodo hablando en inglés en cualquier situación. ¡Aprende de manera divertida y efectiva!",
   sobreMi:
-    "Soy María, licenciada en Matemáticas con más de 10 años de experiencia en la enseñanza de las matemáticas. Mi pasión por esta disciplina me ha llevado a diseñar un curso completo y efectivo que te ayudará a superar tus desafíos matemáticos y a alcanzar el éxito académico."
+    "Soy Juan, el tutor de este curso. Mi amor por los idiomas y mi experiencia en la enseñanza me han llevado a ayudar a numerosos estudiantes a alcanzar fluidez en inglés. Estoy comprometido en hacer que tu aprendizaje sea interesante y práctico."
 };
 
 const MyServiceDetails = () => {
@@ -279,6 +279,8 @@ const MyServiceDetails = () => {
 
   // Get the service id param from the URL.
   const { id: servideId } = useParams();
+
+  const [loggedUser, setLoggedUser] = useContext(UserContext);
 
   const getCommentInitials = (nombreCompleto) => {
     const arrNombreCompleto = nombreCompleto.trim().split(" ");
@@ -303,7 +305,7 @@ const MyServiceDetails = () => {
           <ContainerTituloServicio>
             <TituloServicio
               value={datosPublicacion.nombrePublicacion.toUpperCase()}
-              placeholder="Titulo servicio"
+              placeholder="Título servicio"
               onChangeHandler={(e) =>
                 setDatosPublicacion((prevDatos) => ({
                   ...prevDatos,
@@ -314,7 +316,7 @@ const MyServiceDetails = () => {
           </ContainerTituloServicio>
           <PerfilTutor>
             <ProfileImg
-              src={profilePicture1}
+              src={loggedUser.profilePhoto}
               alt="foto de perfil del profesor"
             />
             <ProfileDescription>

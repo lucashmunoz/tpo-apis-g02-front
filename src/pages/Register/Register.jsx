@@ -4,6 +4,7 @@ import Button from "components/atoms/Button";
 import Input from "components/atoms/Input";
 import IconImage from "../../assets/icons/UserSampleIcon.png";
 import { useNavigate } from "react-router-dom";
+import PrimaryButton from "components/atoms/PrimaryButton";
 
 const DivRegister = styled.div`
   width: 100%;
@@ -80,6 +81,27 @@ const Register = () => {
   const [errorPass, setErrorPass] = useState("");
   const [errorNames, setErrorNames] = useState("");
   const [users, setUsers] = useState([]);
+
+  const [disableRegisterButton, setDisableRegisterButton] = useState(true);
+
+  useEffect(() => {
+    const shouldDisableRegisterButton =
+      registerMail.length === 0 ||
+      registerPassword.length === 0 ||
+      registerName.length === 0 ||
+      registerLastName.length === 0 ||
+      registerTitle.length === 0 ||
+      registerExperience.length === 0;
+
+    setDisableRegisterButton(shouldDisableRegisterButton);
+  }, [
+    registerExperience.length,
+    registerLastName.length,
+    registerMail,
+    registerName.length,
+    registerPassword,
+    registerTitle.length
+  ]);
 
   const checkMail = (cadena) => {
     if (!cadena.includes("@") && cadena.lenght > 0)
@@ -221,15 +243,19 @@ const Register = () => {
             <Experiencia
               id="registro-experiencia"
               placeholder="Ingrese brevemente su experiencia"
-              onChangeHandler={(e) => {
+              onChange={(e) => {
                 setRegisterExperience(e.target.value);
               }}
             />
           </InputDiv>
         </DivInputs>
-        <Button buttonType="primary" onClick={tryRegister}>
+        <PrimaryButton
+          isDisabled={disableRegisterButton}
+          buttonType="primary"
+          onClick={tryRegister}
+        >
           Register
-        </Button>
+        </PrimaryButton>
         {(errorMail !== "" || errorPass !== "") && (
           <ErrorShow>
             {errorMail + " " + errorPass + " " + errorNames}
