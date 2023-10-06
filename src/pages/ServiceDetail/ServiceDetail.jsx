@@ -839,7 +839,7 @@ const ServiceDetail = () => {
         <PedirContratacion>Solicitar contratación</PedirContratacion>
         <MensajeAProveedor
           maxLength="280"
-          placeholder={`Escribe un mensaje para ${"María"}`}
+          placeholder={`Escribe un mensaje para ${serviceDetail.tutor}`}
           value={solicitudContratacion.comment}
           onChange={(e) =>
             setNewsolicitudContratacion((prevSolicitudContratacion) => ({

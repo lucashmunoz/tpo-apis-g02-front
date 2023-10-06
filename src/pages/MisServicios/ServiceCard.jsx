@@ -129,6 +129,7 @@ const RemoveService = styled.img`
 `;
 
 const ServiceCard = ({
+  id,
   profilePhoto,
   title,
   summaryDescription,
@@ -136,16 +137,17 @@ const ServiceCard = ({
   frequency,
   rate,
   nombreProfesor,
-  onClickHandler
+  onClickHandler,
+  eliminarServicio
 }) => {
-  const removeService = (e) => {
-    console.log("Eliminar servicio");
-    e.stopPropagation();
-  };
-
   return (
     <CardContainer onClick={onClickHandler}>
-      <button onClick={removeService}>
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          eliminarServicio(id);
+        }}
+      >
         <RemoveService src={CrossSquare} />
       </button>
 
