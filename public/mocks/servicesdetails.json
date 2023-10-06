@@ -9,7 +9,8 @@
       "sobre_el_servicio": "Aprende matemáticas de forma efectiva con nuestras clases personalizadas. Nuestro enfoque se basa en comprender los conceptos clave y resolver problemas prácticos. Ofrecemos ejercicios prácticos, tutoriales en video y sesiones interactivas para mejorar tus habilidades. ¡Desarrolla tu confianza en las matemáticas con nosotros!",
       "sobre_mi": "Soy María, el tutor de este curso. Tengo una amplia experiencia en la enseñanza de matemáticas y estoy comprometida en ayudarte a alcanzar tus metas académicas. Mi pasión por las matemáticas me lleva a explicar los conceptos de una manera clara y accesible para todos los estudiantes.",
       "frequency": "SEMANAL",
-      "classType": "INDIVIDUAL"
+      "classType": "INDIVIDUAL",
+      "rate": "2.8"
     },
     {
       "id": 1,
@@ -20,7 +21,8 @@
       "sobre_el_servicio": "Mejora tus habilidades en inglés con nuestras clases personalizadas. Nuestro enfoque se centra en la conversación, la gramática y la comprensión auditiva. Ofrecemos material auténtico y situaciones de la vida real para que te sientas cómodo hablando en inglés en cualquier situación. ¡Aprende de manera divertida y efectiva!",
       "sobre_mi": "Soy Juan, el tutor de este curso. Mi amor por los idiomas y mi experiencia en la enseñanza me han llevado a ayudar a numerosos estudiantes a alcanzar fluidez en inglés. Estoy comprometido en hacer que tu aprendizaje sea interesante y práctico.",
       "frequency": "MENSUAL",
-      "classType": "INDIVIDUAL"
+      "classType": "INDIVIDUAL",
+      "rate": "4.2"
     },
     {
       "id": 2,
@@ -31,7 +33,8 @@
       "sobre_el_servicio": "Aprende a programar desde cero o mejora tus habilidades existentes en programación. Nuestro curso abarca los conceptos fundamentales de la programación y te lleva a través de proyectos prácticos. Te sumergirás en el mundo de la codificación y adquirirás las habilidades necesarias para crear tus propias aplicaciones.",
       "sobre_mi": "Soy Laura, la tutora de este curso. Con una sólida formación en informática y años de experiencia en desarrollo de software, estoy aquí para guiarte en tu viaje de aprendizaje de programación. Mi objetivo es que te sientas confiado en tu capacidad para programar y resolver problemas.",
       "frequency": "SEMANAL",
-      "classType": "GRUPAL"
+      "classType": "GRUPAL",
+      "rate": "3.9"
     },
     {
       "id": 3,
@@ -42,7 +45,8 @@
       "sobre_el_servicio": "Explora el pasado a través de fascinantes clases de historia. Nuestro curso te llevará a través de diferentes períodos históricos y eventos significativos. Aprenderás a analizar fuentes históricas y a comprender mejor el mundo que te rodea.",
       "sobre_mi": "Soy Carlos, el tutor de este curso. Mi pasión por la historia me motiva a compartir conocimientos y desafiar la percepción convencional de los eventos pasados. Juntos, exploraremos los secretos de la historia.",
       "frequency": "SEMANAL",
-      "classType": "INDIVIDUAL"
+      "classType": "INDIVIDUAL",
+      "rate": "4.5"
     },
     {
       "id": 4,
@@ -53,7 +57,8 @@
       "sobre_el_servicio": "Descubre el mundo de las ciencias con nuestras clases especializadas en biología. Aprende sobre la diversidad de la vida, la genética y la ecología. Te sumergirás en el fascinante reino natural y comprenderás mejor nuestro entorno.",
       "sobre_mi": "Soy Ana, la tutora de este curso. Con una formación sólida en biología y una pasión por la naturaleza, estoy aquí para compartir contigo mi conocimiento y ayudarte a apreciar la belleza y la complejidad de la vida en la Tierra.",
       "frequency": "MENSUAL",
-      "classType": "GRUPAL"
+      "classType": "GRUPAL",
+      "rate": "3.7"
     },
     {
       "id": 5,
@@ -64,7 +69,8 @@
       "sobre_el_servicio": "Desarrolla tu creatividad a través de nuestras clases de Photoshop. Aprende las técnicas de edición de imágenes, diseño gráfico y manipulación de fotos. Te convertirás en un experto en la herramienta preferida de los profesionales del diseño.",
       "sobre_mi": "Soy Luis, el tutor de este curso. Mi pasión por el diseño gráfico y mi experiencia en Photoshop me han permitido trabajar en proyectos emocionantes. Estoy aquí para transmitirte mis conocimientos y ayudarte a desarrollar tus habilidades creativas.",
       "frequency": "SEMANAL",
-      "classType": "INDIVIDUAL"
+      "classType": "INDIVIDUAL",
+      "rate": "4.8"
     },
     {
       "id": 6,
@@ -75,7 +81,8 @@
       "sobre_el_servicio": "Comprende los principios económicos con nuestras clases especializadas en cocina hogareña. Aprenderás a planificar comidas, administrar tu presupuesto y cocinar platos deliciosos en casa. ¡Eleva tus habilidades culinarias!",
       "sobre_mi": "Soy Patricia, la tutora de este curso. Con una amplia experiencia en el mundo de la gastronomía, estoy aquí para compartir contigo mis secretos de cocina y ayudarte a disfrutar de la cocina en casa.",
       "frequency": "MENSUAL",
-      "classType": "GRUPAL"
+      "classType": "GRUPAL",
+      "rate": "3.2"
     },
     {
       "id": 7,
@@ -86,7 +93,8 @@
       "sobre_el_servicio": "Explora las leyes fundamentales del universo con nuestras clases de física. Aprende sobre la mecánica, la electricidad, la termodinámica y la relatividad. Te adentrarás en el fascinante mundo de la física y sus aplicaciones en la vida cotidiana.",
       "sobre_mi": "Soy José, el tutor de este curso. Mi pasión por la física me lleva a explicar conceptos complejos de manera accesible y emocionante. Estoy aquí para inspirarte y ayudarte a comprender el mundo que nos rodea.",
       "frequency": "UNICA",
-      "classType": "INDIVIDUAL"
+      "classType": "INDIVIDUAL",
+      "rate": "4.1"
     },
     {
       "id": 8,
@@ -97,7 +105,8 @@
       "sobre_el_servicio": "Sumérgete en el mundo de la química con nuestras clases especializadas. Aprende sobre la estructura de la materia, las reacciones químicas y la química orgánica. Descubre cómo la química impacta en nuestra vida diaria.",
       "sobre_mi": "Soy Carmen, la tutora de este curso. Con una sólida formación en química y una pasión por la ciencia, estoy aquí para compartir contigo los secretos del mundo de la química y ayudarte a comprender sus aplicaciones en el mundo real.",
       "frequency": "UNICA",
-      "classType": "GRUPAL"
+      "classType": "GRUPAL",
+      "rate": "3.5"
     },
     {
       "id": 9,
@@ -108,7 +117,8 @@
       "sobre_el_servicio": "Explora el piano y desarrolla tus habilidades musicales con nuestras clases especializadas. Aprenderás técnicas de piano, teoría musical y podrás tocar tus piezas favoritas. ¡Desarrolla tu pasión por la música!",
       "sobre_mi": "Soy Francisco, el tutor de este curso. Mi amor por la música y mi experiencia como pianista me han llevado a enseñar a estudiantes de todas las edades. Estoy aquí para inspirarte y ayudarte a alcanzar tus objetivos musicales.",
       "frequency": "SEMANAL",
-      "classType": "INDIVIDUAL"
+      "classType": "INDIVIDUAL",
+      "rate": "4.3"
     },
     {
       "id": 10,
@@ -119,7 +129,8 @@
       "sobre_el_servicio": "Descubre el mundo a través de clases de geografía. Explorarás paisajes, culturas y procesos geográficos. Aprenderás a analizar mapas, entender la geopolítica y apreciar la diversidad del planeta.",
       "sobre_mi": "Soy Sandra, la tutora de este curso. Mi pasión por la geografía me motiva a compartir conocimientos sobre nuestro mundo. Juntos, exploraremos las maravillas de la Tierra y comprenderemos su importancia en la sociedad actual.",
       "frequency": "SEMANAL",
-      "classType": "INDIVIDUAL"
+      "classType": "INDIVIDUAL",
+      "rate": "3.9"
     },
     {
       "id": 11,
@@ -130,7 +141,8 @@
       "sobre_el_servicio": "Aprende sobre la vida y la naturaleza con clases de biología marina enfocadas en pescados y mariscos. Descubrirás la diversidad de especies, métodos de pesca sostenible y técnicas de preparación culinaria.",
       "sobre_mi": "Soy Manuel, el tutor de este curso. Mi pasión por el mundo marino y la gastronomía se unen en estas clases. Estoy aquí para compartir contigo mi conocimiento y aprecio por los productos del mar.",
       "frequency": "MENSUAL",
-      "classType": "GRUPAL"
+      "classType": "GRUPAL",
+      "rate": "4.7"
     }
   ]
 }
