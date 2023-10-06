@@ -5,7 +5,6 @@ import PrimaryButton from "components/atoms/PrimaryButton";
 import logo from "assets/smlogo.png";
 import BurgerMenuIcon from "assets/icons/menu-burger.svg";
 import UserContext, { initialUserContextState } from "user-context";
-import profilePicture1 from "assets/mock-imgs/profile-picture-1.png";
 
 const HeaderWrapper = styled.header`
   background-color: #f3f4f6;
@@ -195,7 +194,7 @@ const Header = () => {
             onClick={() => setIsLoggedUserMenuVisible(!isLoggedUserMenuVisible)}
           >
             <ProfileImg
-              src={profilePicture1}
+              src={loggedUser.profilePhoto}
               alt="imagen de perfil del usuario"
             />
           </button>
@@ -224,7 +223,7 @@ const Header = () => {
             onClick={() => setIsLoggedUserMenuVisible(!isLoggedUserMenuVisible)}
           >
             <ProfileImg
-              src={profilePicture1}
+              src={loggedUser.profilePhoto}
               alt="imagen de perfil del usuario"
             />
           </button>

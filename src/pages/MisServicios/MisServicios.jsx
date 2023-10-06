@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ServiceCard from "./ServiceCard";
 import styled from "styled-components";
-import profilePicture1 from "assets/mock-imgs/profile-picture-1.png";
+import profilePicture1 from "../../assets/mock-imgs/ana.png";
 
 const Wrapper = styled.div`
   display: flex;
