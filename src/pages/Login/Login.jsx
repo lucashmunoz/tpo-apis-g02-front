@@ -103,7 +103,7 @@ const Login = () => {
 
     window.sessionStorage.setItem("loggedUser", JSON.stringify(userAux));
 
-    console.log("Logueado correctamente");
+    console.log(userAux);
     navigate(`/`);
   };
 
@@ -116,6 +116,7 @@ const Login = () => {
     }
 
     console.log("Se envio un mail para recuperar la cuenta.");
+    setErrorMail("Se envio un mail para recuperar la cuenta.");
   };
 
   // Llamamos a fetchServices en el mount del componente
