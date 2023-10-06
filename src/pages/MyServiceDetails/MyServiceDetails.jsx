@@ -128,6 +128,7 @@ const AcercaDeContent = styled.textarea`
   margin-top: 12px;
   width: 100%;
   height: 150px;
+  padding: 10px;
 `;
 
 const GuardarCambiosButtonContainer = styled.div`

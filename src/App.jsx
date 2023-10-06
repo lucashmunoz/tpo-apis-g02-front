@@ -13,6 +13,7 @@ import styled from "styled-components";
 import UserContext, { initialUserContextState } from "user-context";
 import { useState } from "react";
 import MyServiceDetails from "pages/MyServiceDetails";
+import NewService from "pages/NewService";
 
 const Main = styled.main`
   position: relative;
@@ -34,6 +35,7 @@ function App() {
             <Route path="/hirings" element={<Hirings />} />
             <Route path="/myservices" element={<MisServicios />} />
             <Route path="/myservices/:id" element={<MyServiceDetails />} />
+            <Route path="/newservice" element={<NewService />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Home />} />
