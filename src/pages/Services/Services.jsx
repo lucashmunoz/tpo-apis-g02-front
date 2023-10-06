@@ -9,6 +9,7 @@ import Filtros from "./Filtros";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
 
   @media (max-width: 768px) {
     flex-direction: column;

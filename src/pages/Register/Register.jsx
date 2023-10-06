@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 
 const DivRegister = styled.div`
   width: 100%;
+  height: 100%;
+  margin: 10px 0;
   border-radius: 15px;
   display: flex;
   justify-content: center;

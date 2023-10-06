@@ -8,6 +8,7 @@ import PrimaryButton from "components/atoms/PrimaryButton";
 
 const Wrapper = styled.div`
   width: 100%;
+  height: 100%;
   border-radius: 15px;
   display: flex;
   justify-content: center;
@@ -172,6 +173,7 @@ const Login = () => {
 
         <ActionContainer>
           <LoginInput
+            name="email"
             labelText="Email"
             placeholder="Ingrese su email"
             onChangeHandler={(e) => {
@@ -181,6 +183,7 @@ const Login = () => {
         </ActionContainer>
         <ActionContainer>
           <LoginInput
+            name="password"
             labelText="Contraseña"
             placeholder="Ingrese su contraseña"
             onChangeHandler={(e) => {
