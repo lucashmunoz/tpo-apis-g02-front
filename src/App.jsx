@@ -16,6 +16,7 @@ import MyServiceDetails from "pages/MyServiceDetails";
 
 const Main = styled.main`
   position: relative;
+  flex: 1;
 `;
 
 function App() {

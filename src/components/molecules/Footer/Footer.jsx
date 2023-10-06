@@ -8,7 +8,7 @@ const FooterWrapper = styled.footer`
   border-top: 1px solid grey;
   display: flex;
   flex-direction: column;
-  height: 20px;
+  height: 100px;
   width: 100%;
   padding: 50px 0;
 `;

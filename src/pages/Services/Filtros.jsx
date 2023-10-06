@@ -108,7 +108,7 @@ const Filtros = ({ filters, setFilters }) => {
       </ControlContainer>
       <ControlContainer>
         <StarRate
-          labelText="Calificación"
+          labelText="Calificación Mínima"
           onChangeHandler={(newRate) =>
             setFilters((prevFilters) => ({
               ...prevFilters,

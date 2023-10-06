@@ -7,8 +7,9 @@ import BurgerMenuIcon from "assets/icons/menu-burger.svg";
 import UserContext, { initialUserContextState } from "user-context";
 import profilePicture1 from "assets/mock-imgs/profile-picture-1.png";
 
-const HeaderWrapper = styled.div`
+const HeaderWrapper = styled.header`
   background-color: #f3f4f6;
+  height: 96px;
 `;
 
 const HeaderDesktop = styled.div`
