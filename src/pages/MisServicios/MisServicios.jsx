@@ -64,6 +64,10 @@ const MisServicios = () => {
     }
   };
 
+  const eliminarServicio = (id) => {
+    setServicios(servicios.filter((servicio) => servicio.id !== id));
+  };
+
   return (
     <Wrapper>
       <ServicesContainer>
@@ -83,6 +87,7 @@ const MisServicios = () => {
           return (
             <ServiceCard
               key={id}
+              id={id}
               profilePhoto={loggedUser.profilePhoto}
               title={title}
               summaryDescription={summaryDescription}
@@ -91,6 +96,7 @@ const MisServicios = () => {
               rate={rate}
               nombreProfesor={nombreProfesor}
               onClickHandler={() => goToServiceDetail(id)}
+              eliminarServicio={eliminarServicio}
             />
           );
         })}
