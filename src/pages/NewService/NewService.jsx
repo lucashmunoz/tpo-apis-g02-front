@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
-import profilePicture1 from "assets/mock-imgs/ana.png";
 import Input from "components/atoms/Input";
 import PrimaryButton from "components/atoms/PrimaryButton";
 
@@ -132,6 +131,26 @@ const NewService = () => {
     datosInicialesPublicacion
   );
 
+  const [user, setUser] = useState({});
+
+  const setUserLogged = () => {
+    const userLoggedJSON = window.sessionStorage.getItem("loggedUser");
+
+    // Comprueba si el valor existe en la sesión.
+    if (userLoggedJSON) {
+      try {
+        // Intenta convertir el valor JSON en un objeto JavaScript.
+        const userLogged = JSON.parse(userLoggedJSON);
+        setUser(userLogged);
+      } catch {}
+    }
+  };
+
+  // Llamamos a fetchServices en el mount del componente
+  useEffect(() => {
+    setUserLogged();
+  }, []);
+
   return (
     <Wrapper>
       <DescripcionContainer>
@@ -150,12 +169,12 @@ const NewService = () => {
           </ContainerTituloServicio>
           <PerfilTutor>
             <ProfileImg
-              src={profilePicture1}
+              src={user.profilePhoto}
               alt="foto de perfil del profesor"
             />
             <ProfileDescription>
               <NombrePrecioContainer>
-                <NombreTutor>MARÍA</NombreTutor>
+                <NombreTutor>{user.name + " " + user.lastname}</NombreTutor>
                 <ContainerPrecioTutor>
                   <PrecioTutor
                     value={`$${parseFloat(datosPublicacion.precio).toFixed(2)}`}
