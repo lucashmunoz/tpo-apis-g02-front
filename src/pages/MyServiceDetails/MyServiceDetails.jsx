@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import profilePicture1 from "assets/mock-imgs/profile-picture-1.png";
+import profilePicture1 from "../../assets/mock-imgs/ana.png";
 import CheckedStar from "assets/icons/star-filled.svg";
 import Input from "components/atoms/Input";
 import PrimaryButton from "components/atoms/PrimaryButton";

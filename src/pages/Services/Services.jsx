@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ServiceCard from "./ServiceCard";
 import styled from "styled-components";
-import profilePicture1 from "assets/mock-imgs/profile-picture-1.png";
-import profilePicture2 from "assets/mock-imgs/profile-picture-2.jpg";
 import Filtros from "./Filtros";
 
 const Wrapper = styled.div`
@@ -170,7 +168,7 @@ const Services = () => {
           return (
             <ServiceCard
               key={id}
-              profilePhoto={index % 2 === 0 ? profilePicture1 : profilePicture2}
+              profilePhoto={servicio.profilePhoto}
               title={title}
               summaryDescription={summaryDescription}
               price={price}
