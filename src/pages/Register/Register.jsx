@@ -65,6 +65,7 @@ const InputDiv = styled.div`
 const Experiencia = styled.textarea`
   height: 150px;
   margin-top: 8px;
+  padding: 10px;
 `;
 
 const Register = () => {

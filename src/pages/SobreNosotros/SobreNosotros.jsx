@@ -7,7 +7,7 @@ const WhoWeAre = styled.div`
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
   display: flex;
-  background-color: #909191;
+  background-color: #f3f4f6;
   width: 90%;
   margin-top: 55px;
   margin-bottom: 55px;
@@ -77,6 +77,7 @@ const SobreNosotros = () => {
         <ImagePeople src={pexelsimage} />
         <DivAbout>
           <TitleAbout>¿Quiénes Somos?</TitleAbout>
+          <br />
           <TextContent>
             Somos un grupo de personas que alguna vez estuvimos donde te
             encuentras y buscamos crear la red de conexiones estudiante-profesor

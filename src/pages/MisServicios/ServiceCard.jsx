@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import CheckedStar from "assets/icons/star-filled.svg";
+import CrossSquare from "assets/icons/cross-square.svg";
 
 const CardContainer = styled.button`
   width: 300px;
@@ -10,7 +11,11 @@ const CardContainer = styled.button`
   display: flex;
   flex-direction: column;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  position: relative;
 
+  -webkit-transition: background-color 250ms linear;
+  -ms-transition: background-color 250ms linear;
+  transition: background-color 250ms linear;
   &:hover {
     background-color: #f3f4f6;
   }
@@ -109,6 +114,20 @@ const Price = styled.span`
   font-size: 20px;
 `;
 
+const RemoveService = styled.img`
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  height: 32px;
+  width: 32px;
+  z-index: 2;
+  transition: 0.25s;
+  &:hover {
+    height: 40px;
+    width: 40px;
+  }
+`;
+
 const ServiceCard = ({
   profilePhoto,
   title,
@@ -119,8 +138,17 @@ const ServiceCard = ({
   nombreProfesor,
   onClickHandler
 }) => {
+  const removeService = (e) => {
+    console.log("Eliminar servicio");
+    e.stopPropagation();
+  };
+
   return (
     <CardContainer onClick={onClickHandler}>
+      <button onClick={removeService}>
+        <RemoveService src={CrossSquare} />
+      </button>
+
       <CardHeader>
         <Img src={profilePhoto} alt={title} />
         <ProfesorContainer>

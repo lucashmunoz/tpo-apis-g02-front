@@ -5,6 +5,7 @@ const ButtonElement = styled.button`
   color: white;
   background-color: ${(props) => (props.disabled ? "grey" : "#22c55e")};
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  transition: 0.25s;
 
   &:hover {
     background-color: ${(props) => (props.disabled ? "grey" : "#16a34a")};

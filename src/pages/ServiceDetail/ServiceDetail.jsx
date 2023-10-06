@@ -701,7 +701,7 @@ const ServiceDetail = () => {
           </PerfilTutor>
           <AcercaDe>
             <AcercaDeTitle>Sobre el servicio</AcercaDeTitle>
-            <AcercaDeContent>{serviceDetail.soble_el_servicio}</AcercaDeContent>
+            <AcercaDeContent>{serviceDetail.sobre_el_servicio}</AcercaDeContent>
           </AcercaDe>
           <AcercaDe>
             <AcercaDeTitle>Sobre mí</AcercaDeTitle>
@@ -759,7 +759,7 @@ const ServiceDetail = () => {
                       />
                     </UserCommentRate>
                     <NewCommentNameContainer>
-                      <label htmlFor="nombre-usuario-comentario">Nobre</label>
+                      <label htmlFor="nombre-usuario-comentario">Nombre</label>
                       <NewUserNameInput
                         id="nombre-usuario-comentario"
                         placeholder="Nombre"

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ServiceCard from "./ServiceCard";
+import AgregarServicioCard from "./AgregarServicioCard";
 import styled from "styled-components";
 import profilePicture1 from "../../assets/mock-imgs/ana.png";
 
@@ -19,6 +20,10 @@ const ServicesContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 10px;
+
+  @media (max-width: 768px) {
+    justify-items: center;
+  }
 `;
 
 const MisServicios = () => {
@@ -60,6 +65,7 @@ const MisServicios = () => {
   return (
     <Wrapper>
       <ServicesContainer>
+        <AgregarServicioCard />
         {servicios.map((servicio, index) => {
           const {
             id,
