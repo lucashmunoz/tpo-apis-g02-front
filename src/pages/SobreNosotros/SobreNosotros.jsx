@@ -72,19 +72,20 @@ const SobreNosotros = () => {
       <WhoWeAre>
         <ImagePeople src={pexelsimage} />
         <DivAbout>
-          <TitleAbout>¿Quienes Somos?</TitleAbout>
+          <TitleAbout>¿Quiénes Somos?</TitleAbout>
           <a>
-            Somos un grupo de personas que alguna vez estuvimos donde hoy estas
+            Somos un grupo de personas que alguna vez estuvimos donde hoy estás
             y buscamos crear la red de conexiones estudiante-profesor más grande
-            del mundo.
+            del mundo
             <br />
-            Sabemos lo complicado que es encontrar alguien que se adecue a vos y
-            por eso te prestamos toda la informacion que necesites para
-            encontrar aquel servicio que estas buscando. ¿Queres ayudar a los
+            Sabemos lo complicado que es encontrar alguien que se adecúe a vos y
+            por eso te prestamos toda la información que necesites para
+            encontrar aquel servicio que estás buscando. ¿Querés ayudar a los
             demás en su proceso de aprendizaje? Sumate como Mentor y ayuda a los
-            demás a mejorar sus skills. ¿Sos un estudiante o te encantaria
-            embarcar en nuevo mundo de conocimientos? Busca el tema que deseas,
-            un Mentor que se acerque a tus preferencias e inicia a apreder!
+            demás a mejorar sus habilidades. ¿Sos un estudiante o te encantaría
+            embarcarte en un nuevo mundo de conocimientos? Busca el tema que
+            deseas, un Mentor que se acerque a tus preferencias e inicia a
+            aprender!
           </a>
         </DivAbout>
       </WhoWeAre>

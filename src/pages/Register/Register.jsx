@@ -67,6 +67,8 @@ const Register = () => {
   const [registerPassword, setRegisterPassword] = useState("");
   const [registerName, setRegisterName] = useState("");
   const [registerLastName, setRegisterLastName] = useState("");
+  const [registerTitle, setRegisterTitle] = useState("");
+  const [registerExperience, setRegisterExperience] = useState("");
   const [errorMail, setErrorMail] = useState("");
   const [errorPass, setErrorPass] = useState("");
   const [errorNames, setErrorNames] = useState("");
@@ -113,8 +115,23 @@ const Register = () => {
       return;
     }
 
+    if (!registerMail.includes("@")) {
+      setErrorMail("El mail no cuenta con el formato adecuado.");
+      return;
+    }
+
     if (registerPassword.length < 8) {
       setErrorPass("La contraseña es muy corta.");
+      return;
+    }
+
+    if (registerTitle.length == 0) {
+      setErrorPass("Ingrese su titulo como tutor.");
+      return;
+    }
+
+    if (registerExperience.length == 0) {
+      setErrorPass("Ingrese una breve experiencia como tutor.");
       return;
     }
 
@@ -122,7 +139,9 @@ const Register = () => {
       email: registerMail,
       password: registerPassword,
       name: registerName,
-      lastname: registerLastName
+      lastname: registerLastName,
+      title: registerTitle,
+      experience: registerExperience
     };
 
     window.sessionStorage.setItem("loggedUser", JSON.stringify(newUser));
@@ -179,6 +198,24 @@ const Register = () => {
                 checkPass(e.target.value);
               }}
               type="password"
+            />
+          </InputDiv>
+          <InputDiv>
+            <Input
+              labelText="Titulo"
+              placeholder="Ingrese su titulo como tutor"
+              onChangeHandler={(e) => {
+                setRegisterTitle(e.target.value);
+              }}
+            />
+          </InputDiv>
+          <InputDiv>
+            <Input
+              labelText="Experiencia"
+              placeholder="Ingrese brevemente su experiencia"
+              onChangeHandler={(e) => {
+                setRegisterExperience(e.target.value);
+              }}
             />
           </InputDiv>
         </DivInputs>
