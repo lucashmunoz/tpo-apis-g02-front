@@ -35,6 +35,10 @@ const ServicesContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 10px;
+
+  @media (max-width: 768px) {
+    justify-items: center;
+  }
 `;
 
 const Services = () => {

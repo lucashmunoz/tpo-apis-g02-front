@@ -44,6 +44,7 @@ const SearchInputWrapper = styled.div`
 
   @media (max-width: 768px) {
     width: 100%;
+    margin-bottom: 20px;
   }
 `;
 
@@ -51,13 +52,16 @@ const SearchInput = styled(Input)``;
 
 const SearchButtonContainer = styled.div`
   width: 186px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const SearchButton = styled(PrimaryButton)`
   margin-left: 20px;
-
   @media (max-width: 768px) {
-    margin-top: 20px;
+    width: 100%;
   }
 `;
 

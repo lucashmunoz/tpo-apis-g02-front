@@ -10,6 +10,10 @@ const CardContainer = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+  @media (max-width: 768px) {
+    margin: 10px;
+  }
 `;
 
 const Img = styled.img`

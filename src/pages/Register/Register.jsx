@@ -6,26 +6,28 @@ import IconImage from "../../assets/icons/UserSampleIcon.png";
 import { useNavigate } from "react-router-dom";
 
 const DivRegister = styled.div`
+  width: 100%;
+  border-radius: 15px;
   display: flex;
   justify-content: center;
+  align-items: center;
 
   @media (max-width: 768px) {
-    flex-direction: row;
+    flex-direction: column;
+    width: 100%;
   }
 `;
 
 const FormRegister = styled.div`
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  width: 40%;
-  justify-content: center;
   background-color: #f3f4f6;
-  padding: 5%;
-  border-radius: 15px;
+  display: flex;
+  width: 40%;
+  padding: 20px 60px;
+  flex-direction: column;
 
   @media (max-width: 768px) {
-    flex-direction: row;
+    margin: 10px;
+    width: calc(100% - 20px);
   }
 `;
 
@@ -38,7 +40,6 @@ const DivImage = styled.div`
   width: 100%;
   justify-content: center;
   display: flex;
-  margin-top: 30px;
 `;
 
 const Image = styled.img`
@@ -52,13 +53,16 @@ const ErrorShow = styled.a`
   color: red;
   display: block;
 `;
-const ErrorHide = styled.a`
-  color: red;
-  display: none;
-`;
 
 const InputDiv = styled.div`
   margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Experiencia = styled.textarea`
+  height: 150px;
+  margin-top: 8px;
 `;
 
 const Register = () => {
@@ -125,12 +129,12 @@ const Register = () => {
       return;
     }
 
-    if (registerTitle.length == 0) {
-      setErrorPass("Ingrese su titulo como tutor.");
+    if (registerTitle.length === 0) {
+      setErrorPass("Ingrese su título como tutor.");
       return;
     }
 
-    if (registerExperience.length == 0) {
+    if (registerExperience.length === 0) {
       setErrorPass("Ingrese una breve experiencia como tutor.");
       return;
     }
@@ -203,15 +207,16 @@ const Register = () => {
           <InputDiv>
             <Input
               labelText="Titulo"
-              placeholder="Ingrese su titulo como tutor"
+              placeholder="Ingrese su título como tutor"
               onChangeHandler={(e) => {
                 setRegisterTitle(e.target.value);
               }}
             />
           </InputDiv>
           <InputDiv>
-            <Input
-              labelText="Experiencia"
+            <label htmlFor="registro-experiencia">Experiencia</label>
+            <Experiencia
+              id="registro-experiencia"
               placeholder="Ingrese brevemente su experiencia"
               onChangeHandler={(e) => {
                 setRegisterExperience(e.target.value);
@@ -222,12 +227,10 @@ const Register = () => {
         <Button buttonType="primary" onClick={tryRegister}>
           Register
         </Button>
-        {errorMail != "" || errorPass != "" ? (
+        {(errorMail !== "" || errorPass !== "") && (
           <ErrorShow>
             {errorMail + " " + errorPass + " " + errorNames}
           </ErrorShow>
-        ) : (
-          <ErrorHide />
         )}
       </FormRegister>
     </DivRegister>
