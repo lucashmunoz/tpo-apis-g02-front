@@ -363,6 +363,7 @@ const opcionesHorarioContacto = [
 
 const ServiceDetail = () => {
   const [comments, setComments] = useState(comentariosCursoMatematicas);
+  const [serviceDetail, setServiceDetail] = useState({});
   const [nuevoComentario, setNuevoComentario] = useState({
     name: "",
     commentDate: "",
@@ -390,6 +391,9 @@ const ServiceDetail = () => {
     setIsSubmitNuevoComentarioDisabled(disableSubmitNuevoComentario);
   }, [nuevoComentario]);
 
+  // Get the service id param from the URL.
+  const { id: serviceId } = useParams();
+
   useEffect(() => {
     const { name, phoneNumber, comment, contactHours } = solicitudContratacion;
 
@@ -402,8 +406,16 @@ const ServiceDetail = () => {
     setIsSubmitSolicitudDisabled(disableSolicitarContratacion);
   }, [solicitudContratacion]);
 
-  // Get the service id param from the URL.
-  const { id: servideId } = useParams();
+  const fetchServices = async () => {
+    const response = await fetch("mocks/servicesdetails.json");
+    const { servicesdetail } = await response.json();
+    console.log(servicesdetail);
+    //setServiceDetail(servicesdetail.find((s) => s.id === serviceId));
+  };
+
+  useEffect(() => {
+    fetchServices();
+  }, []);
 
   const getCommentNmeInitials = (nombreCompleto) => {
     const arrNombreCompleto = nombreCompleto.trim().split(" ");
@@ -455,11 +467,13 @@ const ServiceDetail = () => {
     });
   };
 
+  console.log(serviceDetail);
+
   return (
     <Wrapper>
       <DescripcionContainer>
         <DescriptionContent>
-          <TituloServicio>MATEMATICAS</TituloServicio>
+          <TituloServicio>{serviceDetail.titulo}</TituloServicio>
           <PerfilTutor>
             <ProfileImg
               src={profilePicture1}
@@ -467,33 +481,23 @@ const ServiceDetail = () => {
             />
             <ProfileDescription>
               <NombrePrecioContainer>
-                <NombreTutor>MARÍA</NombreTutor>
-                <PrecioTutor>$30.00</PrecioTutor>
+                <NombreTutor>{serviceDetail.tutor}</NombreTutor>
+                <PrecioTutor>${serviceDetail.precio}</PrecioTutor>
               </NombrePrecioContainer>
-              <TitulosTutor>Ingeniera en UADE</TitulosTutor>
+              <TitulosTutor>{serviceDetail.establecimiento}</TitulosTutor>
               <Rate>
                 <StarImg src={CheckedStar} />
-                {parseFloat(2.5).toFixed(2)}
+                {serviceDetail.rate}
               </Rate>
             </ProfileDescription>
           </PerfilTutor>
           <AcercaDe>
             <AcercaDeTitle>Sobre el servicio</AcercaDeTitle>
-            <AcercaDeContent>
-              ¿Quieres dominar las matemáticas de una vez por todas? ¡Bienvenido
-              al Curso de Matemáticas de Excelencia, tu puerta de entrada a un
-              mundo de conocimiento y habilidades matemáticas sobresalientes!
-            </AcercaDeContent>
+            <AcercaDeContent>{serviceDetail.soble_el_servicio}</AcercaDeContent>
           </AcercaDe>
           <AcercaDe>
             <AcercaDeTitle>Sobre mí</AcercaDeTitle>
-            <AcercaDeContent>
-              Soy María, licenciada en Matemáticas con más de 10 años de
-              experiencia en la enseñanza de las matemáticas. Mi pasión por esta
-              disciplina me ha llevado a diseñar un curso completo y efectivo
-              que te ayudará a superar tus desafíos matemáticos y a alcanzar el
-              éxito académico.
-            </AcercaDeContent>
+            <AcercaDeContent>{serviceDetail.sobre_mi}</AcercaDeContent>
           </AcercaDe>
           <CommentsContainer>
             <CommentsLabel>Comentarios de clientes pasados</CommentsLabel>
