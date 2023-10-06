@@ -7,7 +7,7 @@ const Home = () => {
     <>
       <QuickSearch />
       <ComoFunciona />
-      <ServiciosPopulares />
+      {/*<ServiciosPopulares />*/}
     </>
   );
 };

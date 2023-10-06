@@ -8,7 +8,7 @@
       "category": "ESCOLARES",
       "price": "30",
       "frequency": "SEMANAL",
-      "rate": 4,
+      "rate": 4.3,
       "classType": "INDIVIDUAL",
       "nombreProfesor": "María"
     },
@@ -34,7 +34,7 @@
       "frequency": "SEMANAL",
       "rate": 4.5,
       "classType": "GRUPAL",
-      "nombreProfesor": "Laura"
+      "nombreProfesor": "Carlos"
     },
     {
       "id": 3,
@@ -44,9 +44,9 @@
       "category": "ESCOLARES",
       "price": "35",
       "frequency": "SEMANAL",
-      "rate": 4.2,
+      "rate": 4,
       "classType": "INDIVIDUAL",
-      "nombreProfesor": "Carlos"
+      "nombreProfesor": "María"
     },
     {
       "id": 4,

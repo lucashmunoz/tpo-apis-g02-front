@@ -43,9 +43,8 @@ const DivAbout = styled.div`
 
   @media (max-width: 768px) {
     width: 100%;
-    height: 70%;
     display: block;
-    padding: 5px;
+    padding-bottom: 30px;
   }
 `;
 
@@ -56,14 +55,19 @@ const Wrapper = styled.div`
 `;
 
 const TitleAbout = styled.h2`
-  color: white;
+  color: black;
   font-size: 46px;
   font-weight: bold;
+  margin-bottom: 20px;
 
   @media (max-width: 768px) {
     font-size: 24px;
     text-align: center;
   }
+`;
+
+const TextContent = styled.p`
+  color: black;
 `;
 
 const SobreNosotros = () => {
@@ -73,20 +77,21 @@ const SobreNosotros = () => {
         <ImagePeople src={pexelsimage} />
         <DivAbout>
           <TitleAbout>¿Quiénes Somos?</TitleAbout>
-          <a>
-            Somos un grupo de personas que alguna vez estuvimos donde hoy estás
-            y buscamos crear la red de conexiones estudiante-profesor más grande
-            del mundo
+          <TextContent>
+            Somos un grupo de personas que alguna vez estuvimos donde te
+            encuentras y buscamos crear la red de conexiones estudiante-profesor
+            más grande del mundo.
             <br />
-            Sabemos lo complicado que es encontrar alguien que se adecúe a vos y
+            <br />
+            Sabemos lo complicado que es encontrar alguien que se adecúe a uno y
             por eso te prestamos toda la información que necesites para
-            encontrar aquel servicio que estás buscando. ¿Querés ayudar a los
+            encontrar aquel servicio que estás buscando. ¿Quieres ayudar a los
             demás en su proceso de aprendizaje? Sumate como Mentor y ayuda a los
-            demás a mejorar sus habilidades. ¿Sos un estudiante o te encantaría
+            demás a mejorar sus habilidades. ¿Eres un estudiante o te encantaría
             embarcarte en un nuevo mundo de conocimientos? Busca el tema que
-            deseas, un Mentor que se acerque a tus preferencias e inicia a
+            deseas, un mentor que se acerque a tus preferencias y comienza a
             aprender!
-          </a>
+          </TextContent>
         </DivAbout>
       </WhoWeAre>
     </Wrapper>

@@ -1,36 +1,35 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
-import Button from "components/atoms/Button";
+import { useContext, useEffect, useState } from "react";
+import UserContext from "user-context";
 import Input from "components/atoms/Input";
 import IconImage from "../../assets/icons/UserSampleIcon.png";
 import { useNavigate } from "react-router-dom";
+import PrimaryButton from "components/atoms/PrimaryButton";
 
-const DivLogin = styled.div`
-  display: flex;
-  justify-content: center;
-
-  @media (max-width: 768px) {
-    flex-direction: row;
-  }
-`;
-
-const FormLogin = styled.div`
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  width: 40%;
-  justify-content: center;
-  background-color: #f3f4f6;
-  padding: 5%;
+const Wrapper = styled.div`
+  width: 100%;
   border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   @media (max-width: 768px) {
-    flex-direction: row;
+    flex-direction: column;
+    width: 100%;
   }
 `;
 
-const DivInputs = styled.div`
-  margin-bottom: 20px;
+const FormLogin = styled.form`
+  background-color: #f3f4f6;
+  display: flex;
+  width: 40%;
+  padding: 20px 60px;
+  flex-direction: column;
+
+  @media (max-width: 768px) {
+    margin: 10px;
+    width: calc(100% - 20px);
+  }
 `;
 
 const DivImage = styled.div`
@@ -48,13 +47,48 @@ const Image = styled.img`
   background-color: white;
 `;
 
-const ErrorShow = styled.a`
+const LoginInput = styled(Input)`
+  margin-top
+`;
+
+const ActionContainer = styled.div`
+  margin-top: 10px;
+  width: 100%;
+`;
+
+const LogInButton = styled(PrimaryButton)`
+  width: 100%;
+`;
+
+const ResetPasswordButton = styled.button`
+  margin-top: 10px;
+  width: 100%;
+`;
+
+const RegistrarseContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 35px;
+`;
+
+const RegistrarseLabel = styled.label`
+  width: 500px;
+
+  @media (max-width: 768px) {
+    width: auto;
+  }
+`;
+
+const ButtonRegistrarseContainer = styled.div`
+  width: 280px;
+  display: flex;
+  align-items: center;
+  height: 40px;
+`;
+
+const ErrorShow = styled.p`
   color: red;
   display: block;
-`;
-const ErrorHide = styled.a`
-  color: red;
-  display: none;
 `;
 
 const Login = () => {
@@ -64,6 +98,8 @@ const Login = () => {
   const [errorMail, setErrorMail] = useState("");
   const [errorPass, setErrorPass] = useState("");
   const [users, setUsers] = useState([]);
+
+  const [loggedUser, setLoggedUser] = useContext(UserContext);
 
   const checkMail = (cadena) => {
     if (!cadena.includes("@") && cadena.lenght > 0)
@@ -88,8 +124,10 @@ const Login = () => {
     setUsers(users);
   };
 
-  const tryLogin = () => {
-    var userAux = users.find((u) => u.email === loginMail);
+  const tryLogin = (e) => {
+    e.preventDefault();
+
+    const userAux = users.find((u) => u.email === loginMail);
 
     if (userAux === undefined || userAux === null) {
       setErrorMail("Mail inexistente");
@@ -103,7 +141,8 @@ const Login = () => {
 
     window.sessionStorage.setItem("loggedUser", JSON.stringify(userAux));
 
-    console.log(userAux);
+    setLoggedUser({ ...userAux, isUserLoggedIn: true });
+
     navigate(`/`);
   };
 
@@ -125,20 +164,23 @@ const Login = () => {
   }, []);
 
   return (
-    <DivLogin>
-      <FormLogin>
+    <Wrapper>
+      <FormLogin onSubmit={tryLogin}>
         <DivImage>
           <Image src={IconImage}></Image>
         </DivImage>
-        <DivInputs>
-          <Input
+
+        <ActionContainer>
+          <LoginInput
             labelText="Email"
             placeholder="Ingrese su email"
             onChangeHandler={(e) => {
               checkMail(e.target.value);
             }}
           />
-          <Input
+        </ActionContainer>
+        <ActionContainer>
+          <LoginInput
             labelText="Contraseña"
             placeholder="Ingrese su contraseña"
             onChangeHandler={(e) => {
@@ -146,20 +188,34 @@ const Login = () => {
             }}
             type="password"
           />
-        </DivInputs>
-        <Button buttonType="primary" onClick={tryLogin}>
-          Log In
-        </Button>
-        <Button buttonType="third" onClick={newPass}>
-          Recuperar contraseña.
-        </Button>
-        {errorMail !== "" || errorPass !== "" ? (
+        </ActionContainer>
+        <ActionContainer>
+          <LogInButton buttonType="primary" type="submit">
+            Log In
+          </LogInButton>
+        </ActionContainer>
+        <ActionContainer>
+          <ResetPasswordButton buttonType="third" onClick={newPass}>
+            Recuperar contraseña.
+          </ResetPasswordButton>
+        </ActionContainer>
+        {(errorMail !== "" || errorPass !== "") && (
           <ErrorShow>{errorMail + " " + errorPass}</ErrorShow>
-        ) : (
-          <ErrorHide />
         )}
+
+        <RegistrarseContainer>
+          <ButtonRegistrarseContainer>
+            <RegistrarseLabel>¿No tienes cuenta?</RegistrarseLabel>
+            <LogInButton
+              buttonType="primary"
+              onClick={() => navigate("/register")}
+            >
+              Regístrate
+            </LogInButton>
+          </ButtonRegistrarseContainer>
+        </RegistrarseContainer>
       </FormLogin>
-    </DivLogin>
+    </Wrapper>
   );
 };
 

@@ -8,10 +8,6 @@ import StarRate from "components/atoms/StarRate";
 const Wrapper = styled.form`
   display: flex;
   flex-direction: column;
-
-  @media (max-width: 768px) {
-    flex-direction: row;
-  }
 `;
 
 const ControlContainer = styled.div`
