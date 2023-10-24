@@ -3,6 +3,8 @@ import styled from "styled-components";
 const ButtonElement = styled.button`
   width: 100%;
   color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
   background-color: ${(props) => (props.disabled ? "grey" : "#22c55e")};
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
   transition: 0.25s;
@@ -14,11 +16,7 @@ const ButtonElement = styled.button`
 
 const PrimaryButton = ({ children, onClick, isDisabled }) => {
   return (
-    <ButtonElement
-      className="bg-green-500 hover:bg-green-600 py-2 px-4 rounded"
-      onClick={onClick}
-      disabled={isDisabled}
-    >
+    <ButtonElement onClick={onClick} disabled={isDisabled}>
       {children}
     </ButtonElement>
   );

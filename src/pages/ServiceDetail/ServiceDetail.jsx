@@ -1,337 +1,53 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import styled from "styled-components";
 import CheckedStar from "assets/icons/star-filled.svg";
-import StarRate from "components/atoms/StarRate";
-import PrimaryButton from "components/atoms/PrimaryButton";
-import Dropdown from "components/atoms/Dropdown";
-
-const Wrapper = styled.div`
-  display: flex;
-  max-width: 1400px;
-  margin-right: auto;
-  margin-left: auto;
-  padding: 60px 20px;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-`;
-
-const DescripcionContainer = styled.div`
-  width: calc((100% / 12) * 8);
-  background-color: #f3f4f6;
-  float: left;
-
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-`;
-
-const DescriptionContent = styled.div`
-  padding: 0 20px;
-  width: 100%,
-  float: left;
-`;
-
-const TituloServicio = styled.h3`
-  padding: 32px 0;
-  font-size: 30px;
-  font-weight: bold;
-  text-transform: uppercase;
-`;
-
-const PerfilTutor = styled.div`
-  display: flex;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-`;
-
-const ProfileImgContainer = styled.div`
-  @media (max-width: 768px) {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-`;
-
-const ProfileImg = styled.img`
-  height: 160px;
-`;
-
-const ProfileDescription = styled.div`
-  padding-left: 20px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-
-  @media (max-width: 768px) {
-    padding-left: 0;
-  }
-`;
-
-const NombrePrecioContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  @media (max-width: 768px) {
-    margin: 20px 0;
-  }
-`;
-
-const NombreTutor = styled.p`
-  font-size: 24px;
-  font-weight: bold;
-`;
-
-const PrecioTutor = styled.label`
-  font-size: 24px;
-  font-weight: bold;
-`;
-
-const TitulosTutor = styled.label`
-  font-size: 20px;
-`;
-
-const Rate = styled.div`
-  display: flex;
-  color: black;
-`;
-
-const StarImg = styled.img`
-  width: 24x;
-  height: 24px;
-  margin-right: 3px;
-`;
-
-const AcercaDe = styled.div`
-  margin-top: 40px;
-`;
-
-const AcercaDeTitle = styled.label`
-  font-size: 18px;
-  font-weight: bold;
-`;
-
-const AcercaDeContent = styled.p`
-  margin-top: 12px;
-`;
-
-const CommentsContainer = styled.div`
-  margin-top: 40px;
-`;
-
-const CommentsLabel = styled.label`
-  font-size: 18px;
-  font-weight: bold;
-`;
-
-const CommentsHR = styled.hr`
-  width: 100%;
-  height: 1px;
-  color: grey;
-  margin: 20px 20px 20px 0;
-`;
-
-const Comentario = styled.div`
-  margin: 20px 0;
-  display: flex;
-`;
-
-const UserCommentLogoContainer = styled.div``;
-
-const UserCommentLogo = styled.div`
-  width: 50px;
-  height: 50px;
-  background-color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  text-transform: uppercase;
-`;
-
-const UserComment = styled.div`
-  margin-left: 20px;
-  width: 100%;
-`;
-
-const UserCommentRateAndName = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const UserCommentRate = styled.div`
-  display: flex;
-  align-items: center;
-  color: black;
-`;
-
-const UserCommentName = styled.label`
-  margin-left: 15px;
-  font-weight: bold;
-`;
-
-const UserCommentText = styled.p`
-  margin-top: 8px;
-`;
-
-const RealizarNuevoComentarioForm = styled.form``;
-
-const NewCommentNameContainer = styled.div`
-  display: flex;
-  margin-left: 15px;
-
-  @media (max-width: 768px) {
-    margin-left: 0;
-    margin-top: 10px;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-`;
-
-const NewCommentRateAndName = styled.div`
-  display: flex;
-  align-items: center;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-`;
-
-const NewUserNameInput = styled.input`
-  margin-left: 10px;
-  width: 100%;
-  padding-left: 10px;
-  border: 1px solid #ebded5;
-
-  &:hover {
-    border: 1px solid #22c55e;
-  }
-
-  @media (max-width: 768px) {
-    margin-left: 0;
-  }
-`;
-
-const NewCommentText = styled.textarea`
-  margin-top: 8px;
-  height: 100px;
-  width: 100%;
-  resize: none;
-  padding: 10px;
-  border: 1px solid #ebded5;
-
-  &:hover {
-    border: 1px solid #22c55e;
-  }
-
-  @media (max-width: 768px) {
-    margin-top: 10px;
-  }
-`;
-
-const SubmitCommentButtonContainer = styled.div`
-  float: right;
-
-  @media (max-width: 768px) {
-    margin-top: 10px;
-  }
-`;
-
-const SubmitCommentButton = styled(PrimaryButton)`
-  float: right;
-`;
-
-const ContratarContainer = styled.form`
-  width: calc((100% / 12) * 4);
-  background-color: #f3f4f6;
-  float: left;
-  margin-left: 20px;
-  padding: 0 20px;
-
-  @media (max-width: 768px) {
-    width: 100%;
-    margin-top: 40px;
-    margin-left: 0;
-  }
-`;
-
-const PedirContratacion = styled.h3`
-  font-size: 24px;
-  font-weight: bold;
-  padding: 32px 0;
-  text-align: center;
-`;
-
-const MensajeAProveedor = styled.textarea`
-  height: 100px;
-  width: 100%;
-  resize: none;
-  padding: 10px;
-  border: 1px solid #ebded5;
-
-  &:hover {
-    border: 1px solid #22c55e;
-  }
-`;
-
-const InputSimpleSolicitudAlumnoContainer = styled.div`
-  display: flex;
-  margin-top: 10px;
-  align-items: center;
-`;
-
-const LabelSimpleSolicitudAlumno = styled.label`
-  width: 100px;
-  display: inline-block;
-`;
-
-const InputSimpleSolicitudAlumno = styled.input`
-  padding-left: 10px;
-  border: 1px solid #ebded5;
-
-  &:hover {
-    border: 1px solid #22c55e;
-  }
-`;
-
-const FrequencyRateContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  color: grey;
-
-  margin-top: auto;
-
-  @media (max-width: 768px) {
-    margin-top: 10px;
-  }
-`;
-
-const Frequency = styled.div`
-  background-color: #d1d1d1;
-  width: 90px;
-  padding: 2px 8px;
-  border-radius: 8px;
-  color: #505050;
-`;
-
-const DropdownHorarioContacto = styled(Dropdown)`
-  width: 100%;
-`;
-
-const SubmitSolicitudButtonContainer = styled.div`
-  margin-top: 10px;
-`;
-
-const SubmitSolicitudButton = styled(PrimaryButton)``;
+import StarRate from "components/StarRate";
+import PrimaryButton from "components/PrimaryButton";
+import {
+  DescripcionContainer,
+  DescriptionContent,
+  Wrapper,
+  TituloServicio,
+  PerfilTutor,
+  ProfileImgContainer,
+  ProfileImg,
+  ProfileDescription,
+  NombrePrecioContainer,
+  NombreTutor,
+  PrecioTutor,
+  TitulosTutor,
+  Rate,
+  StarImg,
+  AcercaDe,
+  AcercaDeTitle,
+  AcercaDeContent,
+  CommentsContainer,
+  CommentsLabel,
+  CommentsHR,
+  Comentario,
+  UserCommentLogo,
+  UserComment,
+  UserCommentRateAndName,
+  UserCommentRate,
+  UserCommentName,
+  UserCommentText,
+  NewCommentNameContainer,
+  NewCommentRateAndName,
+  NewUserNameInput,
+  NewCommentText,
+  SubmitCommentButtonContainer,
+  SubmitCommentButton,
+  ContratarContainer,
+  PedirContratacion,
+  MensajeAProveedor,
+  InputSimpleSolicitudAlumnoContainer,
+  LabelSimpleSolicitudAlumno,
+  InputSimpleSolicitudAlumno,
+  FrequencyRateContainer,
+  Frequency,
+  DropdownHorarioContacto,
+  SubmitSolicitudButtonContainer
+} from "./styles";
 
 const comentariosCursoMatematicas = [
   {
@@ -757,11 +473,11 @@ const ServiceDetail = () => {
               } = comentario;
               return (
                 <Comentario key={id}>
-                  <UserCommentLogoContainer>
+                  <div>
                     <UserCommentLogo>
                       {getCommentInitials(name)}
                     </UserCommentLogo>
-                  </UserCommentLogoContainer>
+                  </div>
                   <UserComment>
                     <UserCommentRateAndName>
                       <UserCommentRate>
@@ -776,14 +492,14 @@ const ServiceDetail = () => {
               );
             })}
             <CommentsHR />
-            <RealizarNuevoComentarioForm onSubmit={handleMakeNewComment}>
+            <form onSubmit={handleMakeNewComment}>
               <CommentsLabel>Realizar comentario</CommentsLabel>
               <Comentario>
-                <UserCommentLogoContainer>
+                <div>
                   <UserCommentLogo>
                     {getCommentInitials(nuevoComentario.name)}
                   </UserCommentLogo>
-                </UserCommentLogoContainer>
+                </div>
                 <UserComment>
                   <NewCommentRateAndName>
                     <UserCommentRate>
@@ -831,7 +547,7 @@ const ServiceDetail = () => {
                   </SubmitCommentButtonContainer>
                 </UserComment>
               </Comentario>
-            </RealizarNuevoComentarioForm>
+            </form>
           </CommentsContainer>
         </DescriptionContent>
       </DescripcionContainer>
@@ -917,12 +633,9 @@ const ServiceDetail = () => {
           />
         </InputSimpleSolicitudAlumnoContainer>
         <SubmitSolicitudButtonContainer>
-          <SubmitSolicitudButton
-            type="submit"
-            isDisabled={isSubmitSolicitudDisabled}
-          >
+          <PrimaryButton type="submit" isDisabled={isSubmitSolicitudDisabled}>
             Solicitar
-          </SubmitSolicitudButton>
+          </PrimaryButton>
         </SubmitSolicitudButtonContainer>
       </ContratarContainer>
     </Wrapper>

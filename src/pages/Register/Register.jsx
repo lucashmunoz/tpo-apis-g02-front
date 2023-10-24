@@ -1,73 +1,18 @@
-import styled from "styled-components";
 import { useEffect, useState } from "react";
-import Button from "components/atoms/Button";
-import Input from "components/atoms/Input";
+import Input from "components/Input";
 import IconImage from "../../assets/icons/UserSampleIcon.png";
 import { useNavigate } from "react-router-dom";
-import PrimaryButton from "components/atoms/PrimaryButton";
-
-const DivRegister = styled.div`
-  width: 100%;
-  height: 100%;
-  margin: 10px 0;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    width: 100%;
-  }
-`;
-
-const FormRegister = styled.div`
-  background-color: #f3f4f6;
-  display: flex;
-  width: 40%;
-  padding: 20px 60px;
-  flex-direction: column;
-
-  @media (max-width: 768px) {
-    margin: 10px;
-    width: calc(100% - 20px);
-  }
-`;
-
-const DivInputs = styled.div`
-  margin-bottom: 20px;
-`;
-
-const DivImage = styled.div`
-  margin-bottom: 20px;
-  width: 100%;
-  justify-content: center;
-  display: flex;
-`;
-
-const Image = styled.img`
-  width: 120px;
-  border: 2px solid black;
-  border-radius: 150px;
-  background-color: white;
-`;
-
-const ErrorShow = styled.a`
-  color: red;
-  display: block;
-`;
-
-const InputDiv = styled.div`
-  margin-bottom: 10px;
-  display: flex;
-  flex-direction: column;
-`;
-
-const Experiencia = styled.textarea`
-  height: 150px;
-  margin-top: 8px;
-  padding: 10px;
-`;
+import PrimaryButton from "components/PrimaryButton";
+import {
+  DivImage,
+  DivInputs,
+  DivRegister,
+  ErrorShow,
+  Experiencia,
+  FormRegister,
+  Image,
+  InputDiv
+} from "./styles";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -112,12 +57,12 @@ const Register = () => {
   };
 
   const checkNames = (cadena, type) => {
-    if (cadena.lenght == 0) {
+    if (cadena.lenght === 0) {
       setErrorNames("No se puede ingresar una cadena vacia en ningun nombre.");
       return;
     }
 
-    if (type == "first") setRegisterName(cadena);
+    if (type === "first") setRegisterName(cadena);
     else setRegisterLastName(cadena);
   };
 
@@ -137,9 +82,9 @@ const Register = () => {
   };
 
   const tryRegister = () => {
-    var userAux = users.find((u) => u.email == registerMail);
+    var userAux = users.find((u) => u.email === registerMail);
 
-    if (userAux != undefined && userAux != null) {
+    if (userAux !== undefined && userAux !== null) {
       setErrorMail("El mail que ingreso ya esta registrado.");
       return;
     }
@@ -249,11 +194,7 @@ const Register = () => {
             />
           </InputDiv>
         </DivInputs>
-        <PrimaryButton
-          isDisabled={disableRegisterButton}
-          buttonType="primary"
-          onClick={tryRegister}
-        >
+        <PrimaryButton isDisabled={disableRegisterButton} onClick={tryRegister}>
           Register
         </PrimaryButton>
         {(errorMail !== "" || errorPass !== "") && (

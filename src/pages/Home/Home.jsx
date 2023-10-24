@@ -1,13 +1,11 @@
-import ComoFunciona from "components/organisms/ComoFunciona";
-import QuickSearch from "components/organisms/QuickSearch";
-import ServiciosPopulares from "components/organisms/ServiciosPopulares";
+import ComoFunciona from "pages/Home/ComoFunciona";
+import QuickSearch from "pages/Home/QuickSearch";
 
 const Home = () => {
   return (
     <>
       <QuickSearch />
       <ComoFunciona />
-      {/*<ServiciosPopulares />*/}
     </>
   );
 };
