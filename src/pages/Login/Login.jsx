@@ -1,96 +1,21 @@
-import styled from "styled-components";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "user-context";
-import Input from "components/atoms/Input";
 import IconImage from "../../assets/icons/UserSampleIcon.png";
 import { useNavigate } from "react-router-dom";
-import PrimaryButton from "components/atoms/PrimaryButton";
-
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    width: 100%;
-  }
-`;
-
-const FormLogin = styled.form`
-  background-color: #f3f4f6;
-  display: flex;
-  width: 40%;
-  padding: 20px 60px;
-  flex-direction: column;
-
-  @media (max-width: 768px) {
-    margin: 10px;
-    width: calc(100% - 20px);
-  }
-`;
-
-const DivImage = styled.div`
-  margin-bottom: 20px;
-  width: 100%;
-  justify-content: center;
-  display: flex;
-  margin-top: 30px;
-`;
-
-const Image = styled.img`
-  width: 120px;
-  border: 2px solid black;
-  border-radius: 150px;
-  background-color: white;
-`;
-
-const LoginInput = styled(Input)`
-  margin-top
-`;
-
-const ActionContainer = styled.div`
-  margin-top: 10px;
-  width: 100%;
-`;
-
-const LogInButton = styled(PrimaryButton)`
-  width: 100%;
-`;
-
-const ResetPasswordButton = styled.button`
-  margin-top: 10px;
-  width: 100%;
-`;
-
-const RegistrarseContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 35px;
-`;
-
-const RegistrarseLabel = styled.label`
-  width: 500px;
-
-  @media (max-width: 768px) {
-    width: auto;
-  }
-`;
-
-const ButtonRegistrarseContainer = styled.div`
-  width: 280px;
-  display: flex;
-  align-items: center;
-  height: 40px;
-`;
-
-const ErrorShow = styled.p`
-  color: red;
-  display: block;
-`;
+import TextButton from "components/Button";
+import {
+  ActionContainer,
+  ButtonRegistrarseContainer,
+  DivImage,
+  ErrorShow,
+  FormLogin,
+  Image,
+  LogInButton,
+  LoginInput,
+  RegistrarseContainer,
+  RegistrarseLabel,
+  Wrapper
+} from "./styles";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -108,7 +33,7 @@ const Login = () => {
     setDisableLoginButton(disableLoginButton);
   }, [loginMail, loginPassword]);
 
-  const [loggedUser, setLoggedUser] = useContext(UserContext);
+  const [, setLoggedUser] = useContext(UserContext);
 
   const checkMail = (cadena) => {
     if (!cadena.includes("@") && cadena.lenght > 0)
@@ -210,9 +135,7 @@ const Login = () => {
           </LogInButton>
         </ActionContainer>
         <ActionContainer>
-          <ResetPasswordButton buttonType="third" onClick={newPass}>
-            Recuperar contraseña.
-          </ResetPasswordButton>
+          <TextButton onClick={newPass}>Recuperar contraseña.</TextButton>
         </ActionContainer>
         {(errorMail !== "" || errorPass !== "") && (
           <ErrorShow>{errorMail + " " + errorPass}</ErrorShow>

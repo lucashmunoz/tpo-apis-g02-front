@@ -45,7 +45,7 @@ const ComoFunciona = () => {
         <StepCard
           img={stepOne}
           title="Selecciona el tema"
-          text="Primero deberas elegir sobre que tema buscas aprender, ¡No te limites en SkillMentor tenemos una amplia variedad de tópicos para aprender!"
+          text="Primero deberas elegir sobre que tema buscas aprender, ¡No te limites, en SkillMentor tenemos una amplia variedad de tópicos para aprender!"
         />
         <StepCard
           img={stepTwo}

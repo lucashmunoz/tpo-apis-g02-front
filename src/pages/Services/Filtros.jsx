@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
-import Dropdown from "components/atoms/Dropdown";
-import Input from "components/atoms/Input";
-import StarRate from "components/atoms/StarRate";
+import Dropdown from "components/Dropdown";
+import Input from "components/Input";
+import StarRate from "components/StarRate";
 
 const Wrapper = styled.form`
   display: flex;

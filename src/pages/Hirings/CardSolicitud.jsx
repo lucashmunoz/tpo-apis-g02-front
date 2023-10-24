@@ -1,5 +1,5 @@
-import Button from "components/atoms/Button";
-import PrimaryButton from "components/atoms/PrimaryButton";
+import TextButton from "components/Button";
+import PrimaryButton from "components/PrimaryButton";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -156,7 +156,9 @@ const getActionButtons = ({
           <PrimaryButton onClick={() => aceptarSolicitud(id)}>
             ACEPTAR
           </PrimaryButton>
-          <Button onClick={() => cancelarSolicitud(id)}>CANCELAR</Button>
+          <TextButton onClick={() => cancelarSolicitud(id)}>
+            CANCELAR
+          </TextButton>
         </>
       );
     case "ACEPTADA":
@@ -165,7 +167,9 @@ const getActionButtons = ({
           <PrimaryButton onClick={() => finalizarSolicitud(id)}>
             FINALIZAR
           </PrimaryButton>
-          <Button onClick={() => cancelarSolicitud(id)}>CANCELAR</Button>
+          <TextButton onClick={() => cancelarSolicitud(id)}>
+            CANCELAR
+          </TextButton>
         </>
       );
     case "FINALIZADA":

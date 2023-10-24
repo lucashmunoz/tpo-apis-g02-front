@@ -1,20 +1,4 @@
-import styled from "styled-components";
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Select = styled.select`
-  margin-top: 5px;
-  padding: 10px 0;
-  border: 1px solid #ebded5;
-  border-radius: 5px;
-
-  &:hover {
-    border: 1px solid #22c55e;
-  }
-`;
+import { Select, Wrapper } from "./styles";
 
 const Dropdown = ({
   id,

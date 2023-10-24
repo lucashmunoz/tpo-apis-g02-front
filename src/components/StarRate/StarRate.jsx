@@ -1,24 +1,7 @@
 import { useState } from "react";
-import styled from "styled-components";
 import CheckedStar from "assets/icons/star-filled.svg";
 import UncheckedStar from "assets/icons/star-no-filled.svg";
-
-const Wrapper = styled.div``;
-
-const Rates = styled.div`
-  display: flex;
-
-  :not(:first-child) {
-    margin-left: 5px;
-  }
-`;
-
-const Star = styled.button``;
-
-const StarImg = styled.img`
-  width: 24px;
-  height: 24px;
-`;
+import { Rates, StarImg } from "./styles";
 
 const StarRate = ({ onChangeHandler, labelText }) => {
   const [selectedRate, setSelectedRate] = useState(0);
@@ -47,26 +30,26 @@ const StarRate = ({ onChangeHandler, labelText }) => {
   };
 
   return (
-    <Wrapper>
+    <div>
       {labelText && <label>{labelText}</label>}
       <Rates>
-        <Star type="button" name="1" onClick={(e) => handleRateChange(e, 1)}>
+        <button type="button" name="1" onClick={(e) => handleRateChange(e, 1)}>
           <StarImg src={selectedRate >= 1 ? CheckedStar : UncheckedStar} />
-        </Star>
-        <Star type="button" name="2" onClick={(e) => handleRateChange(e, 2)}>
+        </button>
+        <button type="button" name="2" onClick={(e) => handleRateChange(e, 2)}>
           <StarImg src={selectedRate >= 2 ? CheckedStar : UncheckedStar} />
-        </Star>
-        <Star type="button" name="3" onClick={(e) => handleRateChange(e, 3)}>
+        </button>
+        <button type="button" name="3" onClick={(e) => handleRateChange(e, 3)}>
           <StarImg src={selectedRate >= 3 ? CheckedStar : UncheckedStar} />
-        </Star>
-        <Star type="button" name="4" onClick={(e) => handleRateChange(e, 4)}>
+        </button>
+        <button type="button" name="4" onClick={(e) => handleRateChange(e, 4)}>
           <StarImg src={selectedRate >= 4 ? CheckedStar : UncheckedStar} />
-        </Star>
-        <Star type="button" name="5" onClick={(e) => handleRateChange(e, 5)}>
+        </button>
+        <button type="button" name="5" onClick={(e) => handleRateChange(e, 5)}>
           <StarImg src={selectedRate >= 5 ? CheckedStar : UncheckedStar} />
-        </Star>
+        </button>
       </Rates>
-    </Wrapper>
+    </div>
   );
 };
 
