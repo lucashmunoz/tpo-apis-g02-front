@@ -83,7 +83,7 @@ const Header = () => {
         {!loggedUser.isUserLoggedIn ? (
           <SessionButtons>
             <ActionButton onClick={() => navigate("/login")}>
-              Iniciar Sesion
+              Iniciar Sesión
             </ActionButton>
           </SessionButtons>
         ) : (
@@ -112,7 +112,7 @@ const Header = () => {
         {!loggedUser.isUserLoggedIn ? (
           <SessionButtons>
             <ActionButton onClick={() => navigate("/login")}>
-              Iniciar Sesion
+              Iniciar Sesión
             </ActionButton>
           </SessionButtons>
         ) : (

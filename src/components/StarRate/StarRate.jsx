@@ -34,19 +34,34 @@ const StarRate = ({ onChangeHandler, labelText }) => {
       {labelText && <label>{labelText}</label>}
       <Rates>
         <button type="button" name="1" onClick={(e) => handleRateChange(e, 1)}>
-          <StarImg src={selectedRate >= 1 ? CheckedStar : UncheckedStar} />
+          <StarImg
+            src={selectedRate >= 1 ? CheckedStar : UncheckedStar}
+            alt="1 estrella"
+          />
         </button>
         <button type="button" name="2" onClick={(e) => handleRateChange(e, 2)}>
-          <StarImg src={selectedRate >= 2 ? CheckedStar : UncheckedStar} />
+          <StarImg
+            src={selectedRate >= 2 ? CheckedStar : UncheckedStar}
+            alt="2 estrellas"
+          />
         </button>
         <button type="button" name="3" onClick={(e) => handleRateChange(e, 3)}>
-          <StarImg src={selectedRate >= 3 ? CheckedStar : UncheckedStar} />
+          <StarImg
+            src={selectedRate >= 3 ? CheckedStar : UncheckedStar}
+            alt="3 estrellas"
+          />
         </button>
         <button type="button" name="4" onClick={(e) => handleRateChange(e, 4)}>
-          <StarImg src={selectedRate >= 4 ? CheckedStar : UncheckedStar} />
+          <StarImg
+            src={selectedRate >= 4 ? CheckedStar : UncheckedStar}
+            alt="4 estrellas"
+          />
         </button>
         <button type="button" name="5" onClick={(e) => handleRateChange(e, 5)}>
-          <StarImg src={selectedRate >= 5 ? CheckedStar : UncheckedStar} />
+          <StarImg
+            src={selectedRate >= 5 ? CheckedStar : UncheckedStar}
+            alt="5 estrellas"
+          />
         </button>
       </Rates>
     </div>

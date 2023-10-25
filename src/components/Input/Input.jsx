@@ -11,8 +11,12 @@ const Input = ({
 }) => {
   return (
     <>
-      <label htmlFor={id}>{labelText}</label>
-      {labelText && <HorizontalSpace />}
+      {labelText && (
+        <>
+          <label htmlFor={id}>{labelText}</label>
+          <HorizontalSpace />
+        </>
+      )}
       <InputTag
         id={id}
         type={type}

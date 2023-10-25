@@ -155,7 +155,7 @@ const Services = () => {
         <Filtros setFilters={setFilters} filters={filters} />
       </FiltersContainer>
       <ServicesContainer>
-        {serviciosFiltrados.map((servicio, index) => {
+        {serviciosFiltrados.map((servicio) => {
           const {
             id,
             profilePhoto,
@@ -170,7 +170,7 @@ const Services = () => {
           return (
             <ServiceCard
               key={id}
-              profilePhoto={servicio.profilePhoto}
+              profilePhoto={profilePhoto}
               title={title}
               summaryDescription={summaryDescription}
               price={price}
