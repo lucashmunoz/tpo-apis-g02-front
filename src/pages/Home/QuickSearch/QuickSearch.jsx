@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import promoImg1 from "assets/promo-imgs/promo-imgs-banner_1.jpg";
 import Input from "components/Input";
 import {
@@ -11,16 +12,21 @@ import {
   SearchButtonContainer,
   SearchControls,
   SearchInputWrapper,
-  SearchLink,
   SearchPromoText
 } from "./styles";
 
 const QuickSearch = () => {
   const [searchValue, setSearchValue] = useState("");
+  const nav = useNavigate();
+
+  const handleBuscarProfesor = (e) => {
+    e.preventDefault();
+    nav("/services", { state: { subject: searchValue.toString() } });
+  };
 
   return (
     <QuickSearchWrapper>
-      <SearchBoxContainer>
+      <SearchBoxContainer onSubmit={handleBuscarProfesor}>
         <SearchBoxTitle>Acercando la educación a todo el mundo</SearchBoxTitle>
         <SearchControls>
           <SearchInputWrapper>
@@ -34,14 +40,7 @@ const QuickSearch = () => {
             />
           </SearchInputWrapper>
           <SearchButtonContainer>
-            <SearchButton>
-              <SearchLink
-                to="/services"
-                state={{ subject: searchValue.toString() }}
-              >
-                BUSCAR PROFESOR
-              </SearchLink>
-            </SearchButton>
+            <SearchButton type="submit">BUSCAR PROFESOR</SearchButton>
           </SearchButtonContainer>
         </SearchControls>
         <SearchPromoText>
