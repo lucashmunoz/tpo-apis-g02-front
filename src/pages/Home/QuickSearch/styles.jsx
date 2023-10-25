@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import PrimaryButton from "components/PrimaryButton";
 
 export const QuickSearchWrapper = styled.div`
@@ -8,13 +7,14 @@ export const QuickSearchWrapper = styled.div`
   margin: auto;
   display: flex;
   justify-content: center;
+  align-items: center;
 
   @media (max-width: 768px) {
     flex-direction: column;
   }
 `;
 
-export const SearchBoxContainer = styled.div`
+export const SearchBoxContainer = styled.form`
   width: calc(min(600px, 100%));
 `;
 
@@ -58,11 +58,6 @@ export const SearchButton = styled(PrimaryButton)`
   @media (max-width: 768px) {
     width: 100%;
   }
-`;
-
-export const SearchLink = styled(Link)`
-  width: 100%;
-  height: 100%;
 `;
 
 export const SearchPromoText = styled.p`

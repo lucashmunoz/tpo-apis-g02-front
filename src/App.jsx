@@ -16,7 +16,6 @@ import MyServiceDetails from "pages/MyServiceDetails";
 import NewService from "pages/NewService";
 
 const Main = styled.main`
-  position: relative;
   flex: 1;
 `;
 
@@ -41,6 +40,8 @@ function App() {
             <Route path="/" element={<Home />} />
           </Routes>
         </Main>
+
+        {/**/}
         <Footer />
       </Router>
     </UserContext.Provider>

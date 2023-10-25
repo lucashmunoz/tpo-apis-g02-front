@@ -4,9 +4,8 @@ export const FooterWrapper = styled.footer`
   border-top: 1px solid grey;
   display: flex;
   flex-direction: column;
-  height: 100px;
   width: 100%;
-  padding: 50px 0;
+  padding: 20px 0;
 `;
 
 export const LogoImg = styled.img`
@@ -32,7 +31,7 @@ export const LogoEmpresa = styled.p`
   font-size: 24px;
   font-weight: bold;
   letter-spacing: 3px;
-  text-align: CENTER;
+  text-align: center;
 `;
 
 export const HorizontalLine = styled.hr`
