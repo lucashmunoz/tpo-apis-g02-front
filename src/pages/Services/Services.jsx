@@ -132,7 +132,7 @@ const Services = () => {
       return filteredServices;
     };
 
-    setServiciosFiltrados(updateServicesWithFilters);
+    setServiciosFiltrados(updateServicesWithFilters());
   }, [filters, servicios]);
 
   const getFrequencyLabel = (frequencyValue) => {
