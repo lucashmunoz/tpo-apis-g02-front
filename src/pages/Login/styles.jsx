@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import Input from "components/Input";
-import PrimaryButton from "components/PrimaryButton";
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -29,7 +27,7 @@ export const FormLogin = styled.form`
   }
 `;
 
-export const DivImage = styled.div`
+export const ImgWrapper = styled.div`
   margin-bottom: 20px;
   width: 100%;
   justify-content: center;
@@ -44,16 +42,8 @@ export const Image = styled.img`
   background-color: white;
 `;
 
-export const LoginInput = styled(Input)`
-  margin-top
-`;
-
 export const ActionContainer = styled.div`
   margin-top: 10px;
-  width: 100%;
-`;
-
-export const LogInButton = styled(PrimaryButton)`
   width: 100%;
 `;
 

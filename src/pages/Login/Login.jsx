@@ -6,23 +6,23 @@ import TextButton from "components/TextButton";
 import {
   ActionContainer,
   ButtonRegistrarseContainer,
-  DivImage,
+  ImgWrapper,
   ErrorShow,
   FormLogin,
   Image,
-  LogInButton,
-  LoginInput,
   RegistrarseContainer,
   RegistrarseLabel,
   Wrapper
 } from "./styles";
+import Input from "components/Input";
+import PrimaryButton from "components/PrimaryButton";
 
 const Login = () => {
   const navigate = useNavigate();
   const [loginMail, setLoginMail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [errorMail, setErrorMail] = useState("");
-  const [errorPass, setErrorPass] = useState("");
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
   const [users, setUsers] = useState([]);
 
   const [disableLoginButton, setDisableLoginButton] = useState(true);
@@ -35,20 +35,31 @@ const Login = () => {
 
   const [, setLoggedUser] = useContext(UserContext);
 
-  const checkMail = (cadena) => {
-    if (!cadena.includes("@") && cadena.lenght > 0)
-      setErrorMail("El mail debe tener por lo menos un @.");
-    else setErrorMail("");
+  const validateEmail = (email) => {
+    const emailRegex = new RegExp(
+      /^(?:[A-Zd][A-Zd_-]{5,10}|[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4})$/i
+    );
 
-    setLoginMail(cadena);
+    if (!emailRegex.test(email)) {
+      setErrorMail("El email debe seguir el formato email@ejemplo.com");
+    } else {
+      setErrorMail("");
+    }
+
+    setLoginMail(email);
   };
 
-  const checkPass = (cadena) => {
-    if (cadena.lenght > 0 && (cadena.lenght < 8 || cadena.lenght > 16))
-      setErrorPass("La contraseña debe tener entre 8 y 16 caracterees.");
-    else setErrorPass("");
+  const validatePassword = (clave) => {
+    console.log(clave.length);
+    if (clave.length < 8 || clave.length > 16)
+      setPasswordErrorMessage(
+        "La contraseña debe tener entre 8 y 16 caracterees."
+      );
+    else {
+      setPasswordErrorMessage("");
+    }
 
-    setLoginPassword(cadena);
+    setLoginPassword(clave);
   };
 
   const fetchUsers = async () => {
@@ -58,7 +69,7 @@ const Login = () => {
     setUsers(users);
   };
 
-  const tryLogin = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
 
     const userAux = users.find((u) => u.email === loginMail);
@@ -69,7 +80,7 @@ const Login = () => {
     }
 
     if (userAux.password !== loginPassword) {
-      setErrorPass("Contraseña invalida");
+      setPasswordErrorMessage("Contraseña invalida");
       return;
     }
 
@@ -99,57 +110,57 @@ const Login = () => {
 
   return (
     <Wrapper>
-      <FormLogin onSubmit={tryLogin}>
-        <DivImage>
+      <FormLogin onSubmit={handleLogin}>
+        <ImgWrapper>
           <Image src={IconImage}></Image>
-        </DivImage>
+        </ImgWrapper>
 
         <ActionContainer>
-          <LoginInput
+          <Input
             name="email"
             labelText="Email"
             placeholder="Ingrese su email"
             onChangeHandler={(e) => {
-              checkMail(e.target.value);
+              validateEmail(e.target.value);
             }}
           />
         </ActionContainer>
         <ActionContainer>
-          <LoginInput
+          <Input
             name="password"
             labelText="Contraseña"
             placeholder="Ingrese su contraseña"
             onChangeHandler={(e) => {
-              checkPass(e.target.value);
+              validatePassword(e.target.value);
             }}
             type="password"
           />
         </ActionContainer>
         <ActionContainer>
-          <LogInButton
+          <PrimaryButton
             buttonType="primary"
             type="submit"
             isDisabled={disableLoginButton}
           >
             Log In
-          </LogInButton>
+          </PrimaryButton>
         </ActionContainer>
         <ActionContainer>
           <TextButton onClick={newPass}>Recuperar contraseña.</TextButton>
         </ActionContainer>
-        {(errorMail !== "" || errorPass !== "") && (
-          <ErrorShow>{errorMail + " " + errorPass}</ErrorShow>
+        {(errorMail !== "" || passwordErrorMessage !== "") && (
+          <ErrorShow>{errorMail + " " + passwordErrorMessage}</ErrorShow>
         )}
 
         <RegistrarseContainer>
           <ButtonRegistrarseContainer>
             <RegistrarseLabel>¿No tienes cuenta?</RegistrarseLabel>
-            <LogInButton
+            <PrimaryButton
               buttonType="primary"
               onClick={() => navigate("/register")}
             >
               Regístrate
-            </LogInButton>
+            </PrimaryButton>
           </ButtonRegistrarseContainer>
         </RegistrarseContainer>
       </FormLogin>
