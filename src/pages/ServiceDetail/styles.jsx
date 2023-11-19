@@ -286,7 +286,9 @@ export const LabelSimpleSolicitudAlumno = styled.label`
 `;
 
 export const InputSimpleSolicitudAlumno = styled.input`
+  width: 100%;
   padding-left: 10px;
+  margin-left: 28px;
   border: 1px solid #ebded5;
 
   &:hover {
@@ -316,7 +318,7 @@ export const Frequency = styled.div`
 `;
 
 export const DropdownHorarioContacto = styled(Dropdown)`
-  width: 100%;
+  width: 100px;
 `;
 
 export const SubmitSolicitudButtonContainer = styled.div`
