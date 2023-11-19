@@ -1,22 +1,14 @@
-import pexelsimage from "../../assets/pexelsbanner.jpg";
-import {
-  Wrapper,
-  WhoWeAre,
-  ImagePeople,
-  DivAbout,
-  TitleAbout,
-  TextContent
-} from "./styles";
+import aboutUsImg from "../../assets/about-us.jpg";
+import { Wrapper, Content, Img, AboutContainer, TitleAbout } from "./styles";
 
 const SobreNosotros = () => {
   return (
     <Wrapper>
-      <WhoWeAre>
-        <ImagePeople src={pexelsimage} />
-        <DivAbout>
+      <Content>
+        <Img src={aboutUsImg} />
+        <AboutContainer>
           <TitleAbout>¿Quiénes Somos?</TitleAbout>
-          <br />
-          <TextContent>
+          <p>
             Somos un grupo de personas que alguna vez estuvimos donde te
             encuentras y buscamos crear la red de conexiones estudiante-profesor
             más grande del mundo.
@@ -30,9 +22,9 @@ const SobreNosotros = () => {
             embarcarte en un nuevo mundo de conocimientos? Busca el tema que
             deseas, un mentor que se acerque a tus preferencias y comienza a
             aprender!
-          </TextContent>
-        </DivAbout>
-      </WhoWeAre>
+          </p>
+        </AboutContainer>
+      </Content>
     </Wrapper>
   );
 };

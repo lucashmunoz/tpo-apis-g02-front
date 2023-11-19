@@ -1,56 +1,42 @@
 import styled from "styled-components";
 
-export const WhoWeAre = styled.div`
-  border-top-left-radius: 25px;
-  border-bottom-left-radius: 25px;
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
+export const Wrapper = styled.div`
+  padding: 60px 20px;
+`;
+
+export const Content = styled.div`
   display: flex;
   background-color: #f3f4f6;
-  width: 90%;
-  margin-top: 55px;
-  margin-bottom: 55px;
-  color: white;
+  border-radius: 25px;
+  justify-content: flex-start;
+  display: flex;
+  padding: 10px 0;
 
   @media (max-width: 768px) {
-    display: block;
+    flex-direction: column;
   }
 `;
 
-export const ImagePeople = styled.img`
+export const Img = styled.img`
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
+  align-self: center;
   display: flex;
   flex-direction: column;
-  width: 30%;
-  height: 100%;
-
-  @media (max-width: 768px) {
-    width: 100%;
-    height: 30%;
-    flex-direction: row;
-  }
+  width: 250px;
+  height: 250px;
 `;
 
-export const DivAbout = styled.div`
+export const AboutContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 70%;
-  border-bottom-left-radius: 25px;
-  border-bottom-right-radius: 25px;
-  padding: 15px;
+  padding: 0 30px;
 
   @media (max-width: 768px) {
     width: 100%;
     display: block;
     padding-bottom: 30px;
   }
-`;
-
-export const Wrapper = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: center;
 `;
 
 export const TitleAbout = styled.h2`
@@ -63,8 +49,4 @@ export const TitleAbout = styled.h2`
     font-size: 24px;
     text-align: center;
   }
-`;
-
-export const TextContent = styled.p`
-  color: black;
 `;
