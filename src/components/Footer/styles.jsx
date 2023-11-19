@@ -34,7 +34,7 @@ export const LogoEmpresa = styled.p`
   text-align: center;
 `;
 
-export const HorizontalLine = styled.hr`
+export const HorizontalRule = styled.hr`
   background-color: #096227;
   height: 3px;
   margin: 20px 120px 0 120px;

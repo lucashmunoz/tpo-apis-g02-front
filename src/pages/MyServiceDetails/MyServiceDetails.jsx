@@ -100,7 +100,7 @@ const MyServiceDetails = () => {
     datosInicialesPublicacion
   );
 
-  // Get the service id param from the URL.
+  // Obtiene el serviceId desde la url
   const { id: servideId } = useParams();
 
   const [loggedUser] = useContext(UserContext);

@@ -21,8 +21,6 @@ export const Img = styled.img`
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
   align-self: center;
-  display: flex;
-  flex-direction: column;
   width: 250px;
   height: 250px;
 `;
@@ -33,8 +31,7 @@ export const AboutContainer = styled.div`
   padding: 0 30px;
 
   @media (max-width: 768px) {
-    width: 100%;
-    display: block;
+    margin-top: 20px;
     padding-bottom: 30px;
   }
 `;

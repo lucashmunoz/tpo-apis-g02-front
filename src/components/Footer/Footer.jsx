@@ -4,7 +4,7 @@ import linkedinLogo from "assets/redes/linkedin.svg";
 import tiktokLogo from "assets/redes/tiktok.svg";
 import {
   FooterWrapper,
-  HorizontalLine,
+  HorizontalRule,
   LinksContainer,
   LinkRedes,
   LogoEmpresa,
@@ -12,40 +12,44 @@ import {
 } from "./styles";
 
 const Footer = () => {
+  const redes = [
+    {
+      url: "https://www.instagram.com/",
+      logo: instagramLogo,
+      loglAltText: "instagram page"
+    },
+    {
+      url: "https://www.facebook.com/",
+      logo: facebookLogo,
+      loglAltText: "facebook page"
+    },
+    {
+      url: "https://www.linkedin.com/",
+      logo: linkedinLogo,
+      loglAltText: "linkedin page"
+    },
+    {
+      url: "https://www.tiktok.com/",
+      logo: tiktokLogo,
+      loglAltText: "tiktok page"
+    }
+  ];
+
   return (
     <FooterWrapper>
       <LogoEmpresa>SkillMentor</LogoEmpresa>
       <LinksContainer>
-        <LinkRedes
-          href="https://www.instagram.com/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <LogoImg src={instagramLogo} alt="instagram page" />
-        </LinkRedes>
-        <LinkRedes
-          href="https://www.facebook.com/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <LogoImg src={facebookLogo} alt="facebook page" />
-        </LinkRedes>
-        <LinkRedes
-          href="https://www.linkedin.com/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <LogoImg src={linkedinLogo} alt="linkedin page" />
-        </LinkRedes>
-        <LinkRedes
-          href="https://www.tiktok.com/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <LogoImg src={tiktokLogo} alt="tiktok page" />
-        </LinkRedes>
+        {redes.map((red) => {
+          const { url, logo, loglAltText } = red;
+
+          return (
+            <LinkRedes key={url} href={url} target="_blank" rel="noreferrer">
+              <LogoImg src={logo} alt={loglAltText} />
+            </LinkRedes>
+          );
+        })}
       </LinksContainer>
-      <HorizontalLine />
+      <HorizontalRule />
     </FooterWrapper>
   );
 };

@@ -81,59 +81,58 @@ const Services = () => {
       .replace("ü", "u");
   };
 
-  const updateServicesWithFilters = () => {
-    let filteredServices = servicios;
-
-    // Filtramos por categoria si hay elegida
-    if (filters.category && filters.category.length !== 0) {
-      filteredServices = filteredServices.filter(
-        (servicio) => servicio.category === filters.category
-      );
-    }
-
-    // Filtramos por Tipo de Clase
-    if (filters.classType && filters.classType.length !== 0) {
-      filteredServices = filteredServices.filter(
-        (servicio) => servicio.classType === filters.classType
-      );
-    }
-
-    // Filtramos por Frecuencia
-    if (filters.frequency && filters.frequency.length !== 0) {
-      filteredServices = filteredServices.filter(
-        (servicio) => servicio.frequency === filters.frequency
-      );
-    }
-
-    // Filtramos por Tema
-    if (filters.subject && filters.subject.length !== 0) {
-      filteredServices = filteredServices.filter(
-        (servicio) =>
-          eliminarTildes(
-            servicio.summaryDescription.toLocaleLowerCase()
-          ).includes(
-            eliminarTildes(filters.subject.trim().toLocaleLowerCase())
-          ) ||
-          eliminarTildes(servicio.title.toLocaleLowerCase()).includes(
-            eliminarTildes(filters.subject.trim().toLocaleLowerCase())
-          )
-      );
-    }
-
-    // Filtramos por Calificación
-    if (filters.rate > 0) {
-      filteredServices = filteredServices.filter(
-        (servicio) => servicio.rate >= filters.rate
-      );
-    }
-
-    return filteredServices;
-  };
-
-  // Llamamos a fetchServices en el mount del componente
+  // Llamamos a fetchServices en el mount del componente y cuando cambian los filtros
   useEffect(() => {
+    const updateServicesWithFilters = () => {
+      let filteredServices = servicios;
+
+      // Filtramos por categoria si hay elegida
+      if (filters.category && filters.category.length !== 0) {
+        filteredServices = filteredServices.filter(
+          (servicio) => servicio.category === filters.category
+        );
+      }
+
+      // Filtramos por Tipo de Clase
+      if (filters.classType && filters.classType.length !== 0) {
+        filteredServices = filteredServices.filter(
+          (servicio) => servicio.classType === filters.classType
+        );
+      }
+
+      // Filtramos por Frecuencia
+      if (filters.frequency && filters.frequency.length !== 0) {
+        filteredServices = filteredServices.filter(
+          (servicio) => servicio.frequency === filters.frequency
+        );
+      }
+
+      // Filtramos por Tema
+      if (filters.subject && filters.subject.length !== 0) {
+        filteredServices = filteredServices.filter(
+          (servicio) =>
+            eliminarTildes(
+              servicio.summaryDescription.toLocaleLowerCase()
+            ).includes(
+              eliminarTildes(filters.subject.trim().toLocaleLowerCase())
+            ) ||
+            eliminarTildes(servicio.title.toLocaleLowerCase()).includes(
+              eliminarTildes(filters.subject.trim().toLocaleLowerCase())
+            )
+        );
+      }
+
+      // Filtramos por Calificación
+      if (filters.rate > 0) {
+        filteredServices = filteredServices.filter(
+          (servicio) => servicio.rate >= filters.rate
+        );
+      }
+
+      return filteredServices;
+    };
+
     setServiciosFiltrados(updateServicesWithFilters);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters, servicios]);
 
   const getFrequencyLabel = (frequencyValue) => {

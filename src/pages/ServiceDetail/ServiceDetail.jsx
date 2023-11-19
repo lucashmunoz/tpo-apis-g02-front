@@ -342,7 +342,7 @@ const ServiceDetail = () => {
     setIsSubmitNuevoComentarioDisabled(disableSubmitNuevoComentario);
   }, [nuevoComentario]);
 
-  // Get the service id param from the URL.
+  // Obtiene el serviceId desde los parametros de react-router
   const { id: serviceId } = useParams();
 
   useEffect(() => {
@@ -359,18 +359,19 @@ const ServiceDetail = () => {
     setIsSubmitSolicitudDisabled(disableSolicitarContratacion);
   }, [solicitudContratacion]);
 
-  const fetchServices = async () => {
-    // const response = await fetch("servicesdetails.json");
-    // const { servicesdetail } = await response.json();
-
-    setServiceDetail(
-      detallesServicios.find((s) => s.id.toString() === serviceId)
-    );
-  };
-
+  // Obtiene los servicios
   useEffect(() => {
+    const fetchServices = async () => {
+      // const response = await fetch("servicesdetails.json");
+      // const { servicesdetail } = await response.json();
+
+      setServiceDetail(
+        detallesServicios.find((s) => s.id.toString() === serviceId)
+      );
+    };
+
     fetchServices();
-  }, []);
+  }, [serviceId]);
 
   const getCommentInitials = (nombreCompleto) => {
     const arrNombreCompleto = nombreCompleto.trim().split(" ");
@@ -622,7 +623,7 @@ const ServiceDetail = () => {
           <DropdownHorarioContacto
             id="dropdown-horario-contacto"
             options={opcionesHorarioContacto}
-            placeholderLabel="Categoría"
+            placeholderOptionLabel="Categoría"
             value={solicitudContratacion.contactHours}
             onChangeHandler={(e) =>
               setNewsolicitudContratacion((prevSolicitudContratacion) => ({
