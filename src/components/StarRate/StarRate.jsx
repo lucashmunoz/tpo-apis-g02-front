@@ -6,7 +6,7 @@ import { Rates, StarImg } from "./styles";
 const StarRate = ({ onChangeHandler, labelText }) => {
   const [selectedRate, setSelectedRate] = useState(0);
 
-  const handleRateChange = (e, newRate) => {
+  const handleRateChange = (newRate) => {
     // Si se selecciona o deselecciona 1 estrella, el rate a asignar sera 1
     if (newRate === 1) {
       setSelectedRate(1);
@@ -33,36 +33,19 @@ const StarRate = ({ onChangeHandler, labelText }) => {
     <div>
       {labelText && <label>{labelText}</label>}
       <Rates>
-        <button type="button" name="1" onClick={(e) => handleRateChange(e, 1)}>
-          <StarImg
-            src={selectedRate >= 1 ? CheckedStar : UncheckedStar}
-            alt="1 estrella"
-          />
-        </button>
-        <button type="button" name="2" onClick={(e) => handleRateChange(e, 2)}>
-          <StarImg
-            src={selectedRate >= 2 ? CheckedStar : UncheckedStar}
-            alt="2 estrellas"
-          />
-        </button>
-        <button type="button" name="3" onClick={(e) => handleRateChange(e, 3)}>
-          <StarImg
-            src={selectedRate >= 3 ? CheckedStar : UncheckedStar}
-            alt="3 estrellas"
-          />
-        </button>
-        <button type="button" name="4" onClick={(e) => handleRateChange(e, 4)}>
-          <StarImg
-            src={selectedRate >= 4 ? CheckedStar : UncheckedStar}
-            alt="4 estrellas"
-          />
-        </button>
-        <button type="button" name="5" onClick={(e) => handleRateChange(e, 5)}>
-          <StarImg
-            src={selectedRate >= 5 ? CheckedStar : UncheckedStar}
-            alt="5 estrellas"
-          />
-        </button>
+        {[1, 2, 3, 4, 5].map((estrellaNumero) => (
+          <button
+            key={estrellaNumero}
+            type="button"
+            name={estrellaNumero}
+            onClick={() => handleRateChange(estrellaNumero)}
+          >
+            <StarImg
+              src={selectedRate >= estrellaNumero ? CheckedStar : UncheckedStar}
+              alt={`${estrellaNumero} estrellas`}
+            />
+          </button>
+        ))}
       </Rates>
     </div>
   );

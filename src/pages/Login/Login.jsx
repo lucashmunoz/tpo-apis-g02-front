@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import UserContext from "user-context";
 import IconImage from "../../assets/icons/UserSampleIcon.png";
 import { useNavigate } from "react-router-dom";
-import TextButton from "components/Button";
+import TextButton from "components/TextButton";
 import {
   ActionContainer,
   ButtonRegistrarseContainer,

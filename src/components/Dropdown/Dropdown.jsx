@@ -4,21 +4,20 @@ const Dropdown = ({
   id,
   labelText,
   options,
-  placeholderLabel,
+  placeholderOptionLabel,
   onChangeHandler
 }) => {
   return (
     <Wrapper>
       <label htmlFor={id}>{labelText}</label>
       <Select id={id} onChange={onChangeHandler}>
-        {placeholderLabel && (
+        {placeholderOptionLabel && (
           <option value="" defaultValue>
-            {placeholderLabel}
+            {placeholderOptionLabel}
           </option>
         )}
 
-        {options.map((option) => {
-          const { value, label } = option;
+        {options.map(({ value, label }) => {
           return (
             <option key={value} value={value}>
               {label}

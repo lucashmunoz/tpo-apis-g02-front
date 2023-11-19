@@ -46,80 +46,81 @@ const Filtros = ({ filters, setFilters }) => {
     }
 
     window.history.replaceState({}, document.title);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [linkState?.subject, setFilters]);
 
   return (
-    <Wrapper onSubmit={(e) => e.preventDefault()}>
-      <ControlContainer>
-        <Dropdown
-          id="dropdown-categorias"
-          labelText="Categoría"
-          options={opcionesCategorias}
-          placeholderLabel="Categoría"
-          onChangeHandler={(e) =>
-            setFilters((prevFilters) => ({
-              ...prevFilters,
-              category: e.target.value
-            }))
-          }
-        />
-      </ControlContainer>
-      <ControlContainer>
-        <Dropdown
-          id="dropdown-tipo-clase"
-          labelText="Tipo de Clase"
-          options={opcionesTipoClase}
-          placeholderLabel="Tipo de Clase"
-          onChangeHandler={(e) =>
-            setFilters((prevFilters) => ({
-              ...prevFilters,
-              classType: e.target.value
-            }))
-          }
-        />
-      </ControlContainer>
-      <ControlContainer>
-        <Dropdown
-          id="dropdown-frecuencias"
-          labelText="Frecuencia"
-          options={opcionesFrecuencias}
-          placeholderLabel="Frecuencia"
-          onChangeHandler={(e) =>
-            setFilters((prevFilters) => ({
-              ...prevFilters,
-              frequency: e.target.value
-            }))
-          }
-        />
-      </ControlContainer>
-      <ControlContainer>
-        <Input
-          id="tema-servicio"
-          labelText="Tema"
-          placeholder="Tema"
-          inputType="secondary"
-          value={filters.subject}
-          onChangeHandler={(e) =>
-            setFilters((prevFilters) => ({
-              ...prevFilters,
-              subject: e.target.value
-            }))
-          }
-        />
-      </ControlContainer>
-      <ControlContainer>
-        <StarRate
-          labelText="Calificación Mínima"
-          onChangeHandler={(newRate) =>
-            setFilters((prevFilters) => ({
-              ...prevFilters,
-              rate: newRate
-            }))
-          }
-        />
-      </ControlContainer>
-    </Wrapper>
+    <search role="search">
+      <Wrapper onSubmit={(e) => e.preventDefault()}>
+        <ControlContainer>
+          <Dropdown
+            id="dropdown-categorias"
+            labelText="Categoría"
+            options={opcionesCategorias}
+            placeholderOptionLabel="Categoría"
+            onChangeHandler={(e) =>
+              setFilters((prevFilters) => ({
+                ...prevFilters,
+                category: e.target.value
+              }))
+            }
+          />
+        </ControlContainer>
+        <ControlContainer>
+          <Dropdown
+            id="dropdown-tipo-clase"
+            labelText="Tipo de Clase"
+            options={opcionesTipoClase}
+            placeholderOptionLabel="Tipo de Clase"
+            onChangeHandler={(e) =>
+              setFilters((prevFilters) => ({
+                ...prevFilters,
+                classType: e.target.value
+              }))
+            }
+          />
+        </ControlContainer>
+        <ControlContainer>
+          <Dropdown
+            id="dropdown-frecuencias"
+            labelText="Frecuencia"
+            options={opcionesFrecuencias}
+            placeholderOptionLabel="Frecuencia"
+            onChangeHandler={(e) =>
+              setFilters((prevFilters) => ({
+                ...prevFilters,
+                frequency: e.target.value
+              }))
+            }
+          />
+        </ControlContainer>
+        <ControlContainer>
+          <Input
+            id="tema-servicio"
+            labelText="Tema"
+            placeholder="Tema"
+            inputType="secondary"
+            value={filters.subject}
+            onChangeHandler={(e) =>
+              setFilters((prevFilters) => ({
+                ...prevFilters,
+                subject: e.target.value
+              }))
+            }
+          />
+        </ControlContainer>
+        <ControlContainer>
+          <StarRate
+            labelText="Calificación Mínima"
+            onChangeHandler={(newRate) =>
+              setFilters((prevFilters) => ({
+                ...prevFilters,
+                rate: newRate
+              }))
+            }
+          />
+        </ControlContainer>
+      </Wrapper>
+    </search>
   );
 };
 
