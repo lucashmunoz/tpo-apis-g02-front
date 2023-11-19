@@ -590,7 +590,7 @@ const ServiceDetail = () => {
             required
             id="telefono-alumno-solicitud"
             placeholder="Número de teléfono"
-            type=""
+            type="tel"
             value={solicitudContratacion.phoneNumber}
             onChange={(e) =>
               setNewsolicitudContratacion((prevSolicitudContratacion) => ({

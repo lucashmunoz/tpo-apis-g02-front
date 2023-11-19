@@ -82,7 +82,7 @@ const Register = () => {
   };
 
   const tryRegister = () => {
-    var userAux = users.find((u) => u.email === registerMail);
+    const userAux = users.find((u) => u.email === registerMail);
 
     if (userAux !== undefined && userAux !== null) {
       setErrorMail("El mail que ingreso ya esta registrado.");
@@ -109,7 +109,7 @@ const Register = () => {
       return;
     }
 
-    var newUser = {
+    const newUser = {
       email: registerMail,
       password: registerPassword,
       name: registerName,

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const FooterWrapper = styled.footer`
+  background-color: #22c55e;
   border-top: 1px solid grey;
   display: flex;
   flex-direction: column;
@@ -11,7 +12,6 @@ export const FooterWrapper = styled.footer`
 export const LogoImg = styled.img`
   height: 24px;
   width: 24px;
-  color: #096227;
 `;
 
 export const LinksContainer = styled.div`
@@ -27,7 +27,7 @@ export const LinkRedes = styled.a`
 `;
 
 export const LogoEmpresa = styled.p`
-  color: #096227;
+  color: white;
   font-size: 24px;
   font-weight: bold;
   letter-spacing: 3px;
@@ -35,7 +35,7 @@ export const LogoEmpresa = styled.p`
 `;
 
 export const HorizontalRule = styled.hr`
-  background-color: #096227;
+  background-color: white;
   height: 3px;
   margin: 20px 120px 0 120px;
 `;

@@ -19,7 +19,7 @@ import PrimaryButton from "components/PrimaryButton";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [loginMail, setLoginMail] = useState("");
+  const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [errorMail, setErrorMail] = useState("");
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
@@ -29,16 +29,17 @@ const Login = () => {
 
   useEffect(() => {
     const disableLoginButton =
-      loginMail.length === 0 || loginPassword.length === 0;
+      loginEmail.length === 0 ||
+      loginPassword.length === 0 ||
+      errorMail ||
+      passwordErrorMessage;
     setDisableLoginButton(disableLoginButton);
-  }, [loginMail, loginPassword]);
+  }, [loginEmail, loginPassword, errorMail, passwordErrorMessage]);
 
   const [, setLoggedUser] = useContext(UserContext);
 
   const validateEmail = (email) => {
-    const emailRegex = new RegExp(
-      /^(?:[A-Zd][A-Zd_-]{5,10}|[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4})$/i
-    );
+    const emailRegex = new RegExp(/^([A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4})$/i);
 
     if (!emailRegex.test(email)) {
       setErrorMail("El email debe seguir el formato email@ejemplo.com");
@@ -46,14 +47,14 @@ const Login = () => {
       setErrorMail("");
     }
 
-    setLoginMail(email);
+    setLoginEmail(email);
   };
 
   const validatePassword = (clave) => {
     console.log(clave.length);
     if (clave.length < 8 || clave.length > 16)
       setPasswordErrorMessage(
-        "La contraseña debe tener entre 8 y 16 caracterees."
+        "La contraseña debe tener entre 8 y 16 caracteres."
       );
     else {
       setPasswordErrorMessage("");
@@ -72,7 +73,7 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    const userAux = users.find((u) => u.email === loginMail);
+    const userAux = users.find((u) => u.email === loginEmail);
 
     if (userAux === undefined || userAux === null) {
       setErrorMail("Mail inexistente");
@@ -91,15 +92,14 @@ const Login = () => {
     navigate(`/`);
   };
 
-  const newPass = () => {
-    var userAux = users.find((u) => u.email === loginMail);
+  const handleRecuperarClave = () => {
+    const userAux = users.find((u) => u.email === loginEmail);
 
     if (userAux === undefined || userAux === null) {
       setErrorMail("Mail inexistente");
       return;
     }
 
-    console.log("Se envio un mail para recuperar la cuenta.");
     setErrorMail("Se envio un mail para recuperar la cuenta.");
   };
 
@@ -114,7 +114,6 @@ const Login = () => {
         <ImgWrapper>
           <Image src={IconImage}></Image>
         </ImgWrapper>
-
         <ActionContainer>
           <Input
             name="email"
@@ -124,6 +123,7 @@ const Login = () => {
               validateEmail(e.target.value);
             }}
           />
+          {errorMail !== "" && <ErrorShow>{errorMail}</ErrorShow>}
         </ActionContainer>
         <ActionContainer>
           <Input
@@ -135,6 +135,14 @@ const Login = () => {
             }}
             type="password"
           />
+          {passwordErrorMessage !== "" && (
+            <ErrorShow>{passwordErrorMessage}</ErrorShow>
+          )}
+        </ActionContainer>
+        <ActionContainer>
+          <TextButton onClick={handleRecuperarClave}>
+            Recuperar contraseña
+          </TextButton>
         </ActionContainer>
         <ActionContainer>
           <PrimaryButton
@@ -144,14 +152,7 @@ const Login = () => {
           >
             Log In
           </PrimaryButton>
-        </ActionContainer>
-        <ActionContainer>
-          <TextButton onClick={newPass}>Recuperar contraseña.</TextButton>
-        </ActionContainer>
-        {(errorMail !== "" || passwordErrorMessage !== "") && (
-          <ErrorShow>{errorMail + " " + passwordErrorMessage}</ErrorShow>
-        )}
-
+        </ActionContainer>{" "}
         <RegistrarseContainer>
           <ButtonRegistrarseContainer>
             <RegistrarseLabel>¿No tienes cuenta?</RegistrarseLabel>
