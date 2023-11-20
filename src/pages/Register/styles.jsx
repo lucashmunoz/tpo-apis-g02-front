@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const DivRegister = styled.div`
+export const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   margin: 10px 0;
@@ -15,7 +15,7 @@ export const DivRegister = styled.div`
   }
 `;
 
-export const FormRegister = styled.div`
+export const FormRegister = styled.form`
   background-color: #f3f4f6;
   display: flex;
   width: 40%;
@@ -28,11 +28,7 @@ export const FormRegister = styled.div`
   }
 `;
 
-export const DivInputs = styled.div`
-  margin-bottom: 20px;
-`;
-
-export const DivImage = styled.div`
+export const ImageContainer = styled.div`
   margin-bottom: 20px;
   width: 100%;
   justify-content: center;
@@ -46,15 +42,19 @@ export const Image = styled.img`
   background-color: white;
 `;
 
-export const ErrorShow = styled.a`
-  color: red;
-  display: block;
+export const TextFieldsContainer = styled.div`
+  margin-bottom: 20px;
 `;
 
-export const InputDiv = styled.div`
+export const TextFieldContainer = styled.div`
   margin-bottom: 10px;
   display: flex;
   flex-direction: column;
+`;
+
+export const ErrorShow = styled.p`
+  color: red;
+  display: block;
 `;
 
 export const Experiencia = styled.textarea`

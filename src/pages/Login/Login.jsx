@@ -21,7 +21,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-  const [errorMail, setErrorMail] = useState("");
+  const [errorEmail, setErrorEmail] = useState("");
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
   const [users, setUsers] = useState([]);
 
@@ -31,10 +31,10 @@ const Login = () => {
     const disableLoginButton =
       loginEmail.length === 0 ||
       loginPassword.length === 0 ||
-      errorMail ||
+      errorEmail ||
       passwordErrorMessage;
     setDisableLoginButton(disableLoginButton);
-  }, [loginEmail, loginPassword, errorMail, passwordErrorMessage]);
+  }, [loginEmail, loginPassword, errorEmail, passwordErrorMessage]);
 
   const [, setLoggedUser] = useContext(UserContext);
 
@@ -42,16 +42,15 @@ const Login = () => {
     const emailRegex = new RegExp(/^([A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4})$/i);
 
     if (!emailRegex.test(email)) {
-      setErrorMail("El email debe seguir el formato email@ejemplo.com");
+      setErrorEmail("El email debe seguir el formato email@ejemplo.com");
     } else {
-      setErrorMail("");
+      setErrorEmail("");
     }
 
     setLoginEmail(email);
   };
 
   const validatePassword = (clave) => {
-    console.log(clave.length);
     if (clave.length < 8 || clave.length > 16)
       setPasswordErrorMessage(
         "La contraseña debe tener entre 8 y 16 caracteres."
@@ -76,7 +75,7 @@ const Login = () => {
     const userAux = users.find((u) => u.email === loginEmail);
 
     if (userAux === undefined || userAux === null) {
-      setErrorMail("Mail inexistente");
+      setErrorEmail("Mail inexistente");
       return;
     }
 
@@ -96,11 +95,11 @@ const Login = () => {
     const userAux = users.find((u) => u.email === loginEmail);
 
     if (userAux === undefined || userAux === null) {
-      setErrorMail("Mail inexistente");
+      setErrorEmail("Mail inexistente");
       return;
     }
 
-    setErrorMail("Se envio un mail para recuperar la cuenta.");
+    setErrorEmail("Se envio un mail para recuperar la cuenta.");
   };
 
   // Llamamos a fetchServices en el mount del componente
@@ -123,7 +122,7 @@ const Login = () => {
               validateEmail(e.target.value);
             }}
           />
-          {errorMail !== "" && <ErrorShow>{errorMail}</ErrorShow>}
+          <ErrorShow>{errorEmail}</ErrorShow>
         </ActionContainer>
         <ActionContainer>
           <Input
@@ -135,9 +134,7 @@ const Login = () => {
             }}
             type="password"
           />
-          {passwordErrorMessage !== "" && (
-            <ErrorShow>{passwordErrorMessage}</ErrorShow>
-          )}
+          <ErrorShow>{passwordErrorMessage}</ErrorShow>
         </ActionContainer>
         <ActionContainer>
           <TextButton onClick={handleRecuperarClave}>
