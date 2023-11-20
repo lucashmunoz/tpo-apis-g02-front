@@ -4,17 +4,18 @@ export const CardContainer = styled.button`
   width: 300px;
   height: 340px;
   margin: 20px;
-  border-radius: 10px;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  box-shadow: rgba(34, 197, 94, 0.15) 1.95px 1.95px 2.6px;
+  background-color: #fefefe;
 
   -webkit-transition: background-color 250ms linear;
   -ms-transition: background-color 250ms linear;
   transition: background-color 250ms linear;
+
   &:hover {
-    background-color: #f3f4f6;
+    background-color: #a7c9b1;
   }
 `;
 
@@ -57,7 +58,7 @@ export const HRContainer = styled.div`
 `;
 
 export const HorizontalLine = styled.hr`
-  background-color: #096227;
+  background-color: #22c55e;
   height: 2px;
   width: 100%;
 `;

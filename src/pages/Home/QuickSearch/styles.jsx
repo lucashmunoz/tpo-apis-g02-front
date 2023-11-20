@@ -80,4 +80,5 @@ export const PromoImgContainer = styled.div`
 export const PromoImg = styled.img`
   height: auto;
   width: 100%;
+  border-radius: 10px;
 `;

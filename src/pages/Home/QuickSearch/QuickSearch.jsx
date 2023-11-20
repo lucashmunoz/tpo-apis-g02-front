@@ -48,7 +48,6 @@ const QuickSearch = () => {
           desees aprender y elige tu próximo tutor!
         </SearchPromoText>
       </SearchBoxContainer>
-
       <PromoImgContainer>
         <PromoImg src={promoImg1} alt="imagen promocional" />
       </PromoImgContainer>
