@@ -64,19 +64,12 @@ const Register = () => {
   };
 
   const validateName = (name, type) => {
-    console.log(name.length);
     // Verificamos si los nombres son válidos
-    if (type === "first") {
-      setErrorNames((prev) => ({
-        ...prev,
-        firstNameError: name.length === 0 ? "El nombre es obligatorio." : ""
-      }));
-    } else {
-      setErrorNames((prev) => ({
-        ...prev,
-        lastNameError: name.length === 0 ? "El nombre es obligatorio." : ""
-      }));
-    }
+    setErrorNames((prev) => ({
+      ...prev,
+      [type === "first" ? "firstNameError" : "lastNameError"]:
+        name.length === 0 ? "El nombre es obligatorio." : ""
+    }));
 
     // Nombres válidos
     if (type === "first") {
