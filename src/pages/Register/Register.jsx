@@ -4,27 +4,30 @@ import IconImage from "../../assets/icons/UserSampleIcon.png";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "components/PrimaryButton";
 import {
-  DivImage,
-  DivInputs,
-  DivRegister,
+  ImageContainer,
+  TextFieldsContainer,
+  Wrapper,
   ErrorShow,
   Experiencia,
   FormRegister,
   Image,
-  InputDiv
+  TextFieldContainer
 } from "./styles";
 
 const Register = () => {
   const navigate = useNavigate();
   const [registerMail, setRegisterMail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
-  const [registerName, setRegisterName] = useState("");
-  const [registerLastName, setRegisterLastName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [registerTitle, setRegisterTitle] = useState("");
   const [registerExperience, setRegisterExperience] = useState("");
-  const [errorMail, setErrorMail] = useState("");
-  const [errorPass, setErrorPass] = useState("");
-  const [errorNames, setErrorNames] = useState("");
+  const [errorEmail, setErrorEmail] = useState("");
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
+  const [errorNames, setErrorNames] = useState({
+    firstNameError: "",
+    lastNameError: ""
+  });
   const [users, setUsers] = useState([]);
 
   const [disableRegisterButton, setDisableRegisterButton] = useState(true);
@@ -33,45 +36,66 @@ const Register = () => {
     const shouldDisableRegisterButton =
       registerMail.length === 0 ||
       registerPassword.length === 0 ||
-      registerName.length === 0 ||
-      registerLastName.length === 0 ||
+      firstName.length === 0 ||
+      lastName.length === 0 ||
       registerTitle.length === 0 ||
       registerExperience.length === 0;
 
     setDisableRegisterButton(shouldDisableRegisterButton);
   }, [
     registerExperience.length,
-    registerLastName.length,
+    lastName.length,
     registerMail,
-    registerName.length,
+    firstName.length,
     registerPassword,
     registerTitle.length
   ]);
 
-  const checkMail = (cadena) => {
-    if (!cadena.includes("@") && cadena.lenght > 0)
-      setErrorMail("El mail debe tener por lo menos un @.");
-    else setErrorMail("");
+  const validateEmail = (email) => {
+    const emailRegex = new RegExp(/^([A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4})$/i);
 
-    setRegisterMail(cadena);
-  };
-
-  const checkNames = (cadena, type) => {
-    if (cadena.lenght === 0) {
-      setErrorNames("No se puede ingresar una cadena vacia en ningun nombre.");
-      return;
+    if (!emailRegex.test(email)) {
+      setErrorEmail("El email debe seguir el formato email@ejemplo.com");
+    } else {
+      setErrorEmail("");
     }
 
-    if (type === "first") setRegisterName(cadena);
-    else setRegisterLastName(cadena);
+    setRegisterMail(email);
   };
 
-  const checkPass = (cadena) => {
-    if (cadena.lenght > 0 && (cadena.lenght <= 8 || cadena.lenght >= 16))
-      setErrorPass("La contraseña debe tener entre 8 y 16 caracterees.");
-    else setErrorPass("");
+  const validateName = (name, type) => {
+    console.log(name.length);
+    // Verificamos si los nombres son válidos
+    if (type === "first") {
+      setErrorNames((prev) => ({
+        ...prev,
+        firstNameError: name.length === 0 ? "El nombre es obligatorio." : ""
+      }));
+    } else {
+      setErrorNames((prev) => ({
+        ...prev,
+        lastNameError: name.length === 0 ? "El nombre es obligatorio." : ""
+      }));
+    }
 
-    setRegisterPassword(cadena);
+    // Nombres válidos
+    if (type === "first") {
+      setFirstName(name);
+    } else {
+      setLastName(name);
+    }
+  };
+
+  const validatePassword = (clave) => {
+    if (clave.length < 8 || clave.length > 16)
+      setPasswordErrorMessage(
+        "La contraseña debe tener entre 8 y 16 caracterees."
+      );
+    else {
+      setPasswordErrorMessage("");
+    }
+
+    setRegisterPassword(clave);
   };
 
   const fetchUsers = async () => {
@@ -81,46 +105,44 @@ const Register = () => {
     setUsers(users);
   };
 
-  const tryRegister = () => {
+  const registerUser = () => {
     const userAux = users.find((u) => u.email === registerMail);
 
     if (userAux !== undefined && userAux !== null) {
-      setErrorMail("El mail que ingreso ya esta registrado.");
+      setErrorEmail("El mail que ingreso ya esta registrado.");
       return;
     }
 
     if (!registerMail.includes("@")) {
-      setErrorMail("El mail no cuenta con el formato adecuado.");
+      setErrorEmail("El mail no cuenta con el formato adecuado.");
       return;
     }
 
     if (registerPassword.length < 8) {
-      setErrorPass("La contraseña es muy corta.");
+      setPasswordErrorMessage("La contraseña es muy corta.");
       return;
     }
 
     if (registerTitle.length === 0) {
-      setErrorPass("Ingrese su título como tutor.");
+      setPasswordErrorMessage("Ingrese su título como tutor.");
       return;
     }
 
     if (registerExperience.length === 0) {
-      setErrorPass("Ingrese una breve experiencia como tutor.");
+      setPasswordErrorMessage("Ingrese una breve experiencia como tutor.");
       return;
     }
 
     const newUser = {
       email: registerMail,
       password: registerPassword,
-      name: registerName,
-      lastname: registerLastName,
+      name: firstName,
+      lastname: lastName,
       title: registerTitle,
       experience: registerExperience
     };
 
     window.sessionStorage.setItem("loggedUser", JSON.stringify(newUser));
-
-    console.log(newUser);
 
     navigate(`/`);
   };
@@ -131,50 +153,54 @@ const Register = () => {
   }, []);
 
   return (
-    <DivRegister>
-      <FormRegister>
-        <DivImage>
+    <Wrapper>
+      <FormRegister onSubmit={registerUser}>
+        <ImageContainer>
           <Image src={IconImage}></Image>
-        </DivImage>
-        <DivInputs>
-          <InputDiv>
+        </ImageContainer>
+        <TextFieldsContainer>
+          <TextFieldContainer>
             <Input
               labelText="Nombre"
               placeholder="Ingrese su nombre"
               onChangeHandler={(e) => {
-                checkNames(e.target.value, "first");
+                validateName(e.target.value, "first");
               }}
             />
-          </InputDiv>
-          <InputDiv>
+            <ErrorShow>{errorNames.firstNameError}</ErrorShow>
+          </TextFieldContainer>
+          <TextFieldContainer>
             <Input
               labelText="Apellido"
               placeholder="Ingrese su apellido"
               onChangeHandler={(e) => {
-                checkNames(e.target.value, "last");
+                validateName(e.target.value, "last");
               }}
             />
-          </InputDiv>
-          <InputDiv>
+            <ErrorShow>{errorNames.lastNameError}</ErrorShow>
+          </TextFieldContainer>
+          <TextFieldContainer>
             <Input
               labelText="Email"
               placeholder="Ingrese su email"
               onChangeHandler={(e) => {
-                checkMail(e.target.value);
+                validateEmail(e.target.value);
               }}
             />
-          </InputDiv>
-          <InputDiv>
+            <ErrorShow>{errorEmail}</ErrorShow>
+          </TextFieldContainer>
+          <TextFieldContainer>
             <Input
               labelText="Contraseña"
               placeholder="Ingrese su contraseña"
               onChangeHandler={(e) => {
-                checkPass(e.target.value);
+                validatePassword(e.target.value);
               }}
               type="password"
             />
-          </InputDiv>
-          <InputDiv>
+            <ErrorShow>{passwordErrorMessage}</ErrorShow>
+          </TextFieldContainer>
+          <TextFieldContainer>
             <Input
               labelText="Titulo"
               placeholder="Ingrese su título como tutor"
@@ -182,8 +208,8 @@ const Register = () => {
                 setRegisterTitle(e.target.value);
               }}
             />
-          </InputDiv>
-          <InputDiv>
+          </TextFieldContainer>
+          <TextFieldContainer>
             <label htmlFor="registro-experiencia">Experiencia</label>
             <Experiencia
               id="registro-experiencia"
@@ -192,18 +218,13 @@ const Register = () => {
                 setRegisterExperience(e.target.value);
               }}
             />
-          </InputDiv>
-        </DivInputs>
-        <PrimaryButton isDisabled={disableRegisterButton} onClick={tryRegister}>
+          </TextFieldContainer>
+        </TextFieldsContainer>
+        <PrimaryButton isDisabled={disableRegisterButton} type="submit">
           Register
         </PrimaryButton>
-        {(errorMail !== "" || errorPass !== "") && (
-          <ErrorShow>
-            {errorMail + " " + errorPass + " " + errorNames}
-          </ErrorShow>
-        )}
       </FormRegister>
-    </DivRegister>
+    </Wrapper>
   );
 };
 

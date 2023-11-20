@@ -33,6 +33,10 @@ const BackToTop = () => {
     });
   };
 
+  /**
+   * Se crean los event listener de scroll y resize para que cuando cambien se
+   * revise la posición de scroll vertical a ver si hay que mostrar el botón
+   */
   useEffect(() => {
     setButtonVisibility();
 
