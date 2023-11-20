@@ -11,6 +11,14 @@ const CardContainer = styled.div`
   justify-content: flex-start;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 
+  -webkit-transition: background-color 250ms linear;
+  -ms-transition: background-color 250ms linear;
+  transition: background-color 250ms linear;
+
+  &:hover {
+    background-color: #f3f4f6;
+  }
+
   @media (max-width: 768px) {
     margin: 10px;
   }

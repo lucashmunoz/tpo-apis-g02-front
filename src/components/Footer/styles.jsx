@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const FooterWrapper = styled.footer`
-  background-color: #22c55e;
+  background-color: #7aaf89;
   border-top: 1px solid grey;
   display: flex;
   flex-direction: column;

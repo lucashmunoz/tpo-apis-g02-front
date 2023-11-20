@@ -14,9 +14,11 @@ import UserContext, { initialUserContextState } from "user-context";
 import { useState } from "react";
 import MyServiceDetails from "pages/MyServiceDetails";
 import NewService from "pages/NewService";
+import BackToTop from "components/BackToTop";
 
 const Main = styled.main`
   flex: 1;
+  background-color: #ffffff;
 `;
 
 function App() {
@@ -41,6 +43,7 @@ function App() {
           </Routes>
         </Main>
         <Footer />
+        <BackToTop />
       </Router>
     </UserContext.Provider>
   );
