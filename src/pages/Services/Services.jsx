@@ -175,25 +175,25 @@ const Services = () => {
         {serviciosFiltrados.map((servicio) => {
           const {
             _id,
-            profilePhoto,
+            mentorProfilePhoto,
             title,
             summaryDescription,
             price,
             frequency,
             rate,
-            nombreProfesor
+            mentorName
           } = servicio;
 
           return (
             <ServiceCard
               key={_id}
-              profilePhoto={profilePhoto}
+              profilePhoto={mentorProfilePhoto}
               title={title}
               summaryDescription={summaryDescription}
               price={price}
               frequency={getFrequencyLabel(frequency)}
               rate={rate}
-              nombreProfesor={nombreProfesor}
+              nombreProfesor={mentorName}
               onClickHandler={() => goToServiceDetail(_id)}
             />
           );

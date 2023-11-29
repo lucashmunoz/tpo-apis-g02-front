@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import PrimaryButton from "components/PrimaryButton";
+import UserContext from "user-context";
 import {
   Wrapper,
   DescripcionContainer,
@@ -34,25 +35,8 @@ const NewService = () => {
     datosInicialesPublicacion
   );
 
-  const [user, setUser] = useState({});
-
-  const setUserLogged = () => {
-    const userLoggedJSON = window.sessionStorage.getItem("loggedUser");
-
-    // Comprueba si el valor existe en la sesión.
-    if (userLoggedJSON) {
-      try {
-        // Intenta convertir el valor JSON en un objeto JavaScript.
-        const userLogged = JSON.parse(userLoggedJSON);
-        setUser(userLogged);
-      } catch {}
-    }
-  };
-
-  // Llamamos a fetchServices en el mount del componente
-  useEffect(() => {
-    setUserLogged();
-  }, []);
+  const [loggedUser, setLoggedUser] = useContext(UserContext);
+  console.log(loggedUser);
 
   return (
     <Wrapper>
@@ -72,12 +56,12 @@ const NewService = () => {
           </ContainerTituloServicio>
           <PerfilTutor>
             <ProfileImg
-              src={user.profilePhoto}
+              src={loggedUser?.profilePhoto}
               alt="foto de perfil del profesor"
             />
             <ProfileDescription>
               <NombrePrecioContainer>
-                <NombreTutor>Juan</NombreTutor>
+                <NombreTutor>{loggedUser?.name}</NombreTutor>
                 <ContainerPrecioTutor>
                   <PrecioTutor
                     value={`$${parseFloat(datosPublicacion.precio).toFixed(2)}`}
