@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Input from "components/Input";
+import axios from "axios";
 import IconImage from "../../assets/icons/UserSampleIcon.png";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "components/PrimaryButton";
@@ -91,21 +92,7 @@ const Register = () => {
     setRegisterPassword(clave);
   };
 
-  const fetchUsers = async () => {
-    const response = await fetch("mocks/users.json");
-    const { users } = await response.json();
-
-    setUsers(users);
-  };
-
-  const registerUser = () => {
-    const userAux = users.find((u) => u.email === registerMail);
-
-    if (userAux !== undefined && userAux !== null) {
-      setErrorEmail("El mail que ingreso ya esta registrado.");
-      return;
-    }
-
+  const registerUser = async () => {
     if (!registerMail.includes("@")) {
       setErrorEmail("El mail no cuenta con el formato adecuado.");
       return;
@@ -135,15 +122,33 @@ const Register = () => {
       experience: registerExperience
     };
 
-    window.sessionStorage.setItem("loggedUser", JSON.stringify(newUser));
+    const formData = new FormData();
+    formData.append("name", firstName);
+    formData.append("lastName", lastName);
+    formData.append("email", registerMail);
+    formData.append("password", registerPassword);
+    formData.append("title", registerTitle);
+    formData.append("workExperience", registerExperience);
 
-    navigate(`/`);
+    let response;
+    try {
+      axios
+        .post("http://localhost:4000/api/mentors/registration", formData, {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+          }
+        })
+        .then((r) => {
+          console.log(r);
+          window.sessionStorage.setItem("loggedUser", JSON.stringify(newUser));
+          navigate(`/`);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    } catch (e) {}
   };
-
-  // Llamamos a fetchServices en el mount del componente
-  useEffect(() => {
-    fetchUsers();
-  }, []);
 
   return (
     <Wrapper>
