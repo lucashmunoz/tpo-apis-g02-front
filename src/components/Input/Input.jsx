@@ -10,7 +10,7 @@ const Input = ({
   type = "text",
   profileImage = "false"
 }) => {
-  if (profileImage == "false") {
+  if (profileImage === "false") {
     return (
       <>
         {labelText && (

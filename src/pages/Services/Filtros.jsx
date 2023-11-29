@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useDebounce } from "use-debounce";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Dropdown from "components/Dropdown";
@@ -18,6 +19,15 @@ const Filtros = ({ filters, setFilters }) => {
   const [opcionesCategorias, setOpcionesCategorias] = useState([]);
   const [opcionesTipoClase, setOpcionesTipoClase] = useState([]);
   const [opcionesFrecuencias, setOpcionesFrecuencias] = useState([]);
+  const [tema, setTema] = useState("");
+  const [debouncedTema] = useDebounce(tema, 500);
+
+  useEffect(() => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      subject: debouncedTema
+    }));
+  }, [debouncedTema, setFilters]);
 
   // Desde state recibieremos la búsqueda ingresada en home
   const { state: linkState } = useLocation();
@@ -99,13 +109,8 @@ const Filtros = ({ filters, setFilters }) => {
             labelText="Tema"
             placeholder="Tema"
             inputType="secondary"
-            value={filters.subject}
-            onChangeHandler={(e) =>
-              setFilters((prevFilters) => ({
-                ...prevFilters,
-                subject: e.target.value
-              }))
-            }
+            value={tema}
+            onChangeHandler={(e) => setTema(e.target.value)}
           />
         </ControlContainer>
         <ControlContainer>
