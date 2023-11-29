@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import ServiceCard from "./ServiceCard";
 import styled from "styled-components";
 import Filtros from "./Filtros";
+import axios from "axios";
 
 const Wrapper = styled.div`
   display: flex;
@@ -59,8 +60,25 @@ const Services = () => {
    * Obtiene los servicios totales ofrecidos
    */
   const fetchServices = async () => {
-    const response = await fetch("mocks/services.json");
-    const { services } = await response.json();
+    let response;
+    let services;
+    try {
+      response = await axios.get(
+        "http://localhost:4000/api/service/getAvailableServices",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+          }
+        }
+      );
+
+      console.log(response);
+
+      if (response.data.status === 200) {
+        services = response.data.services;
+      }
+    } catch (e) {}
 
     setServicios(services);
     setServiciosFiltrados(services);
@@ -156,7 +174,7 @@ const Services = () => {
       <ServicesContainer>
         {serviciosFiltrados.map((servicio) => {
           const {
-            id,
+            _id,
             profilePhoto,
             title,
             summaryDescription,
@@ -168,7 +186,7 @@ const Services = () => {
 
           return (
             <ServiceCard
-              key={id}
+              key={_id}
               profilePhoto={profilePhoto}
               title={title}
               summaryDescription={summaryDescription}
@@ -176,7 +194,7 @@ const Services = () => {
               frequency={getFrequencyLabel(frequency)}
               rate={rate}
               nombreProfesor={nombreProfesor}
-              onClickHandler={() => goToServiceDetail(id)}
+              onClickHandler={() => goToServiceDetail(_id)}
             />
           );
         })}

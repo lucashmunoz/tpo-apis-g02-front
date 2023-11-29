@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import axios from "axios";
 import UserContext from "user-context";
 import IconImage from "../../assets/icons/UserSampleIcon.png";
 import { useNavigate } from "react-router-dom";
@@ -23,7 +24,6 @@ const Login = () => {
   const [loginPassword, setLoginPassword] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
-  const [users, setUsers] = useState([]);
 
   const [disableLoginButton, setDisableLoginButton] = useState(true);
 
@@ -36,7 +36,7 @@ const Login = () => {
     setDisableLoginButton(disableLoginButton);
   }, [loginEmail, loginPassword, errorEmail, passwordErrorMessage]);
 
-  const [, setLoggedUser] = useContext(UserContext);
+  const [userLogged, setLoggedUser] = useContext(UserContext);
 
   const validateEmail = (email) => {
     const emailRegex = new RegExp(/^([A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4})$/i);
@@ -62,54 +62,78 @@ const Login = () => {
     setLoginPassword(clave);
   };
 
-  const fetchUsers = async () => {
-    const response = await fetch("mocks/users.json");
-    const { users } = await response.json();
-
-    setUsers(users);
-  };
-
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    let response;
+    try {
+      response = await axios.post(
+        "http://localhost:4000/api/mentors/login",
+        {
+          email: loginEmail,
+          password: loginPassword
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+          }
+        }
+      );
 
-    const userAux = users.find((u) => u.email === loginEmail);
+      console.log(response.data.loginmentor);
+      if (response.status === 200) {
+        window.sessionStorage.setItem(
+          "loggedUser",
+          JSON.stringify(response.data.loginmentor)
+        );
 
-    if (userAux === undefined || userAux === null) {
-      setErrorEmail("Mail inexistente");
-      return;
+        setLoggedUser({
+          _id: response.data.loginmentor.Mentor._id,
+          password: response.data.loginmentor.Mentor.password,
+          name: response.data.loginmentor.Mentor.name,
+          email: response.data.loginmentor.Mentor.email,
+          lastName: response.data.loginmentor.Mentor.lastName,
+          title: response.data.loginmentor.Mentor.title,
+          isUserLoggedIn: true,
+          token: response.data.loginmentor.token,
+          profilePhoto: response.data.loginmentor.Mentor.profilePhoto
+        });
+        console.log(userLogged);
+        navigate(`/`);
+      }
+    } catch (e) {
+      console.log(e);
+      setErrorEmail(e.message);
     }
-
-    if (userAux.password !== loginPassword) {
-      setPasswordErrorMessage("Contraseña invalida");
-      return;
-    }
-
-    window.sessionStorage.setItem("loggedUser", JSON.stringify(userAux));
-
-    setLoggedUser({ ...userAux, isUserLoggedIn: true });
-
-    navigate(`/`);
   };
 
-  const handleRecuperarClave = () => {
-    const userAux = users.find((u) => u.email === loginEmail);
-
-    if (userAux === undefined || userAux === null) {
-      setErrorEmail("Mail inexistente");
-      return;
+  const handleRecuperarClave = async () => {
+    let response;
+    try {
+      response = await axios.post(
+        "http://localhost:4000/api/mentors/forgottenpass",
+        {
+          mail: loginEmail
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+          }
+        }
+      );
+    } catch (e) {
+      console.log(e);
+      setErrorEmail(e.message);
     }
+    console.log(response);
 
     setErrorEmail("Se envio un mail para recuperar la cuenta.");
   };
 
-  // Llamamos a fetchServices en el mount del componente
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
   return (
     <Wrapper>
-      <FormLogin onSubmit={handleLogin}>
+      <FormLogin>
         <ImgWrapper>
           <Image src={IconImage}></Image>
         </ImgWrapper>
@@ -137,7 +161,7 @@ const Login = () => {
           <ErrorShow>{passwordErrorMessage}</ErrorShow>
         </ActionContainer>
         <ActionContainer>
-          <TextButton onClick={handleRecuperarClave}>
+          <TextButton type="button" onClick={handleRecuperarClave}>
             Recuperar contraseña
           </TextButton>
         </ActionContainer>
@@ -146,6 +170,7 @@ const Login = () => {
             buttonType="primary"
             type="submit"
             isDisabled={disableLoginButton}
+            onClick={handleLogin}
           >
             Log In
           </PrimaryButton>
