@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Input from "components/Input";
+import Dropdown from "components/Dropdown";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -87,13 +88,19 @@ export const PrecioTutor = styled(Input)`
   font-weight: bold;
 `;
 
-export const ContainerTitulosTutor = styled.div`
-  margin-top: 10px;
+export const ControlContainer = styled.div`
+  margin-top: 15px;
+  text-align: right;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 `;
 
-export const TitulosTutor = styled(Input)`
-  margin-top: 50px;
-  font-size: 20px;
+export const OpcionDropdown = styled(Dropdown)`
+  width: 320px;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const AcercaDe = styled.div`

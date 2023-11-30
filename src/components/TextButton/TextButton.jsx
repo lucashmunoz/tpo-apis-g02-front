@@ -7,8 +7,12 @@ const Button = styled.button`
   background: transparent;
 `;
 
-const TextButton = ({ children, onClick }) => {
-  return <Button onClick={onClick}>{children}</Button>;
+const TextButton = ({ children, onClick, type }) => {
+  return (
+    <Button onClick={onClick} type={type}>
+      {children}
+    </Button>
+  );
 };
 
 export default TextButton;
