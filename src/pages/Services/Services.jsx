@@ -56,15 +56,21 @@ const Services = () => {
   const navigate = useNavigate();
   const goToServiceDetail = (serviceId) => navigate(`/service/${serviceId}`);
 
-  /**
-   * Obtiene los servicios totales ofrecidos
-   */
+  // Llamamos a fetchServices en el mount del componente
+  useEffect(() => {
+    fetchServices();
+  }, []);
+
   const fetchServices = async () => {
     let response;
     let services;
+    console.log(filters);
     try {
-      response = await axios.get(
+      response = await axios.post(
         "http://localhost:4000/api/service/getAvailableServices",
+        {
+          filters: filters
+        },
         {
           headers: {
             "Content-Type": "application/json",
@@ -83,11 +89,6 @@ const Services = () => {
     setServicios(services);
     setServiciosFiltrados(services);
   };
-
-  // Llamamos a fetchServices en el mount del componente
-  useEffect(() => {
-    fetchServices();
-  }, []);
 
   // Llamamos a fetchServices en el mount del componente y cuando cambian los filtros
   useEffect(() => {
