@@ -43,15 +43,19 @@ const NewService = () => {
   const [opcionesTipoClase, setOpcionesTipoClase] = useState([]);
   const [opcionesFrecuencias, setOpcionesFrecuencias] = useState([]);
 
+  const [categoriaElegida, setCategoriaElegida] = useState("");
+  const [tipoClaseElegida, setTipoClaseElegida] = useState("");
+  const [frecuenciaElegida, setFrecuenciaElegida] = useState("");
+
   const sendService = () => {
     let body = {
       mentorId: loggedUser._id,
       service: {
         title: datosInicialesPublicacion.nombrePublicacion,
         summaryDescription: datosInicialesPublicacion.sobreElServicio,
-        category: opcionesCategorias,
-        frecuency: opcionesFrecuencias,
-        classType: opcionesCategorias,
+        category: categoriaElegida,
+        frecuency: frecuenciaElegida,
+        classType: tipoClaseElegida,
         aboutMe: datosInicialesPublicacion.sobreMi,
         price: datosInicialesPublicacion.precio
       }
@@ -134,7 +138,7 @@ const NewService = () => {
                   labelText="Categoría"
                   options={opcionesCategorias}
                   placeholderOptionLabel="Categoría"
-                  onChangeHandler={(e) => setOpcionesCategorias(e.target.value)}
+                  onChangeHandler={(e) => setCategoriaElegida(e.target.value)}
                 />
               </ControlContainer>
               <ControlContainer>
@@ -143,7 +147,7 @@ const NewService = () => {
                   labelText="Tipo de Clase"
                   options={opcionesTipoClase}
                   placeholderOptionLabel="Tipo de Clase"
-                  onChangeHandler={(e) => setOpcionesTipoClase(e.target.value)}
+                  onChangeHandler={(e) => setTipoClaseElegida(e.target.value)}
                 />
               </ControlContainer>
               <ControlContainer>
@@ -152,9 +156,7 @@ const NewService = () => {
                   labelText="Frecuencia"
                   options={opcionesFrecuencias}
                   placeholderOptionLabel="Frecuencia"
-                  onChangeHandler={(e) =>
-                    setOpcionesFrecuencias(e.target.value)
-                  }
+                  onChangeHandler={(e) => setFrecuenciaElegida(e.target.value)}
                 />
               </ControlContainer>
             </ProfileDescription>
