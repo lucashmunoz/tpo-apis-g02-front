@@ -62,9 +62,13 @@ const Services = () => {
   const fetchServices = async () => {
     let response;
     let services;
+    console.log(filters);
     try {
-      response = await axios.get(
+      response = await axios.post(
         "http://localhost:4000/api/service/getAvailableServices",
+        {
+          filters: filters
+        },
         {
           headers: {
             "Content-Type": "application/json",
