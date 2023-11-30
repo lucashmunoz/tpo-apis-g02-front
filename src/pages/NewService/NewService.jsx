@@ -51,13 +51,13 @@ const NewService = () => {
     let body = {
       mentorId: loggedUser._id,
       service: {
-        title: datosInicialesPublicacion.nombrePublicacion,
-        summaryDescription: datosInicialesPublicacion.sobreElServicio,
+        title: datosPublicacion.nombrePublicacion,
+        summaryDescription: datosPublicacion.sobreElServicio,
         category: categoriaElegida,
         frecuency: frecuenciaElegida,
         classType: tipoClaseElegida,
-        aboutMe: datosInicialesPublicacion.sobreMi,
-        price: datosInicialesPublicacion.precio
+        aboutMe: datosPublicacion.sobreMi,
+        price: parseFloat(datosPublicacion.precio)
       }
     };
     console.log(body);
