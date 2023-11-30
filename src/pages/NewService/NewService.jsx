@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import PrimaryButton from "components/PrimaryButton";
 import UserContext from "user-context";
+import axios from "axios";
 import {
   Wrapper,
   DescripcionContainer,
@@ -41,6 +42,36 @@ const NewService = () => {
   const [opcionesCategorias, setOpcionesCategorias] = useState([]);
   const [opcionesTipoClase, setOpcionesTipoClase] = useState([]);
   const [opcionesFrecuencias, setOpcionesFrecuencias] = useState([]);
+
+  const sendService = () => {
+    let body = {
+      mentorId: loggedUser._id,
+      service: {
+        title: datosInicialesPublicacion.nombrePublicacion,
+        summaryDescription: datosInicialesPublicacion.sobreElServicio,
+        category: opcionesCategorias,
+        frecuency: opcionesFrecuencias,
+        classType: opcionesCategorias,
+        aboutMe: datosInicialesPublicacion.sobreMi,
+        price: datosInicialesPublicacion.precio
+      }
+    };
+    console.log(body);
+    try {
+      let response = axios.post(
+        "http://localhost:4000/api/service/setservice",
+        body,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "x-access-token": loggedUser.token
+          }
+        }
+      );
+      console.log(response);
+    } catch (e) {}
+  };
 
   // Llamamos a fetchFilters en el mount del componente
   useEffect(() => {
@@ -156,7 +187,9 @@ const NewService = () => {
           </AcercaDe>
 
           <GuardarCambiosButtonContainer>
-            <PrimaryButton>Publicar Servicio</PrimaryButton>
+            <PrimaryButton onClick={sendService}>
+              Publicar Servicio
+            </PrimaryButton>
           </GuardarCambiosButtonContainer>
         </DescriptionContent>
       </DescripcionContainer>
