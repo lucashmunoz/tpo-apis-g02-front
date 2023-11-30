@@ -117,16 +117,8 @@ const Register = () => {
       return;
     }
 */
-    const newUser = {
-      email: registerMail,
-      password: registerPassword,
-      name: firstName,
-      lastname: lastName,
-      title: registerTitle,
-      experience: registerExperience
-    };
 
-    const formData = new URLSearchParams();
+    const formData = new FormData();
     formData.append("name", firstName);
     formData.append("lastName", lastName);
     formData.append("email", registerMail);
@@ -135,7 +127,6 @@ const Register = () => {
     formData.append("workExperience", registerExperience);
     formData.append("profilePhoto", profilePicture);
 
-    let response;
     try {
       axios
         .post("http://localhost:4000/api/mentors/registration", formData, {
@@ -147,7 +138,6 @@ const Register = () => {
         })
         .then((r) => {
           console.log(r);
-          window.sessionStorage.setItem("loggedUser", JSON.stringify(newUser));
           navigate(`/`);
         })
         .catch((e) => {
@@ -221,7 +211,10 @@ const Register = () => {
               name="profile_pic"
               accept=".jpg, .jpeg, .png"
               encType="multipart/form-data"
-              onChange={(e) => setProfilePicture(e.target.files[0])}
+              onChange={(e) => {
+                console.log(e.target.files[0]);
+                setProfilePicture(e.target.files[0]);
+              }}
             />
           </TextFieldContainer>
         </TextFieldsContainer>
