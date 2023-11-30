@@ -14,8 +14,8 @@ import {
   NombreTutor,
   ContainerPrecioTutor,
   PrecioTutor,
-  ContainerTitulosTutor,
-  TitulosTutor,
+  ControlContainer,
+  OpcionDropdown,
   AcercaDe,
   AcercaDeTitle,
   AcercaDeContent,
@@ -37,6 +37,24 @@ const NewService = () => {
 
   const [loggedUser, setLoggedUser] = useContext(UserContext);
   console.log(loggedUser);
+
+  const [opcionesCategorias, setOpcionesCategorias] = useState([]);
+  const [opcionesTipoClase, setOpcionesTipoClase] = useState([]);
+  const [opcionesFrecuencias, setOpcionesFrecuencias] = useState([]);
+
+  // Llamamos a fetchFilters en el mount del componente
+  useEffect(() => {
+    const fetchFilters = async () => {
+      const response = await fetch("mocks/filtervalues.json");
+      const filtersValues = await response.json();
+
+      setOpcionesCategorias(filtersValues.categories);
+      setOpcionesTipoClase(filtersValues.classTypes);
+      setOpcionesFrecuencias(filtersValues.frequencies);
+    };
+
+    fetchFilters();
+  }, []);
 
   return (
     <Wrapper>
@@ -78,18 +96,36 @@ const NewService = () => {
                   />
                 </ContainerPrecioTutor>
               </NombrePrecioContainer>
-              <ContainerTitulosTutor>
-                <TitulosTutor
-                  placeholder="Titulos personales"
-                  value={datosPublicacion.tituloTutor}
+
+              <ControlContainer>
+                <OpcionDropdown
+                  id="dropdown-categorias"
+                  labelText="Categoría"
+                  options={opcionesCategorias}
+                  placeholderOptionLabel="Categoría"
+                  onChangeHandler={(e) => setOpcionesCategorias(e.target.value)}
+                />
+              </ControlContainer>
+              <ControlContainer>
+                <OpcionDropdown
+                  id="dropdown-tipo-clase"
+                  labelText="Tipo de Clase"
+                  options={opcionesTipoClase}
+                  placeholderOptionLabel="Tipo de Clase"
+                  onChangeHandler={(e) => setOpcionesTipoClase(e.target.value)}
+                />
+              </ControlContainer>
+              <ControlContainer>
+                <OpcionDropdown
+                  id="dropdown-frecuencias"
+                  labelText="Frecuencia"
+                  options={opcionesFrecuencias}
+                  placeholderOptionLabel="Frecuencia"
                   onChangeHandler={(e) =>
-                    setDatosPublicacion((prevDatos) => ({
-                      ...prevDatos,
-                      tituloTutor: e.target.value
-                    }))
+                    setOpcionesFrecuencias(e.target.value)
                   }
                 />
-              </ContainerTitulosTutor>
+              </ControlContainer>
             </ProfileDescription>
           </PerfilTutor>
           <AcercaDe>

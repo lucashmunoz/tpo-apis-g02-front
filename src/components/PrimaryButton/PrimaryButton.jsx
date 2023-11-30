@@ -14,9 +14,9 @@ const ButtonElement = styled.button`
   }
 `;
 
-const PrimaryButton = ({ children, onClick, isDisabled }) => {
+const PrimaryButton = ({ children, onClick, isDisabled, type }) => {
   return (
-    <ButtonElement onClick={onClick} disabled={isDisabled}>
+    <ButtonElement onClick={onClick} disabled={isDisabled} type={type}>
       {children}
     </ButtonElement>
   );

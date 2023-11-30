@@ -5,10 +5,11 @@ const Dropdown = ({
   labelText,
   options,
   placeholderOptionLabel,
-  onChangeHandler
+  onChangeHandler,
+  className
 }) => {
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       <label htmlFor={id}>{labelText}</label>
       <Select id={id} onChange={onChangeHandler}>
         {placeholderOptionLabel && (

@@ -133,7 +133,7 @@ const Login = () => {
 
   return (
     <Wrapper>
-      <FormLogin>
+      <FormLogin onSubmit={handleLogin}>
         <ImgWrapper>
           <Image src={IconImage}></Image>
         </ImgWrapper>
