@@ -23,6 +23,7 @@ const Register = () => {
   const [lastName, setLastName] = useState("");
   const [registerTitle, setRegisterTitle] = useState("");
   const [registerExperience, setRegisterExperience] = useState("");
+  const [profilePicture, setProfilePicture] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
   const [errorNames, setErrorNames] = useState({
@@ -30,6 +31,8 @@ const Register = () => {
     lastNameError: ""
   });
   const [users, setUsers] = useState([]);
+
+  console.log(profilePicture);
 
   const [disableRegisterButton, setDisableRegisterButton] = useState(true);
 
@@ -39,12 +42,10 @@ const Register = () => {
       registerPassword.length === 0 ||
       firstName.length === 0 ||
       lastName.length === 0 ||
-      registerTitle.length === 0 ||
-      registerExperience.length === 0;
+      registerTitle.length === 0;
 
     setDisableRegisterButton(shouldDisableRegisterButton);
   }, [
-    registerExperience.length,
     lastName.length,
     registerMail,
     firstName.length,
@@ -92,7 +93,9 @@ const Register = () => {
     setRegisterPassword(clave);
   };
 
-  const registerUser = async () => {
+  const registerUser = async (e) => {
+    e.preventDefault();
+
     if (!registerMail.includes("@")) {
       setErrorEmail("El mail no cuenta con el formato adecuado.");
       return;
@@ -108,11 +111,12 @@ const Register = () => {
       return;
     }
 
+    /*
     if (registerExperience.length === 0) {
       setPasswordErrorMessage("Ingrese una breve experiencia como tutor.");
       return;
     }
-
+*/
     const newUser = {
       email: registerMail,
       password: registerPassword,
@@ -122,20 +126,22 @@ const Register = () => {
       experience: registerExperience
     };
 
-    const formData = new FormData();
+    const formData = new URLSearchParams();
     formData.append("name", firstName);
     formData.append("lastName", lastName);
     formData.append("email", registerMail);
     formData.append("password", registerPassword);
     formData.append("title", registerTitle);
     formData.append("workExperience", registerExperience);
+    formData.append("profilePhoto", profilePicture);
 
     let response;
     try {
       axios
         .post("http://localhost:4000/api/mentors/registration", formData, {
           headers: {
-            "Content-Type": "application/json",
+            Accept: "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded",
             "Access-Control-Allow-Origin": "*"
           }
         })
@@ -208,13 +214,14 @@ const Register = () => {
             />
           </TextFieldContainer>
           <TextFieldContainer>
-            <label htmlFor="registro-experiencia">Experiencia</label>
-            <Experiencia
-              id="registro-experiencia"
-              placeholder="Ingrese brevemente su experiencia"
-              onChange={(e) => {
-                setRegisterExperience(e.target.value);
-              }}
+            <label htmlFor="registro-experiencia">Foto de perfil</label>
+            <input
+              type="file"
+              id="upload-image-input"
+              name="profile_pic"
+              accept=".jpg, .jpeg, .png"
+              encType="multipart/form-data"
+              onChange={(e) => setProfilePicture(e.target.files[0])}
             />
           </TextFieldContainer>
         </TextFieldsContainer>
