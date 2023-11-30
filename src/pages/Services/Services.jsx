@@ -56,9 +56,11 @@ const Services = () => {
   const navigate = useNavigate();
   const goToServiceDetail = (serviceId) => navigate(`/service/${serviceId}`);
 
-  /**
-   * Obtiene los servicios totales ofrecidos
-   */
+  // Llamamos a fetchServices en el mount del componente
+  useEffect(() => {
+    fetchServices();
+  }, []);
+
   const fetchServices = async () => {
     let response;
     let services;
@@ -87,11 +89,6 @@ const Services = () => {
     setServicios(services);
     setServiciosFiltrados(services);
   };
-
-  // Llamamos a fetchServices en el mount del componente
-  useEffect(() => {
-    fetchServices();
-  }, []);
 
   // Llamamos a fetchServices en el mount del componente y cuando cambian los filtros
   useEffect(() => {
