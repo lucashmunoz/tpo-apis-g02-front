@@ -17,7 +17,7 @@ import {
 } from "./styles";
 
 const getActionButtons = ({
-  id,
+  _id,
   state,
   aceptarSolicitud,
   finalizarSolicitud,
@@ -27,10 +27,10 @@ const getActionButtons = ({
     case "SOLICITADA":
       return (
         <>
-          <PrimaryButton onClick={() => aceptarSolicitud(id)}>
+          <PrimaryButton onClick={() => aceptarSolicitud(_id)}>
             ACEPTAR
           </PrimaryButton>
-          <TextButton onClick={() => cancelarSolicitud(id)}>
+          <TextButton onClick={() => cancelarSolicitud(_id)}>
             CANCELAR
           </TextButton>
         </>
@@ -38,10 +38,10 @@ const getActionButtons = ({
     case "ACEPTADA":
       return (
         <>
-          <PrimaryButton onClick={() => finalizarSolicitud(id)}>
+          <PrimaryButton onClick={() => finalizarSolicitud(_id)}>
             FINALIZAR
           </PrimaryButton>
-          <TextButton onClick={() => cancelarSolicitud(id)}>
+          <TextButton onClick={() => cancelarSolicitud(_id)}>
             CANCELAR
           </TextButton>
         </>
@@ -59,10 +59,12 @@ const CardSolicitud = ({
   solicitud,
   aceptarSolicitud,
   finalizarSolicitud,
-  cancelarSolicitud
+  cancelarSolicitud,
+  state
 }) => {
-  const { id, name, phoneNumber, email, contactHours, message, state } =
-    solicitud;
+  const { _id, name, phoneNumber, email, contactHours, comment } = solicitud;
+
+  console.log(solicitud);
 
   const hideCard = () => state === "FINALIZADA" || state === "CANCELADA";
 
@@ -82,11 +84,11 @@ const CardSolicitud = ({
               Horario de contacto: {contactHours}
             </HorarioContactoAlumno>
           </DatosAlumno>
-          <MensajeAlumno>{message}</MensajeAlumno>
+          <MensajeAlumno>{comment}</MensajeAlumno>
         </SolicitudAlumno>
         <Actions>
           {getActionButtons({
-            id,
+            _id,
             state,
             aceptarSolicitud,
             finalizarSolicitud,

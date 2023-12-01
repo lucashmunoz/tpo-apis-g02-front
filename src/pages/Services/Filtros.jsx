@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Dropdown from "components/Dropdown";
 import Input from "components/Input";
 import StarRate from "components/StarRate";
+import TextButton from "components/TextButton";
 
 const Wrapper = styled.form`
   display: flex;
@@ -15,7 +16,11 @@ const ControlContainer = styled.div`
   margin-top: 15px;
 `;
 
-const Filtros = ({ filters, setFilters }) => {
+const ReiniciarFIltrosButton = styled(TextButton)`
+  margin-top: 32px;
+`;
+
+const Filtros = ({ setFilters }) => {
   const [opcionesCategorias, setOpcionesCategorias] = useState([]);
   const [opcionesTipoClase, setOpcionesTipoClase] = useState([]);
   const [opcionesFrecuencias, setOpcionesFrecuencias] = useState([]);
@@ -31,6 +36,16 @@ const Filtros = ({ filters, setFilters }) => {
 
   // Desde state recibieremos la búsqueda ingresada en home
   const { state: linkState } = useLocation();
+
+  const handleReiniciarFiltros = () => {
+    setFilters({
+      category: "",
+      frequency: "",
+      classType: "",
+      rate: 0,
+      subject: ""
+    });
+  };
 
   /**
    * Obtiene los filtros de busqueda del componente
@@ -124,6 +139,10 @@ const Filtros = ({ filters, setFilters }) => {
             }
           />
         </ControlContainer>
+
+        <ReiniciarFIltrosButton onClick={handleReiniciarFiltros}>
+          Reiniciar filtros
+        </ReiniciarFIltrosButton>
       </Wrapper>
     </search>
   );

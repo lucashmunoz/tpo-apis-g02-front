@@ -32,11 +32,11 @@ npm start
 
 Esta es la lista de las principales dependencias y sus versiones utilizadas:
 
-- "react": "^18.2.0",
-- "react-dom": "^18.2.0",
-- "react-router-dom": "^6.16.0",
-- "styled-components": "^6.0.8"
-- "axios": "^1.6.2",
-- "eslint": "^8.49.0",
-- "prettier": "3.0.3",
-- "tailwindcss": "^3.3.3"
+- react@18.2.0,
+- react-dom@18.2.0,
+- react-router-dom@6.16.0,
+- styled-components@6.0.8
+- axios@1.6.2,
+- eslint@8.49.0,
+- prettier@3.0.3,
+- tailwindcss@3.3.3

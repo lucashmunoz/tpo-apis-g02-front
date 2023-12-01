@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import UserContext from "user-context";
 import { useParams } from "react-router-dom";
 import CheckedStar from "assets/icons/star-filled.svg";
@@ -40,70 +40,75 @@ import {
   UserCommentLogoContainer,
   Wrapper
 } from "./styles";
-
-const comentariosCursoMatematicas = [
-  {
-    id: 0,
-    name: "María Pérez",
-    commentDate: "2023-10-04",
-    comment:
-      "Este curso ha sido una experiencia increíble. El profesor es muy claro en sus explicaciones, y las lecciones personalizadas hicieron que las matemáticas fueran mucho más comprensibles. ¡Le doy 5 estrellas!",
-    rate: 5
-  },
-  {
-    id: 1,
-    name: "Juan López",
-    commentDate: "2023-10-03",
-    comment:
-      "Como estudiante universitario, este curso me ayudó a superar mis miedos a las matemáticas. Las prácticas constantes realmente fortalecieron mis habilidades. Lo recomiendo encarecidamente. Puntuación: 4",
-    rate: 4
-  },
-  {
-    id: 2,
-    name: "Ana Gómez",
-    commentDate: "2023-10-02",
-    comment:
-      "El profesor es muy paciente y se toma el tiempo para explicar cada concepto. Me siento mucho más segura con las matemáticas ahora. Le doy un sólido 5. ¡Gracias!",
-    rate: 5
-  },
-  {
-    id: 3,
-    name: "Carlos Rodríguez",
-    commentDate: "2023-10-01",
-    comment:
-      "El material del curso es excelente y está bien estructurado. Sin embargo, me hubiera gustado más interacción en vivo. Le doy un 4.",
-    rate: 4
-  },
-  {
-    id: 4,
-    name: "Laura Martínez",
-    commentDate: "2023-09-30",
-    comment:
-      "Este curso ha sido un salvavidas para mí. Las matemáticas siempre fueron mi debilidad, pero ahora me siento mucho más confiada. Le doy 5 estrellas sin dudarlo.",
-    rate: 5
-  }
-];
-
-const datosInicialesPublicacion = {
-  nombrePublicacion: "Inglés",
-  tituloTutor: "Facultad de Lenguas, Universidad Nacional de Córdoba",
-  precio: "25.00",
-  sobreElServicio:
-    "Mejora tus habilidades en inglés con nuestras clases personalizadas. Nuestro enfoque se centra en la conversación, la gramática y la comprensión auditiva. Ofrecemos material auténtico y situaciones de la vida real para que te sientas cómodo hablando en inglés en cualquier situación. ¡Aprende de manera divertida y efectiva!",
-  sobreMi:
-    "Soy Juan, el tutor de este curso. Mi amor por los idiomas y mi experiencia en la enseñanza me han llevado a ayudar a numerosos estudiantes a alcanzar fluidez en inglés. Estoy comprometido en hacer que tu aprendizaje sea interesante y práctico."
-};
+import axios from "axios";
+import { maskPrecio, unmaskPrecio } from "helpers/helpers";
 
 const MyServiceDetails = () => {
-  const [comments, setComments] = useState(comentariosCursoMatematicas);
-  const [datosPublicacion, setDatosPublicacion] = useState(
-    datosInicialesPublicacion
-  );
+  const [datosPublicacion, setDatosPublicacion] = useState({
+    mentor: {
+      name: "Ignacio",
+      email: "igcesarani@gmail.com",
+      profilePhoto:
+        "https://res.cloudinary.com/dybrmprcg/image/upload/v1701183447/l5wlad1zptynhwjwcupk.jpg",
+      workExperience: "Trabaje como profesor de matematica y desarrollador web",
+      title: "Ing Informatico"
+    },
+    service: {
+      title: "",
+      summaryDescription: "s",
+      category: "",
+      price: "",
+      classType: "",
+      nombreProfesor: "",
+      hireRequest: [],
+      comments: [],
+      aboutMe: ""
+    }
+  });
 
   // Obtiene el serviceId desde la url
-  const { id: servideId } = useParams();
+  const { id: serviceId } = useParams();
 
   const [loggedUser] = useContext(UserContext);
+
+  const fetchService = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:4000/api/service/getservicetoupdate/${serviceId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "x-access-token": loggedUser.token
+          }
+        }
+      );
+
+      if (response.status === 200) {
+        setDatosPublicacion({
+          ...response.data
+        });
+
+        /*
+        setDatosPublicacion({
+          ...response.data.service,
+          service: {
+            ...response.data.service.service,
+            price: maskPrecio(response.data.service.service.price)
+          }
+        });
+        */
+      }
+    } catch (e) {}
+  };
+
+  console.log(datosPublicacion);
+
+  // Obtiene el servicio
+  useEffect(() => {
+    fetchService(serviceId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [serviceId]);
 
   const getCommentInitials = (nombreCompleto) => {
     const arrNombreCompleto = nombreCompleto.trim().split(" ");
@@ -127,19 +132,22 @@ const MyServiceDetails = () => {
         <DescriptionContent>
           <ContainerTituloServicio>
             <TituloServicio
-              value={datosPublicacion.nombrePublicacion.toUpperCase()}
+              value={datosPublicacion.service.title}
               placeholder="Título servicio"
               onChangeHandler={(e) =>
                 setDatosPublicacion((prevDatos) => ({
                   ...prevDatos,
-                  nombrePublicacion: e.target.value
+                  service: {
+                    ...prevDatos.service,
+                    title: e.target.value
+                  }
                 }))
               }
             />
           </ContainerTituloServicio>
           <PerfilTutor>
             <ProfileImg
-              src={loggedUser.profilePhoto}
+              src={datosPublicacion.mentor.profilePhoto}
               alt="foto de perfil del profesor"
             />
             <ProfileDescription>
@@ -147,21 +155,43 @@ const MyServiceDetails = () => {
                 <NombreTutor>Juan</NombreTutor>
                 <ContainerPrecioTutor>
                   <PrecioTutor
-                    value={`$${parseFloat(datosPublicacion.precio).toFixed(2)}`}
+                    value={datosPublicacion.service.price}
                     placeholder="Precio"
+                    onBlur={(e) => {
+                      setDatosPublicacion((prevDatos) => ({
+                        ...prevDatos,
+                        service: {
+                          ...prevDatos.service,
+                          price: maskPrecio(e.target.value)
+                        }
+                      }));
+                    }}
+                    onFocus={(e) => {
+                      setDatosPublicacion((prevDatos) => ({
+                        ...prevDatos,
+                        service: {
+                          ...prevDatos.service,
+                          price: unmaskPrecio(e.target.value)
+                        }
+                      }));
+                    }}
                     onChangeHandler={(e) => {
-                      if (isNaN(e.target.value.substring(1))) {
+                      if (isNaN(e.target.value)) {
                         return;
                       }
                       setDatosPublicacion((prevDatos) => ({
                         ...prevDatos,
-                        precio: e.target.value.substring(1)
+                        service: {
+                          ...prevDatos.service,
+                          price: e.target.value
+                        }
                       }));
                     }}
                   />
                 </ContainerPrecioTutor>
               </NombrePrecioContainer>
-              <ContainerTitulosTutor>
+              {/*
+                <ContainerTitulosTutor>
                 <TitulosTutor
                   value={datosPublicacion.tituloTutor}
                   onChangeHandler={(e) =>
@@ -172,6 +202,8 @@ const MyServiceDetails = () => {
                   }
                 />
               </ContainerTitulosTutor>
+                */}
+
               <Rate>
                 <StarImg src={CheckedStar} />
                 {parseFloat(4.2).toFixed(2)}
@@ -181,7 +213,7 @@ const MyServiceDetails = () => {
           <AcercaDe>
             <AcercaDeTitle>Sobre el servicio</AcercaDeTitle>
             <AcercaDeContent
-              value={datosPublicacion.sobreElServicio}
+              value={datosPublicacion.service.summaryDescription}
               onChange={(e) =>
                 setDatosPublicacion((prevDatos) => ({
                   ...prevDatos,
@@ -193,7 +225,7 @@ const MyServiceDetails = () => {
           <AcercaDe>
             <AcercaDeTitle>Sobre mí</AcercaDeTitle>
             <AcercaDeContent
-              value={datosPublicacion.sobreMi}
+              value={datosPublicacion.service.aboutMe}
               onChange={(e) =>
                 setDatosPublicacion((prevDatos) => ({
                   ...prevDatos,
@@ -209,7 +241,7 @@ const MyServiceDetails = () => {
           <CommentsContainer>
             <CommentsLabel>Comentarios de clientes pasados</CommentsLabel>
             <CommentsHR />
-            {comments.map((comentario) => {
+            {datosPublicacion.service.comments.map((comentario) => {
               const {
                 id,
                 name,

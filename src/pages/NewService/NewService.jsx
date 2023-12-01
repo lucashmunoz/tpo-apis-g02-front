@@ -22,6 +22,7 @@ import {
   AcercaDeContent,
   GuardarCambiosButtonContainer
 } from "./styles";
+import { maskPrecio, unmaskPrecio } from "helpers/helpers";
 
 const datosInicialesPublicacion = {
   nombrePublicacion: "",
@@ -29,24 +30,6 @@ const datosInicialesPublicacion = {
   precio: "0",
   sobreElServicio: "",
   sobreMi: ""
-};
-
-/** Enmascaa el precio de la publicacion. Ej. 35.5 => $35.50 */
-const maskPrecio = (precio) => {
-  if (precio === 0 || precio === "") {
-    return "0.00";
-  } else {
-    return `$${parseFloat(precio).toFixed(2)}`;
-  }
-};
-
-/** Desmascaa el precio de la publicacion. Ej. $35.50 => 35.0 */
-const unmaskPrecio = (precio) => {
-  const noDollarSignPrecio = precio.substring(1);
-  if (isNaN(noDollarSignPrecio)) {
-    return "0.00";
-  }
-  return parseFloat(noDollarSignPrecio);
 };
 
 const NewService = () => {

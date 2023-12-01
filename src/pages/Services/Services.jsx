@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 import ServiceCard from "./ServiceCard";
 import styled from "styled-components";
 import Filtros from "./Filtros";
+import sampleImage from "../../assets/icons/UserSampleIcon.png";
 import axios from "axios";
+import { PuffLoader } from "react-spinners";
 
 const Wrapper = styled.div`
   display: flex;
@@ -41,7 +43,18 @@ const ServicesContainer = styled.div`
   }
 `;
 
+const LoaderWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+`;
+
 const Services = () => {
+  const [servicesLoading, setServicesLoading] = useState(false);
+
   const [servicios, setServicios] = useState([]);
 
   const [filters, setFilters] = useState({
@@ -56,6 +69,7 @@ const Services = () => {
   const goToServiceDetail = (serviceId) => navigate(`/service/${serviceId}`);
 
   const fetchServices = async () => {
+    setServicesLoading(true);
     try {
       const response = await axios.post(
         "http://localhost:4000/api/service/getAvailableServices",
@@ -76,6 +90,8 @@ const Services = () => {
     } catch (e) {
       setServicios([]);
     }
+
+    setServicesLoading(false);
   };
 
   // Llamamos a fetchServices en el mount del componente
@@ -106,36 +122,45 @@ const Services = () => {
   return (
     <Wrapper>
       <FiltersContainer>
-        <Filtros setFilters={setFilters} filters={filters} />
+        <Filtros setFilters={setFilters} />
       </FiltersContainer>
-      <ServicesContainer>
-        {servicios.map((servicio) => {
-          const {
-            _id,
-            mentorProfilePhoto,
-            title,
-            summaryDescription,
-            price,
-            frequency,
-            rate,
-            mentorName
-          } = servicio;
 
-          return (
-            <ServiceCard
-              key={_id}
-              profilePhoto={mentorProfilePhoto}
-              title={title}
-              summaryDescription={summaryDescription}
-              price={price}
-              frequency={getFrequencyLabel(frequency)}
-              rate={rate}
-              nombreProfesor={mentorName}
-              onClickHandler={() => goToServiceDetail(_id)}
-            />
-          );
-        })}
-      </ServicesContainer>
+      {servicesLoading ? (
+        <LoaderWrapper>
+          <PuffLoader color="#22c55e" />
+        </LoaderWrapper>
+      ) : (
+        <ServicesContainer>
+          {servicios.map((servicio) => {
+            const {
+              _id,
+              mentorProfilePhoto,
+              title,
+              summaryDescription,
+              price,
+              frequency,
+              rate,
+              mentorName
+            } = servicio;
+
+            return (
+              <ServiceCard
+                key={_id}
+                profilePhoto={
+                  mentorProfilePhoto ? mentorProfilePhoto : sampleImage
+                }
+                title={title}
+                summaryDescription={summaryDescription}
+                price={price}
+                frequency={getFrequencyLabel(frequency)}
+                rate={rate}
+                nombreProfesor={mentorName}
+                onClickHandler={() => goToServiceDetail(_id)}
+              />
+            );
+          })}
+        </ServicesContainer>
+      )}
     </Wrapper>
   );
 };

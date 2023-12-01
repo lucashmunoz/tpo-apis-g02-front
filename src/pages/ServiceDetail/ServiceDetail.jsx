@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import CheckedStar from "assets/icons/star-filled.svg";
 import StarRate from "components/StarRate";
 import PrimaryButton from "components/PrimaryButton";
+import sampleImage from "../../assets/icons/UserSampleIcon.png";
 import axios from "axios";
 import {
   DescripcionContainer,
@@ -83,7 +84,8 @@ const ServiceDetail = () => {
       classType: "",
       nombreProfesor: "",
       hireRequest: [],
-      comments: []
+      comments: [],
+      aboutMe: ""
     }
   });
   const [nuevoComentario, setNuevoComentario] = useState({
@@ -131,7 +133,7 @@ const ServiceDetail = () => {
     setIsSubmitSolicitudDisabled(disableSolicitarContratacion);
   }, [solicitudContratacion]);
 
-  const fetchServices = async (serviceId) => {
+  const fetchService = async (serviceId) => {
     try {
       const response = await axios.get(
         `http://localhost:4000/api/service/getoneservice/${serviceId}`,
@@ -149,9 +151,9 @@ const ServiceDetail = () => {
     } catch (e) {}
   };
 
-  // Obtiene los servicios
+  // Obtiene el servicio
   useEffect(() => {
-    fetchServices(serviceId);
+    fetchService(serviceId);
   }, [serviceId]);
 
   const getCommentInitials = (nombreCompleto) => {
@@ -183,10 +185,35 @@ const ServiceDetail = () => {
     });
   };
 
-  const handleMakeNewSolicitud = (e) => {
+  const handleMakeNewSolicitud = async (e) => {
     e.preventDefault();
 
     // Llamar a la api de solicitud de nueva contratacion
+
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/service/sethiringrequest",
+        {
+          serviceId: serviceDetail.service._id,
+          hireReq: {
+            comment: solicitudContratacion.comment,
+            name: solicitudContratacion.name,
+            phoneNumber: solicitudContratacion.phoneNumber,
+            email: solicitudContratacion.email,
+            contactHours: solicitudContratacion.contactHours
+          }
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+          }
+        }
+      );
+
+      if (response.data.status === 200) {
+      }
+    } catch (e) {}
 
     setNewsolicitudContratacion({
       name: "",
@@ -205,22 +232,26 @@ const ServiceDetail = () => {
           <PerfilTutor>
             <ProfileImgContainer>
               <ProfileImg
-                src={serviceDetail.mentor.profilePhoto}
+                src={
+                  serviceDetail?.mentor?.profilePhoto
+                    ? serviceDetail.mentor.profilePhoto
+                    : sampleImage
+                }
                 alt="foto de perfil del profesor"
               />
             </ProfileImgContainer>
             <ProfileDescription>
               <NombrePrecioContainer>
-                <NombreTutor>{serviceDetail.mentor.name}</NombreTutor>
+                <NombreTutor>{serviceDetail?.mentor?.name}</NombreTutor>
                 <PrecioTutor>
                   ${parseFloat(serviceDetail.service.price).toFixed(2)}
                 </PrecioTutor>
               </NombrePrecioContainer>
-              <TitulosTutor>{serviceDetail.mentor.title}</TitulosTutor>
+              {/* <TitulosTutor>{serviceDetail?.mentor?.title}</TitulosTutor> */}
               <FrequencyRateContainer>
                 <Rate>
                   <StarImg src={CheckedStar} />
-                  {serviceDetail.service.rate}
+                  {serviceDetail.rate}
                 </Rate>
 
                 <Frequency>{serviceDetail.service.frequency}</Frequency>
@@ -235,9 +266,7 @@ const ServiceDetail = () => {
           </AcercaDe>
           <AcercaDe>
             <AcercaDeTitle>Sobre mí</AcercaDeTitle>
-            <AcercaDeContent>
-              {serviceDetail.mentor.workExperience}
-            </AcercaDeContent>
+            <AcercaDeContent>{serviceDetail?.service.aboutMe}</AcercaDeContent>
           </AcercaDe>
           <CommentsContainer>
             <CommentsLabel>Comentarios de clientes pasados</CommentsLabel>
@@ -325,11 +354,11 @@ const ServiceDetail = () => {
         </DescriptionContent>
       </DescripcionContainer>
 
-      <ContratarContainer onSubmit={handleMakeNewSolicitud}>
+      <ContratarContainer>
         <PedirContratacion>Solicitar contratación</PedirContratacion>
         <MensajeAProveedor
           maxLength="280"
-          placeholder={`Escribe un mensaje para ${serviceDetail.tutor}`}
+          placeholder={`Escribe un mensaje para ${serviceDetail?.mentor?.name}`}
           value={solicitudContratacion.comment}
           onChange={(e) =>
             setNewsolicitudContratacion((prevSolicitudContratacion) => ({
@@ -406,7 +435,11 @@ const ServiceDetail = () => {
           />
         </InputSimpleSolicitudAlumnoContainer>
         <SubmitSolicitudButtonContainer>
-          <PrimaryButton type="submit" isDisabled={isSubmitSolicitudDisabled}>
+          <PrimaryButton
+            type="button"
+            onClick={handleMakeNewSolicitud}
+            isDisabled={isSubmitSolicitudDisabled}
+          >
             Solicitar
           </PrimaryButton>
         </SubmitSolicitudButtonContainer>
