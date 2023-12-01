@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import AddSquare from "assets/icons/add-square.svg";
 import { useNavigate } from "react-router-dom";
-import UserContext from "user-context";
 
 const CardContainer = styled.button`
   width: 300px;
