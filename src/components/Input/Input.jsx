@@ -8,7 +8,9 @@ const Input = ({
   onChangeHandler,
   value,
   type = "text",
-  profileImage = "false"
+  profileImage = "false",
+  onFocus,
+  onBlur
 }) => {
   if (profileImage === "false") {
     return (
@@ -26,6 +28,8 @@ const Input = ({
           $inputType={inputType}
           onChange={onChangeHandler}
           value={value}
+          onFocus={onFocus}
+          onBlur={onBlur}
         />
       </>
     );
@@ -37,6 +41,8 @@ const Input = ({
       $inputType={inputType}
       onChange={onChangeHandler}
       value={value}
+      onFocus={onFocus}
+      onBlur={onBlur}
     />;
   }
 };

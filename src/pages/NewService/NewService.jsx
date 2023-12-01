@@ -31,6 +31,24 @@ const datosInicialesPublicacion = {
   sobreMi: ""
 };
 
+/** Enmascaa el precio de la publicacion. Ej. 35.5 => $35.50 */
+const maskPrecio = (precio) => {
+  if (precio === 0 || precio === "") {
+    return "0.00";
+  } else {
+    return `$${parseFloat(precio).toFixed(2)}`;
+  }
+};
+
+/** Desmascaa el precio de la publicacion. Ej. $35.50 => 35.0 */
+const unmaskPrecio = (precio) => {
+  const noDollarSignPrecio = precio.substring(1);
+  if (isNaN(noDollarSignPrecio)) {
+    return "0.00";
+  }
+  return parseFloat(noDollarSignPrecio);
+};
+
 const NewService = () => {
   const [datosPublicacion, setDatosPublicacion] = useState(
     datosInicialesPublicacion
@@ -56,7 +74,7 @@ const NewService = () => {
         frequency: frecuenciaElegida,
         classType: tipoClaseElegida,
         aboutMe: datosPublicacion.sobreMi,
-        price: parseFloat(datosPublicacion.precio)
+        price: unmaskPrecio(datosPublicacion.precio)
       }
     };
     try {
@@ -110,15 +128,27 @@ const NewService = () => {
                 <NombreTutor>{loggedUser?.name}</NombreTutor>
                 <ContainerPrecioTutor>
                   <PrecioTutor
-                    value={`$${parseFloat(datosPublicacion.precio).toFixed(2)}`}
+                    value={datosPublicacion.precio}
                     placeholder="Precio"
+                    onBlur={(e) => {
+                      setDatosPublicacion((prevDatos) => ({
+                        ...prevDatos,
+                        precio: maskPrecio(e.target.value)
+                      }));
+                    }}
+                    onFocus={(e) => {
+                      setDatosPublicacion((prevDatos) => ({
+                        ...prevDatos,
+                        precio: unmaskPrecio(e.target.value)
+                      }));
+                    }}
                     onChangeHandler={(e) => {
-                      if (isNaN(e.target.value.substring(1))) {
+                      if (isNaN(e.target.value)) {
                         return;
                       }
                       setDatosPublicacion((prevDatos) => ({
                         ...prevDatos,
-                        precio: e.target.value.substring(1)
+                        precio: e.target.value
                       }));
                     }}
                   />
@@ -182,7 +212,7 @@ const NewService = () => {
           </AcercaDe>
 
           <GuardarCambiosButtonContainer>
-            <PrimaryButton onClick={sendService}>
+            <PrimaryButton onClick={sendService} type="button">
               Publicar Servicio
             </PrimaryButton>
           </GuardarCambiosButtonContainer>
