@@ -108,10 +108,10 @@ const ServiceDetail = () => {
     useState(false);
 
   useEffect(() => {
-    const { name, comment, rate } = nuevoComentario;
+    const { name, comment, stars } = nuevoComentario;
 
     const disableSubmitNuevoComentario =
-      name.length === 0 || comment.length === 0 || rate === 0;
+      name.length === 0 || comment.length === 0 || stars === 0;
 
     setIsSubmitNuevoComentarioDisabled(disableSubmitNuevoComentario);
   }, [nuevoComentario]);
@@ -224,6 +224,50 @@ const ServiceDetail = () => {
     });
   };
 
+  const comentar = async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:4000/api/service/addcomment`,
+        {
+          service: { _id: serviceId },
+          comment: nuevoComentario
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+          }
+        }
+      );
+
+      if (response.data.status === 200) {
+      }
+    } catch (e) {}
+  };
+
+  const solicitar = async () => {
+    try {
+      let body = {
+        serviceId: serviceId,
+        hireReq: solicitudContratacion
+      };
+      console.log(body);
+      const response = await axios.post(
+        `http://localhost:4000/api/service/sethiringrequest`,
+        body,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+          }
+        }
+      );
+
+      if (response.data.status === 200) {
+      }
+    } catch (e) {}
+  };
+
   return (
     <Wrapper>
       <DescripcionContainer>
@@ -294,7 +338,7 @@ const ServiceDetail = () => {
               );
             })}
             <CommentsHR />
-            <form onSubmit={handleMakeNewComment}>
+            <form onSubmit={comentar}>
               <CommentsLabel>Realizar comentario</CommentsLabel>
               <Comentario>
                 <div>
@@ -309,7 +353,7 @@ const ServiceDetail = () => {
                         onChangeHandler={(newRate) =>
                           setNuevoComentario((prevCommentState) => ({
                             ...prevCommentState,
-                            rate: newRate
+                            stars: newRate
                           }))
                         }
                       />
