@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Input from "components/Input";
+import Dropdown from "components/Dropdown";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -73,6 +74,21 @@ export const NombrePrecioContainer = styled.div`
   }
 `;
 
+export const ControlContainer = styled.div`
+  margin-top: 15px;
+  text-align: right;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+`;
+
+export const OpcionDropdown = styled(Dropdown)`
+  width: 320px;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`;
+
 export const NombreTutor = styled.p`
   font-size: 24px;
   font-weight: bold;
@@ -100,6 +116,9 @@ export const Rate = styled.div`
   margin-top: auto;
   display: flex;
   color: black;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
 `;
 
 export const StarImg = styled.img`

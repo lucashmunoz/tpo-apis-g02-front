@@ -17,7 +17,6 @@ import {
   NombrePrecioContainer,
   NombreTutor,
   PrecioTutor,
-  TitulosTutor,
   Rate,
   StarImg,
   AcercaDe,
@@ -172,10 +171,30 @@ const ServiceDetail = () => {
     }`;
   };
 
-  const handleMakeNewComment = (e) => {
+  const handleMakeNewComment = async (e) => {
     e.preventDefault();
 
-    // Llamar a la api de publiacion de nuevo comentario para el id de servicio
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/service/addcomment",
+        {
+          service: { _id: serviceDetail.service._id },
+          comment: {
+            name: nuevoComentario.name,
+            comment: nuevoComentario.comment
+          }
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+          }
+        }
+      );
+
+      if (response.data.status === 200) {
+      }
+    } catch (e) {}
 
     setNuevoComentario({
       name: "",
@@ -187,8 +206,6 @@ const ServiceDetail = () => {
 
   const handleMakeNewSolicitud = async (e) => {
     e.preventDefault();
-
-    // Llamar a la api de solicitud de nueva contratacion
 
     try {
       const response = await axios.post(
@@ -226,7 +243,7 @@ const ServiceDetail = () => {
 
   const comentar = async () => {
     try {
-      const response = await axios.post(
+      await axios.post(
         `http://localhost:4000/api/service/addcomment`,
         {
           service: { _id: serviceId },
@@ -239,32 +256,6 @@ const ServiceDetail = () => {
           }
         }
       );
-
-      if (response.data.status === 200) {
-      }
-    } catch (e) {}
-  };
-
-  const solicitar = async () => {
-    try {
-      let body = {
-        serviceId: serviceId,
-        hireReq: solicitudContratacion
-      };
-      console.log(body);
-      const response = await axios.post(
-        `http://localhost:4000/api/service/sethiringrequest`,
-        body,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*"
-          }
-        }
-      );
-
-      if (response.data.status === 200) {
-      }
     } catch (e) {}
   };
 
@@ -291,7 +282,6 @@ const ServiceDetail = () => {
                   ${parseFloat(serviceDetail.service.price).toFixed(2)}
                 </PrecioTutor>
               </NombrePrecioContainer>
-              {/* <TitulosTutor>{serviceDetail?.mentor?.title}</TitulosTutor> */}
               <FrequencyRateContainer>
                 <Rate>
                   <StarImg src={CheckedStar} />
@@ -387,6 +377,7 @@ const ServiceDetail = () => {
                   <SubmitCommentButtonContainer>
                     <SubmitCommentButton
                       isDisabled={isSubmitNuevoComentarioDisabled}
+                      onClick={handleMakeNewComment}
                     >
                       Comentar
                     </SubmitCommentButton>

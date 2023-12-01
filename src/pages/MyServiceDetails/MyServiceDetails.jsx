@@ -14,8 +14,9 @@ import {
   CommentsContainer,
   CommentsHR,
   CommentsLabel,
+  ControlContainer,
+  OpcionDropdown,
   ContainerPrecioTutor,
-  ContainerTitulosTutor,
   ContainerTituloServicio,
   DescripcionContainer,
   DescriptionContent,
@@ -29,7 +30,6 @@ import {
   Rate,
   StarImg,
   TituloServicio,
-  TitulosTutor,
   UserComment,
   UserCommentRateAndName,
   UserCommentAccions,
@@ -56,10 +56,27 @@ const MyServiceDetails = () => {
     aboutMe: ""
   });
 
+  const [opcionesCategorias, setOpcionesCategorias] = useState([]);
+  const [opcionesTipoClase, setOpcionesTipoClase] = useState([]);
+  const [opcionesFrecuencias, setOpcionesFrecuencias] = useState([]);
+
   // Obtiene el serviceId desde la url
   const { id: serviceId } = useParams();
 
   const [loggedUser] = useContext(UserContext);
+
+  useEffect(() => {
+    const fetchFilters = async () => {
+      const response = await fetch("mocks/filtervalues.json");
+      const filtersValues = await response.json();
+
+      setOpcionesCategorias(filtersValues.categories);
+      setOpcionesTipoClase(filtersValues.classTypes);
+      setOpcionesFrecuencias(filtersValues.frequencies);
+    };
+
+    fetchFilters();
+  }, []);
 
   const fetchService = async () => {
     try {
@@ -88,8 +105,6 @@ const MyServiceDetails = () => {
     fetchService(serviceId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [serviceId]);
-
-  console.log(datosPublicacion);
 
   const handleGuardarCambios = async (e) => {
     e.preventDefault();
@@ -136,6 +151,37 @@ const MyServiceDetails = () => {
     return `${arrNombreCompleto[0][0]}${
       arrNombreCompleto[arrNombreCompleto.length - 1][0]
     }`;
+  };
+
+  const changeCommentStatus = async (commentId, nuevoEstado) => {
+    try {
+      await axios.post(
+        `http://localhost:4000/api/service/changecommentstatus`,
+        {
+          serviceId: datosPublicacion._id,
+          commentId: commentId,
+          commentStatus: nuevoEstado
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "x-access-token": loggedUser.token
+          }
+        }
+      );
+    } catch (e) {}
+
+    await fetchService();
+  };
+
+  const handleAceptarComentario = (id) => {
+    console.log({ id });
+    changeCommentStatus(id, 1);
+  };
+
+  const handleRechazarComentario = (id) => {
+    changeCommentStatus(id, 2);
   };
 
   return (
@@ -190,23 +236,56 @@ const MyServiceDetails = () => {
                   />
                 </ContainerPrecioTutor>
               </NombrePrecioContainer>
-              {/*
-                <ContainerTitulosTutor>
-                <TitulosTutor
-                  value={datosPublicacion.tituloTutor}
+
+              <ControlContainer>
+                <OpcionDropdown
+                  id="dropdown-categorias"
+                  labelText="Categoría"
+                  options={opcionesCategorias}
+                  placeholderOptionLabel="Categoría"
                   onChangeHandler={(e) =>
                     setDatosPublicacion((prevDatos) => ({
                       ...prevDatos,
-                      tituloTutor: e.target.value
+                      category: e.target.value
                     }))
                   }
                 />
-              </ContainerTitulosTutor>
-                */}
+              </ControlContainer>
+              <ControlContainer>
+                <OpcionDropdown
+                  id="dropdown-tipo-clase"
+                  labelText="Tipo de Clase"
+                  options={opcionesTipoClase}
+                  placeholderOptionLabel="Tipo de Clase"
+                  onChangeHandler={(e) =>
+                    setDatosPublicacion((prevDatos) => ({
+                      ...prevDatos,
+                      classType: e.target.value
+                    }))
+                  }
+                />
+              </ControlContainer>
+              <ControlContainer>
+                <OpcionDropdown
+                  id="dropdown-frecuencias"
+                  labelText="Frecuencia"
+                  options={opcionesFrecuencias}
+                  placeholderOptionLabel="Frecuencia"
+                  onChangeHandler={(e) =>
+                    setDatosPublicacion((prevDatos) => ({
+                      ...prevDatos,
+                      frequency: e.target.value
+                    }))
+                  }
+                />
+              </ControlContainer>
 
               <Rate>
                 <StarImg src={CheckedStar} />
-                {parseFloat(4.2).toFixed(2)}
+                {parseFloat(datosPublicacion.rate) >= 1 &&
+                parseFloat(datosPublicacion.rate <= 5)
+                  ? parseFloat(datosPublicacion.rate)
+                  : "Sin calificación"}
               </Rate>
             </ProfileDescription>
           </PerfilTutor>
@@ -245,25 +324,31 @@ const MyServiceDetails = () => {
             <CommentsHR />
             {datosPublicacion.comments.map((comentario) => {
               const {
-                id,
+                _id,
                 name,
                 comment: commentText,
                 rate: commentRate
               } = comentario;
               return (
-                <Comentario key={id}>
+                <Comentario key={_id}>
                   <UserCommentLogoContainer>
                     <UserCommentLogo>
                       {getCommentInitials(name)}
                     </UserCommentLogo>
                     <UserCommentAccions>
-                      <button>
+                      <button
+                        onClick={() => handleAceptarComentario(_id)}
+                        type="button"
+                      >
                         <CommentActionImg
                           src={CheckSquare}
                           alt="Aceptar Comentario"
                         />
                       </button>
-                      <button>
+                      <button
+                        onClick={() => handleRechazarComentario(_id)}
+                        type="button"
+                      >
                         <CommentActionImg
                           src={CrossSquare}
                           alt="Rechazar Comentario"

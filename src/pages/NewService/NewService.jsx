@@ -27,7 +27,7 @@ import { maskPrecio, unmaskPrecio } from "helpers/helpers";
 const datosInicialesPublicacion = {
   nombrePublicacion: "",
   tituloTutor: "",
-  precio: "0",
+  precio: "$0.00",
   sobreElServicio: "",
   sobreMi: ""
 };

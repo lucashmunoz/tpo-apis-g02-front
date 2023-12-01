@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import Input from "components/Input";
 import axios from "axios";
 import UserContext from "user-context";
-import IconImage from "../../assets/icons/UserSampleIcon.png";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "components/PrimaryButton";
 import {
@@ -64,6 +63,7 @@ const MyProfile = () => {
       } catch (e) {}
     };
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const validatePassword = (clave) => {
