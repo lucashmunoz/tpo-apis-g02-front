@@ -323,12 +323,7 @@ const MyServiceDetails = () => {
             <CommentsLabel>Comentarios de clientes pasados</CommentsLabel>
             <CommentsHR />
             {datosPublicacion.comments.map((comentario) => {
-              const {
-                _id,
-                name,
-                comment: commentText,
-                rate: commentRate
-              } = comentario;
+              const { _id, name, comment: commentText, stars } = comentario;
               return (
                 <Comentario key={_id}>
                   <UserCommentLogoContainer>
@@ -360,7 +355,7 @@ const MyServiceDetails = () => {
                     <UserCommentRateAndName>
                       <UserCommentRate>
                         <StarImg src={CheckedStar} />
-                        {parseFloat(commentRate).toFixed(2)}
+                        {parseFloat(stars).toFixed(2)}
                       </UserCommentRate>
                       <UserCommentName>{name}</UserCommentName>
                     </UserCommentRateAndName>
