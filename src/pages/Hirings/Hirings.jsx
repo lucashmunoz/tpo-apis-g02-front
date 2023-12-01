@@ -36,7 +36,16 @@ const Hirings = () => {
       );
 
       if (response.data.status === 200) {
-        setSolicitudes(response.data.hiringRequests[0]);
+        const hiringReq = [];
+        for (let i = 0; i < response.data.hiringRequests.length; i++) {
+          let lista = response.data.hiringRequests[i];
+          console.log(lista);
+          for (let j = 0; j < lista.length; j++) {
+            console.log(lista[j]);
+            hiringReq.push(lista[j]);
+          }
+        }
+        setSolicitudes(hiringReq);
       }
     } catch (e) {}
   };
@@ -65,7 +74,16 @@ const Hirings = () => {
 
       if (response.data.status === 200) {
         // setServicios(response.data.services);
-        setSolicitudes(response.data.hiringRequests[0]);
+        const hiringReq = [];
+        for (let i = 0; i < response.data.hiringRequests.length; i++) {
+          let lista = response.data.hiringRequests[i];
+          console.log(lista);
+          for (let j = 0; j < lista.length; j++) {
+            console.log(lista[j]);
+            hiringReq.push(lista[j]);
+          }
+        }
+        setSolicitudes(hiringReq);
       }
     } catch (e) {}
 
