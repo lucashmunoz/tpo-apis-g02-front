@@ -100,7 +100,7 @@ const Login = () => {
         navigate(`/`);
       }
     } catch (e) {
-      setErrorEmail(e.message);
+      setPasswordErrorMessage("Email o contraseña incorrecta");
     }
   };
 
