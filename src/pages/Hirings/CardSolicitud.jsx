@@ -64,8 +64,6 @@ const CardSolicitud = ({
 }) => {
   const { _id, name, phoneNumber, email, contactHours, comment } = solicitud;
 
-  console.log(solicitud);
-
   const hideCard = () => state === "FINALIZADA" || state === "CANCELADA";
 
   return (
