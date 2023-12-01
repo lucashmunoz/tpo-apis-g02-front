@@ -181,7 +181,8 @@ const ServiceDetail = () => {
           service: { _id: serviceDetail.service._id },
           comment: {
             name: nuevoComentario.name,
-            comment: nuevoComentario.comment
+            comment: nuevoComentario.comment,
+            stars: nuevoComentario.stars
           }
         },
         {
@@ -200,7 +201,7 @@ const ServiceDetail = () => {
       name: "",
       commentDate: Date.now(),
       comment: "",
-      rate: 0
+      stars: 0
     });
   };
 
