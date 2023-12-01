@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Input from "components/Input";
 import axios from "axios";
+import UserContext from "user-context";
 import IconImage from "../../assets/icons/UserSampleIcon.png";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "components/PrimaryButton";
@@ -9,7 +10,6 @@ import {
   TextFieldsContainer,
   Wrapper,
   ErrorShow,
-  Experiencia,
   FormRegister,
   Image,
   TextFieldContainer
@@ -21,8 +21,6 @@ const Register = () => {
   const [registerPassword, setRegisterPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [registerTitle, setRegisterTitle] = useState("");
-  const [registerExperience, setRegisterExperience] = useState("");
   const [profilePicture, setProfilePicture] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
@@ -30,28 +28,20 @@ const Register = () => {
     firstNameError: "",
     lastNameError: ""
   });
-  const [users, setUsers] = useState([]);
-
-  console.log(profilePicture);
 
   const [disableRegisterButton, setDisableRegisterButton] = useState(true);
+
+  const [, setLoggedUser] = useContext(UserContext);
 
   useEffect(() => {
     const shouldDisableRegisterButton =
       registerMail.length === 0 ||
       registerPassword.length === 0 ||
       firstName.length === 0 ||
-      lastName.length === 0 ||
-      registerTitle.length === 0;
+      lastName.length === 0;
 
     setDisableRegisterButton(shouldDisableRegisterButton);
-  }, [
-    lastName.length,
-    registerMail,
-    firstName.length,
-    registerPassword,
-    registerTitle.length
-  ]);
+  }, [lastName.length, registerMail, firstName.length, registerPassword]);
 
   const validateEmail = (email) => {
     const emailRegex = new RegExp(/^([A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4})$/i);
@@ -93,6 +83,46 @@ const Register = () => {
     setRegisterPassword(clave);
   };
 
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/mentors/login",
+        {
+          email: registerMail,
+          password: registerPassword
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+          }
+        }
+      );
+
+      if (response.status === 200) {
+        window.sessionStorage.setItem(
+          "loggedUser",
+          JSON.stringify(response.data.loginmentor)
+        );
+
+        setLoggedUser({
+          _id: response.data.loginmentor.Mentor._id,
+          password: response.data.loginmentor.Mentor.password,
+          name: response.data.loginmentor.Mentor.name,
+          email: response.data.loginmentor.Mentor.email,
+          lastName: response.data.loginmentor.Mentor.lastName,
+          title: response.data.loginmentor.Mentor.title,
+          isUserLoggedIn: true,
+          token: response.data.loginmentor.token,
+          profilePhoto: response.data.loginmentor.Mentor.profilePhoto
+        });
+        navigate(`/`);
+      }
+    } catch (e) {
+      setErrorEmail(e.message);
+    }
+  };
+
   const registerUser = async (e) => {
     e.preventDefault();
 
@@ -106,25 +136,13 @@ const Register = () => {
       return;
     }
 
-    if (registerTitle.length === 0) {
-      setPasswordErrorMessage("Ingrese su título como tutor.");
-      return;
-    }
-
-    /*
-    if (registerExperience.length === 0) {
-      setPasswordErrorMessage("Ingrese una breve experiencia como tutor.");
-      return;
-    }
-*/
-
     const formData = new FormData();
     formData.append("name", firstName);
     formData.append("lastName", lastName);
     formData.append("email", registerMail);
     formData.append("password", registerPassword);
-    formData.append("title", registerTitle);
-    formData.append("workExperience", registerExperience);
+    formData.append("title", "");
+    formData.append("workExperience", "");
     formData.append("profilePhoto", profilePicture);
 
     try {
@@ -137,11 +155,8 @@ const Register = () => {
           }
         })
         .then((r) => {
-          console.log(r);
+          handleLogin();
           navigate(`/`);
-        })
-        .catch((e) => {
-          console.log(e);
         });
     } catch (e) {}
   };
@@ -195,15 +210,6 @@ const Register = () => {
             <ErrorShow>{passwordErrorMessage}</ErrorShow>
           </TextFieldContainer>
           <TextFieldContainer>
-            <Input
-              labelText="Titulo"
-              placeholder="Ingrese su título como tutor"
-              onChangeHandler={(e) => {
-                setRegisterTitle(e.target.value);
-              }}
-            />
-          </TextFieldContainer>
-          <TextFieldContainer>
             <label htmlFor="registro-experiencia">Foto de perfil</label>
             <input
               type="file"
@@ -212,7 +218,6 @@ const Register = () => {
               accept=".jpg, .jpeg, .png"
               encType="multipart/form-data"
               onChange={(e) => {
-                console.log(e.target.files[0]);
                 setProfilePicture(e.target.files[0]);
               }}
             />

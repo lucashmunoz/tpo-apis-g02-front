@@ -36,7 +36,7 @@ const Login = () => {
     setDisableLoginButton(disableLoginButton);
   }, [loginEmail, loginPassword, errorEmail, passwordErrorMessage]);
 
-  const [userLogged, setLoggedUser] = useContext(UserContext);
+  const [, setLoggedUser] = useContext(UserContext);
 
   const validateEmail = (email) => {
     const emailRegex = new RegExp(/^([A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4})$/i);
@@ -64,9 +64,9 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    let response;
+
     try {
-      response = await axios.post(
+      const response = await axios.post(
         "http://localhost:4000/api/mentors/login",
         {
           email: loginEmail,
@@ -80,7 +80,6 @@ const Login = () => {
         }
       );
 
-      console.log(response.data.loginmentor);
       if (response.status === 200) {
         window.sessionStorage.setItem(
           "loggedUser",
@@ -98,19 +97,16 @@ const Login = () => {
           token: response.data.loginmentor.token,
           profilePhoto: response.data.loginmentor.Mentor.profilePhoto
         });
-        console.log(userLogged);
         navigate(`/`);
       }
     } catch (e) {
-      console.log(e);
       setErrorEmail(e.message);
     }
   };
 
   const handleRecuperarClave = async () => {
-    let response;
     try {
-      response = await axios.post(
+      await axios.post(
         "http://localhost:4000/api/mentors/forgottenpass",
         {
           mail: loginEmail
@@ -123,10 +119,8 @@ const Login = () => {
         }
       );
     } catch (e) {
-      console.log(e);
       setErrorEmail(e.message);
     }
-    console.log(response);
 
     setErrorEmail("Se envio un mail para recuperar la cuenta.");
   };

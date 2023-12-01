@@ -132,12 +132,8 @@ const ServiceDetail = () => {
   }, [solicitudContratacion]);
 
   const fetchServices = async (serviceId) => {
-    // const response = await fetch("servicesdetails.json");
-    // const { servicesdetail } = await response.json();
-    let response;
-    let service;
     try {
-      response = await axios.get(
+      const response = await axios.get(
         `http://localhost:4000/api/service/getoneservice/${serviceId}`,
         {
           headers: {
@@ -148,14 +144,9 @@ const ServiceDetail = () => {
       );
 
       if (response.data.status === 200) {
-        service = response.data.service;
+        setServiceDetail(response.data.service);
       }
     } catch (e) {}
-
-    console.log(response);
-    console.log(service);
-
-    setServiceDetail(service);
   };
 
   // Obtiene los servicios
@@ -183,10 +174,6 @@ const ServiceDetail = () => {
     e.preventDefault();
 
     // Llamar a la api de publiacion de nuevo comentario para el id de servicio
-    console.log(
-      "Nuevo comentario enviado y en espera de revision!",
-      nuevoComentario
-    );
 
     setNuevoComentario({
       name: "",
@@ -200,10 +187,6 @@ const ServiceDetail = () => {
     e.preventDefault();
 
     // Llamar a la api de solicitud de nueva contratacion
-    console.log(
-      "Nuevo solicitud enviada y en espera de aceptación!",
-      nuevoComentario
-    );
 
     setNewsolicitudContratacion({
       name: "",

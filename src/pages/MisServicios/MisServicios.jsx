@@ -30,7 +30,7 @@ const ServicesContainer = styled.div`
 const MisServicios = () => {
   const [servicios, setServicios] = useState([]);
 
-  const [loggedUser, setLoggedUser] = useContext(UserContext);
+  const [loggedUser] = useContext(UserContext);
 
   const navigate = useNavigate();
   const goToServiceDetail = (serviceId) => navigate(`/myservices/${serviceId}`);
@@ -39,11 +39,8 @@ const MisServicios = () => {
    * Obtiene los servicios totales ofrecidos
    */
   const fetchServices = async () => {
-    let response;
-    let services;
-    console.log(loggedUser);
     try {
-      response = await axios.post(
+      const response = await axios.post(
         "http://localhost:4000/api/service/getmyservices",
         {
           mentorId: loggedUser._id
@@ -57,19 +54,18 @@ const MisServicios = () => {
         }
       );
 
-      console.log(response);
-
       if (response.data.status === 200) {
-        services = response.data.services;
+        setServicios(response.data.services);
       }
-    } catch (e) {}
-
-    setServicios(services);
+    } catch (e) {
+      setServicios([]);
+    }
   };
 
   // Llamamos a fetchServices en el mount del componente
   useEffect(() => {
     fetchServices();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getFrequencyLabel = (frequencyValue) => {
@@ -87,7 +83,7 @@ const MisServicios = () => {
 
   const eliminarServicio = async (id) => {
     try {
-      let response = await axios.delete(
+      const response = await axios.delete(
         `http://localhost:4000/api/service/${id}`,
         {
           headers: {
@@ -97,8 +93,7 @@ const MisServicios = () => {
           }
         }
       );
-      if (response?.status == 200) {
-        console.log(response);
+      if (response?.status === 200) {
         navigate("/myservices");
       }
     } catch (e) {}
@@ -125,7 +120,10 @@ const MisServicios = () => {
                 rate={rate}
                 nombreProfesor={loggedUser.name}
                 onClickHandler={() => goToServiceDetail(_id)}
-                eliminarServicio={() => eliminarServicio(_id)}
+                eliminarServicio={async () => {
+                  await eliminarServicio(_id);
+                  await fetchServices();
+                }}
               />
             );
           })

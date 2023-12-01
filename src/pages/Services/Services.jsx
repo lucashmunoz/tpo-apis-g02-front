@@ -43,7 +43,6 @@ const ServicesContainer = styled.div`
 
 const Services = () => {
   const [servicios, setServicios] = useState([]);
-  const [serviciosFiltrados, setServiciosFiltrados] = useState([]);
 
   const [filters, setFilters] = useState({
     category: "",
@@ -56,17 +55,9 @@ const Services = () => {
   const navigate = useNavigate();
   const goToServiceDetail = (serviceId) => navigate(`/service/${serviceId}`);
 
-  // Llamamos a fetchServices en el mount del componente
-  useEffect(() => {
-    fetchServices();
-  }, []);
-
   const fetchServices = async () => {
-    let response;
-    let services;
-    console.log(filters);
     try {
-      response = await axios.post(
+      const response = await axios.post(
         "http://localhost:4000/api/service/getAvailableServices",
         {
           filters: filters
@@ -79,25 +70,25 @@ const Services = () => {
         }
       );
 
-      console.log(response);
-
       if (response.data.status === 200) {
-        services = response.data.services;
+        setServicios(response.data.services);
       }
-    } catch (e) {}
-
-    setServicios(services);
-    setServiciosFiltrados(services);
+    } catch (e) {
+      setServicios([]);
+    }
   };
 
-  // Llamamos a fetchServices en el mount del componente y cuando cambian los filtros
+  // Llamamos a fetchServices en el mount del componente
   useEffect(() => {
-    const fetchServicesByFilters = () => {
-      return servicios;
-    };
-
-    setServiciosFiltrados(fetchServicesByFilters());
-  }, [filters, servicios]);
+    fetchServices();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    filters.category,
+    filters.frequency,
+    filters.classType,
+    filters.rate,
+    filters.subject
+  ]);
 
   const getFrequencyLabel = (frequencyValue) => {
     switch (frequencyValue) {
@@ -118,7 +109,7 @@ const Services = () => {
         <Filtros setFilters={setFilters} filters={filters} />
       </FiltersContainer>
       <ServicesContainer>
-        {serviciosFiltrados.map((servicio) => {
+        {servicios.map((servicio) => {
           const {
             _id,
             mentorProfilePhoto,
