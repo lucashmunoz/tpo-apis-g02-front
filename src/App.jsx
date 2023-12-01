@@ -15,6 +15,7 @@ import { useState } from "react";
 import MyServiceDetails from "pages/MyServiceDetails";
 import NewService from "pages/NewService";
 import BackToTop from "components/BackToTop";
+import MyProfile from "pages/MyProfile";
 
 const Main = styled.main`
   flex: 1;
@@ -37,6 +38,7 @@ function App() {
             <Route path="/myservices" element={<MisServicios />} />
             <Route path="/myservices/:id" element={<MyServiceDetails />} />
             <Route path="/newservice" element={<NewService />} />
+            <Route path="/myprofile" element={<MyProfile />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Home />} />

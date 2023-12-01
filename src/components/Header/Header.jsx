@@ -45,6 +45,11 @@ const Header = () => {
     navigate(`/about`);
   };
 
+  const goToMyProfile = () => {
+    setIsMobileMenuItemsVisible(false);
+    navigate("/myprofile");
+  };
+
   const goToServicios = () => {
     setIsMobileMenuItemsVisible(false);
     navigate("/services");
@@ -136,6 +141,7 @@ const Header = () => {
       <LoggedUserMenuContainer $isUserMenuVisible={isLoggedUserMenuVisible}>
         <UserMenuButton onClick={goToHirings}>Contrataciones</UserMenuButton>
         <UserMenuButton onClick={goToMyServices}>Mis Cursos</UserMenuButton>
+        <UserMenuButton onClick={goToMyProfile}>Mis Datos</UserMenuButton>
         <UserMenuButton onClick={handleCerrarSesion}>
           Cerrar sesión
         </UserMenuButton>

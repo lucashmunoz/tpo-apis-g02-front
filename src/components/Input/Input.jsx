@@ -10,7 +10,8 @@ const Input = ({
   type = "text",
   profileImage = "false",
   onFocus,
-  onBlur
+  onBlur,
+  disabled
 }) => {
   if (profileImage === "false") {
     return (
@@ -30,6 +31,7 @@ const Input = ({
           value={value}
           onFocus={onFocus}
           onBlur={onBlur}
+          disabled={disabled}
         />
       </>
     );
@@ -43,6 +45,7 @@ const Input = ({
       value={value}
       onFocus={onFocus}
       onBlur={onBlur}
+      disabled={disabled}
     />;
   }
 };
