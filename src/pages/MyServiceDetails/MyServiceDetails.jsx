@@ -382,7 +382,13 @@ const MyServiceDetails = () => {
             <CommentsLabel>Comentarios de clientes pasados</CommentsLabel>
             <CommentsHR />
             {datosPublicacion.comments.map((comentario) => {
-              const { _id, name, comment: commentText, stars } = comentario;
+              const {
+                _id,
+                name,
+                comment: commentText,
+                stars,
+                status
+              } = comentario;
               return (
                 <Comentario key={_id}>
                   <UserCommentLogoContainer>
@@ -390,24 +396,29 @@ const MyServiceDetails = () => {
                       {getCommentInitials(name)}
                     </UserCommentLogo>
                     <UserCommentAccions>
-                      <button
-                        onClick={() => handleAceptarComentario(_id)}
-                        type="button"
-                      >
-                        <CommentActionImg
-                          src={CheckSquare}
-                          alt="Aceptar Comentario"
-                        />
-                      </button>
-                      <button
-                        onClick={() => handleRechazarComentario(_id)}
-                        type="button"
-                      >
-                        <CommentActionImg
-                          src={CrossSquare}
-                          alt="Rechazar Comentario"
-                        />
-                      </button>
+                      {(status === 0 || status === 2) && (
+                        <button
+                          onClick={() => handleAceptarComentario(_id)}
+                          type="button"
+                        >
+                          <CommentActionImg
+                            src={CheckSquare}
+                            alt="Aceptar Comentario"
+                          />
+                        </button>
+                      )}
+
+                      {(status === 0 || status === 1) && (
+                        <button
+                          onClick={() => handleRechazarComentario(_id)}
+                          type="button"
+                        >
+                          <CommentActionImg
+                            src={CrossSquare}
+                            alt="Rechazar Comentario"
+                          />
+                        </button>
+                      )}
                     </UserCommentAccions>
                   </UserCommentLogoContainer>
                   <UserComment>

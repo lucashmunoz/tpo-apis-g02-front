@@ -288,7 +288,7 @@ const ServiceDetail = () => {
                   <StarImg src={CheckedStar} />
                   {serviceDetail.service.rate === 0
                     ? "Sin Calificación"
-                    : serviceDetail.service.rate}
+                    : parseFloat(serviceDetail.service.rate).toFixed(2)}
                 </Rate>
 
                 <Frequency>{serviceDetail.service.frequency}</Frequency>
