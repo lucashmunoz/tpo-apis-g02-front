@@ -116,7 +116,7 @@ const Register = () => {
           token: response.data.loginmentor.token,
           profilePhoto: response.data.loginmentor.Mentor.profilePhoto
         });
-        navigate(`/`);
+        navigate("/");
       }
     } catch (e) {
       setErrorEmail(e.message);

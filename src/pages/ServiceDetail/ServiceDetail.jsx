@@ -285,7 +285,9 @@ const ServiceDetail = () => {
               <FrequencyRateContainer>
                 <Rate>
                   <StarImg src={CheckedStar} />
-                  {serviceDetail.rate}
+                  {serviceDetail.service.rate === 0
+                    ? "Sin Calificación"
+                    : serviceDetail.service.rate}
                 </Rate>
 
                 <Frequency>{serviceDetail.service.frequency}</Frequency>
