@@ -45,25 +45,15 @@ import { maskPrecio, unmaskPrecio } from "helpers/helpers";
 
 const MyServiceDetails = () => {
   const [datosPublicacion, setDatosPublicacion] = useState({
-    mentor: {
-      name: "Ignacio",
-      email: "igcesarani@gmail.com",
-      profilePhoto:
-        "https://res.cloudinary.com/dybrmprcg/image/upload/v1701183447/l5wlad1zptynhwjwcupk.jpg",
-      workExperience: "Trabaje como profesor de matematica y desarrollador web",
-      title: "Ing Informatico"
-    },
-    service: {
-      title: "",
-      summaryDescription: "s",
-      category: "",
-      price: "",
-      classType: "",
-      nombreProfesor: "",
-      hireRequest: [],
-      comments: [],
-      aboutMe: ""
-    }
+    title: "",
+    summaryDescription: "s",
+    category: "",
+    price: "",
+    classType: "",
+    nombreProfesor: "",
+    hireRequest: [],
+    comments: [],
+    aboutMe: ""
   });
 
   // Obtiene el serviceId desde la url
@@ -86,29 +76,51 @@ const MyServiceDetails = () => {
 
       if (response.status === 200) {
         setDatosPublicacion({
-          ...response.data
-        });
-
-        /*
-        setDatosPublicacion({
           ...response.data.service,
-          service: {
-            ...response.data.service.service,
-            price: maskPrecio(response.data.service.service.price)
-          }
+          price: maskPrecio(response.data.service.price)
         });
-        */
       }
     } catch (e) {}
   };
-
-  console.log(datosPublicacion);
 
   // Obtiene el servicio
   useEffect(() => {
     fetchService(serviceId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [serviceId]);
+
+  console.log(datosPublicacion);
+
+  const handleGuardarCambios = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.post(
+        `http://localhost:4000/api/service/updateservice`,
+        {
+          service: {
+            _id: datosPublicacion._id,
+            title: datosPublicacion.title,
+            summaryDescription: datosPublicacion.summaryDescription,
+            category: datosPublicacion.category,
+            frequency: datosPublicacion.frequency,
+            classType: datosPublicacion.classType,
+            aboutMe: datosPublicacion.aboutMe,
+            price: unmaskPrecio(datosPublicacion.price)
+          }
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "x-access-token": loggedUser.token
+          }
+        }
+      );
+    } catch (e) {}
+
+    await fetchService();
+  };
 
   const getCommentInitials = (nombreCompleto) => {
     const arrNombreCompleto = nombreCompleto.trim().split(" ");
@@ -132,47 +144,38 @@ const MyServiceDetails = () => {
         <DescriptionContent>
           <ContainerTituloServicio>
             <TituloServicio
-              value={datosPublicacion.service.title}
+              value={datosPublicacion.title}
               placeholder="Título servicio"
               onChangeHandler={(e) =>
                 setDatosPublicacion((prevDatos) => ({
                   ...prevDatos,
-                  service: {
-                    ...prevDatos.service,
-                    title: e.target.value
-                  }
+                  title: e.target.value
                 }))
               }
             />
           </ContainerTituloServicio>
           <PerfilTutor>
             <ProfileImg
-              src={datosPublicacion.mentor.profilePhoto}
+              src={loggedUser.profilePhoto}
               alt="foto de perfil del profesor"
             />
             <ProfileDescription>
               <NombrePrecioContainer>
-                <NombreTutor>Juan</NombreTutor>
+                <NombreTutor>{loggedUser.name}</NombreTutor>
                 <ContainerPrecioTutor>
                   <PrecioTutor
-                    value={datosPublicacion.service.price}
+                    value={datosPublicacion.price}
                     placeholder="Precio"
                     onBlur={(e) => {
                       setDatosPublicacion((prevDatos) => ({
                         ...prevDatos,
-                        service: {
-                          ...prevDatos.service,
-                          price: maskPrecio(e.target.value)
-                        }
+                        price: maskPrecio(e.target.value)
                       }));
                     }}
                     onFocus={(e) => {
                       setDatosPublicacion((prevDatos) => ({
                         ...prevDatos,
-                        service: {
-                          ...prevDatos.service,
-                          price: unmaskPrecio(e.target.value)
-                        }
+                        price: unmaskPrecio(e.target.value)
                       }));
                     }}
                     onChangeHandler={(e) => {
@@ -181,10 +184,7 @@ const MyServiceDetails = () => {
                       }
                       setDatosPublicacion((prevDatos) => ({
                         ...prevDatos,
-                        service: {
-                          ...prevDatos.service,
-                          price: e.target.value
-                        }
+                        price: e.target.value
                       }));
                     }}
                   />
@@ -213,11 +213,11 @@ const MyServiceDetails = () => {
           <AcercaDe>
             <AcercaDeTitle>Sobre el servicio</AcercaDeTitle>
             <AcercaDeContent
-              value={datosPublicacion.service.summaryDescription}
+              value={datosPublicacion.summaryDescription}
               onChange={(e) =>
                 setDatosPublicacion((prevDatos) => ({
                   ...prevDatos,
-                  sobreElServicio: e.target.value
+                  summaryDescription: e.target.value
                 }))
               }
             />
@@ -225,23 +225,25 @@ const MyServiceDetails = () => {
           <AcercaDe>
             <AcercaDeTitle>Sobre mí</AcercaDeTitle>
             <AcercaDeContent
-              value={datosPublicacion.service.aboutMe}
+              value={datosPublicacion.aboutMe}
               onChange={(e) =>
                 setDatosPublicacion((prevDatos) => ({
                   ...prevDatos,
-                  sobreMi: e.target.value
+                  aboutMe: e.target.value
                 }))
               }
             />
           </AcercaDe>
 
           <GuardarCambiosButtonContainer>
-            <PrimaryButton>Guardar Cambios</PrimaryButton>
+            <PrimaryButton type="button" onClick={handleGuardarCambios}>
+              Guardar Cambios
+            </PrimaryButton>
           </GuardarCambiosButtonContainer>
           <CommentsContainer>
             <CommentsLabel>Comentarios de clientes pasados</CommentsLabel>
             <CommentsHR />
-            {datosPublicacion.service.comments.map((comentario) => {
+            {datosPublicacion.comments.map((comentario) => {
               const {
                 id,
                 name,
