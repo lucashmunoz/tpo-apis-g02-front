@@ -36,8 +36,7 @@ const NewService = () => {
     datosInicialesPublicacion
   );
 
-  const [loggedUser, setLoggedUser] = useContext(UserContext);
-  console.log(loggedUser);
+  const [loggedUser] = useContext(UserContext);
 
   const [opcionesCategorias, setOpcionesCategorias] = useState([]);
   const [opcionesTipoClase, setOpcionesTipoClase] = useState([]);
@@ -48,32 +47,26 @@ const NewService = () => {
   const [frecuenciaElegida, setFrecuenciaElegida] = useState("");
 
   const sendService = () => {
-    let body = {
+    const body = {
       mentorId: loggedUser._id,
       service: {
         title: datosPublicacion.nombrePublicacion,
         summaryDescription: datosPublicacion.sobreElServicio,
         category: categoriaElegida,
-        frecuency: frecuenciaElegida,
+        frequency: frecuenciaElegida,
         classType: tipoClaseElegida,
         aboutMe: datosPublicacion.sobreMi,
         price: parseFloat(datosPublicacion.precio)
       }
     };
-    console.log(body);
     try {
-      let response = axios.post(
-        "http://localhost:4000/api/service/setservice",
-        body,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            "x-access-token": loggedUser.token
-          }
+      axios.post("http://localhost:4000/api/service/setservice", body, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "x-access-token": loggedUser.token
         }
-      );
-      console.log(response);
+      });
     } catch (e) {}
   };
 

@@ -56,9 +56,3 @@ export const ErrorShow = styled.p`
   color: red;
   display: block;
 `;
-
-export const Experiencia = styled.textarea`
-  height: 150px;
-  margin-top: 8px;
-  padding: 10px;
-`;
