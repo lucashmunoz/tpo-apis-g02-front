@@ -45,7 +45,7 @@ const ServiceCard = ({
           <Frequency>{frequency}</Frequency>
           <Rate>
             <StarImg src={CheckedStar} alt="calificacion" />
-            {parseFloat(rate).toFixed(2)}
+            {rate === 0 ? "Sin calificación" : parseFloat(rate).toFixed(2)}
           </Rate>
         </FrequencyRateContainer>
         <Price>${parseFloat(price).toFixed(2)}</Price>

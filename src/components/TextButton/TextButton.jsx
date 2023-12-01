@@ -7,9 +7,9 @@ const Button = styled.button`
   background: transparent;
 `;
 
-const TextButton = ({ children, onClick, type }) => {
+const TextButton = ({ className, children, onClick, type }) => {
   return (
-    <Button onClick={onClick} type={type}>
+    <Button className={className} onClick={onClick} type={type}>
       {children}
     </Button>
   );

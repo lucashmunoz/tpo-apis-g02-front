@@ -1,102 +1,101 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CardSolicitud from "./CardSolicitud";
+import UserContext from "user-context";
+import axios from "axios";
 
-const solicitudesAPI = [
-  {
-    id: "0",
-    name: "Juan",
-    phoneNumber: "1145857485",
-    email: "juan@uade.edu.ar",
-    contactHours: "MAÑANA",
-    message: "Estoy interesado en el curso, gracias.",
-    state: "SOLICITADA"
-  },
-  {
-    id: "1",
-    name: "Carla",
-    phoneNumber: "1145896585",
-    email: "carla@uade.edu.ar",
-    contactHours: "TARDE",
-    message: "Estoy interesada en el curso, gracias.",
-    state: "ACEPTADA"
-  },
-  {
-    id: "2",
-    name: "Esteban",
-    phoneNumber: "1145857444",
-    email: "esteban@uade.edu.ar",
-    contactHours: "NOCHE",
-    message: "Estoy interesado en el curso, gracias.",
-    state: "FINALIZADA"
-  },
-  {
-    id: "3",
-    name: "María",
-    phoneNumber: "1147852369",
-    email: "maria@uade.edu.ar",
-    contactHours: "TARDE",
-    message: "Estoy interesada en el curso, gracias.",
-    state: "CANCELADA"
+const translateEstadoSolicitud = (estadoNumerico) => {
+  switch (estadoNumerico) {
+    case 0:
+      return "SOLICITADA";
+    case 1:
+      return "ACEPTADA";
+    case 2:
+      return "FINALIZADA";
+    case 3:
+    default:
+      return "CANCELADA";
   }
-];
+};
 
 const Hirings = () => {
   const [solicitudes, setSolicitudes] = useState([]);
 
+  const [loggedUser] = useContext(UserContext);
+
+  const fetchHiringRequests = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:4000/api/service/getmyhiringrequests/${loggedUser._id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "x-access-token": loggedUser.token
+          }
+        }
+      );
+
+      if (response.data.status === 200) {
+        setSolicitudes(response.data.hiringRequests[0]);
+      }
+    } catch (e) {}
+  };
+
   useEffect(() => {
-    setSolicitudes(solicitudesAPI);
+    fetchHiringRequests();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const aceptarSolicitud = (id) => {
-    const updatedSolicitudes = solicitudes.map((solicitud) => {
-      if (solicitud.id !== id) {
-        return solicitud;
+  const cambiarEstadoSolicitud = async (id, nuevoEstado) => {
+    try {
+      const response = await axios.post(
+        `http://localhost:4000/api/service/changeHiringStatus`,
+        {
+          hiringReqId: id,
+          newStatus: nuevoEstado
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "x-access-token": loggedUser.token
+          }
+        }
+      );
+
+      if (response.data.status === 200) {
+        // setServicios(response.data.services);
+        setSolicitudes(response.data.hiringRequests[0]);
       }
-      return {
-        ...solicitud,
-        state: "ACEPTADA"
-      };
-    });
-    setSolicitudes(updatedSolicitudes);
+    } catch (e) {}
+
+    await fetchHiringRequests();
+  };
+
+  const aceptarSolicitud = async (id) => {
+    cambiarEstadoSolicitud(id, 1);
   };
 
   const finalizarSolicitud = (id) => {
-    const updatedSolicitudes = solicitudes.map((solicitud) => {
-      if (solicitud.id !== id) {
-        return solicitud;
-      }
-      return {
-        ...solicitud,
-        state: "FINALIZADA"
-      };
-    });
-    setSolicitudes(updatedSolicitudes);
+    cambiarEstadoSolicitud(id, 2);
   };
 
   const cancelarSolicitud = (id) => {
-    const updatedSolicitudes = solicitudes.map((solicitud) => {
-      if (solicitud.id !== id) {
-        return solicitud;
-      }
-      return {
-        ...solicitud,
-        state: "CANCELADA"
-      };
-    });
-    setSolicitudes(updatedSolicitudes);
+    cambiarEstadoSolicitud(id, 3);
   };
 
   return (
     <div>
       {solicitudes.map((solicitud) => {
-        const { id } = solicitud;
+        const { creationDate } = solicitud;
         return (
           <CardSolicitud
-            key={id}
+            key={creationDate}
             solicitud={solicitud}
             aceptarSolicitud={aceptarSolicitud}
             finalizarSolicitud={finalizarSolicitud}
             cancelarSolicitud={cancelarSolicitud}
+            state={translateEstadoSolicitud(solicitud.status)}
           />
         );
       })}
