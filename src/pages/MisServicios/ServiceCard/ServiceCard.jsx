@@ -52,6 +52,7 @@ const H3 = styled.h3`
   font-weight: bold;
   text-transform: uppercase;
   text-align: left;
+  width: 90%;
 `;
 
 const HRContainer = styled.div`
