@@ -1,17 +1,17 @@
 # <img src="src/assets/smlogo.png" width="28"/> SkillMentor
 
-![Screenshot](src/assets/SkillMentor.PNG)
+![Screenshot](src/assets/SkillMentor.jpg)
 
 ### Instalación
 
 - Clonar el repositorio:
   ```bash
-  git clone https://github.com/lucashmunoz/tpo-apis.git
+  git clone https://github.com/lucashmunoz/tpo-g02-front.git
   ```
-- Dirigirse al directorio tpo-apis
+- Dirigirse al directorio tpo-g02-front
 
   ```bash
-  cd tpo-apis
+  cd tpo-g02-front
   ```
 
 - Instalar dependencias
