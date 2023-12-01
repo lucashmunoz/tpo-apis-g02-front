@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import PrimaryButton from "components/PrimaryButton";
+import { useNavigate } from "react-router-dom";
 import UserContext from "user-context";
 import axios from "axios";
 import {
@@ -33,6 +34,8 @@ const datosInicialesPublicacion = {
 };
 
 const NewService = () => {
+  const navigate = useNavigate();
+
   const [datosPublicacion, setDatosPublicacion] = useState(
     datosInicialesPublicacion
   );
@@ -47,7 +50,7 @@ const NewService = () => {
   const [tipoClaseElegida, setTipoClaseElegida] = useState("");
   const [frecuenciaElegida, setFrecuenciaElegida] = useState("");
 
-  const sendService = () => {
+  const sendService = async () => {
     const body = {
       mentorId: loggedUser._id,
       service: {
@@ -61,7 +64,7 @@ const NewService = () => {
       }
     };
     try {
-      axios.post("http://localhost:4000/api/service/setservice", body, {
+      await axios.post("http://localhost:4000/api/service/setservice", body, {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
@@ -69,6 +72,8 @@ const NewService = () => {
         }
       });
     } catch (e) {}
+
+    navigate("/myservices");
   };
 
   // Llamamos a fetchFilters en el mount del componente
