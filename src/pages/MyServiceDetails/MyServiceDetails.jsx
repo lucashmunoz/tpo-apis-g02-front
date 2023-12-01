@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import UserContext from "user-context";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CheckedStar from "assets/icons/star-filled.svg";
 import PrimaryButton from "components/PrimaryButton";
 import CheckSquare from "assets/icons/check-square.svg";
@@ -44,6 +44,8 @@ import axios from "axios";
 import { maskPrecio, unmaskPrecio } from "helpers/helpers";
 
 const MyServiceDetails = () => {
+  const navigate = useNavigate();
+
   const [datosPublicacion, setDatosPublicacion] = useState({
     title: "",
     summaryDescription: "s",
@@ -56,9 +58,64 @@ const MyServiceDetails = () => {
     aboutMe: ""
   });
 
-  const [opcionesCategorias, setOpcionesCategorias] = useState([]);
-  const [opcionesTipoClase, setOpcionesTipoClase] = useState([]);
-  const [opcionesFrecuencias, setOpcionesFrecuencias] = useState([]);
+  const [opcionesCategorias, setOpcionesCategorias] = useState([
+    {
+      label: "Materias Escolares",
+      value: "ESCOLARES"
+    },
+    {
+      label: "Idiomas",
+      value: "LANGUAGE"
+    },
+    {
+      label: "Música",
+      value: "MUSIC"
+    },
+    {
+      label: "Multimedia",
+      value: "MULTIMEDIA"
+    },
+    {
+      label: "Diseño",
+      value: "DISENO"
+    },
+    {
+      label: "Programación",
+      value: "PROGRAMMING"
+    },
+    {
+      label: "Deportes",
+      value: "DEPORTES"
+    },
+    {
+      label: "Cocina",
+      value: "COCINA"
+    }
+  ]);
+  const [opcionesTipoClase, setOpcionesTipoClase] = useState([
+    {
+      label: "Individual",
+      value: "INDIVIDUAL"
+    },
+    {
+      label: "Grupal",
+      value: "GRUPAL"
+    }
+  ]);
+  const [opcionesFrecuencias, setOpcionesFrecuencias] = useState([
+    {
+      label: "Única",
+      value: "UNICA"
+    },
+    {
+      label: "Semanal",
+      value: "SEMANAL"
+    },
+    {
+      label: "Mensual",
+      value: "MENSUAL"
+    }
+  ]);
 
   // Obtiene el serviceId desde la url
   const { id: serviceId } = useParams();
@@ -132,6 +189,8 @@ const MyServiceDetails = () => {
           }
         }
       );
+
+      navigate("/myservices");
     } catch (e) {}
 
     await fetchService();
