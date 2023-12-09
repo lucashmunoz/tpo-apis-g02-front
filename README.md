@@ -1,4 +1,4 @@
-# <img src="src/assets/smlogo.png" width="28"/> SkillMentor
+# <img src="src/assets/smlogo.png" width="28"/> SkillMentor - FrontEnd
 
 ![Screenshot](src/assets/SkillMentor.jpg)
 
