@@ -2,6 +2,10 @@
 
 ![Screenshot](src/assets/SkillMentor.jpg)
 
+### Introducción
+
+Proyecto de FrontEnd de SkillMentor. Debe utilizarse en conjunto con https://github.com/lucashmunoz/tpo-apis-g02-back
+
 ### Instalación
 
 - Clonar el repositorio:
