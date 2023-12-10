@@ -318,9 +318,18 @@ export const Frequency = styled.div`
 `;
 
 export const DropdownHorarioContacto = styled(Dropdown)`
-  width: 100px;
+  width: 100%;
+  margin-left: 28px;
 `;
 
 export const SubmitSolicitudButtonContainer = styled.div`
   margin-top: 10px;
+`;
+
+export const ErrorShow = styled.p`
+  color: red;
+  display: block;
+  text-align: left;
+  margin-left: 102px;
+  font-size: 14px;
 `;
