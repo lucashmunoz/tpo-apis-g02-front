@@ -10,12 +10,12 @@ Proyecto de FrontEnd de SkillMentor. Debe utilizarse en conjunto con https://git
 
 - Clonar el repositorio:
   ```bash
-  git clonehttps://github.com/lucashmunoz/tpo-apis-g02-back.git
+  git clone https://github.com/lucashmunoz/tpo-apis-g02-front.git
   ```
-- Dirigirse al directorio tpo-apis-g02-back
+- Dirigirse al directorio tpo-apis-g02-front
 
   ```bash
-  cd tpo-apis-g02-back
+  cd tpo-apis-g02-front
   ```
 
 - Instalar dependencias
