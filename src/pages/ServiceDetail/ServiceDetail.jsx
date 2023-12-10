@@ -47,7 +47,8 @@ import {
   FrequencyRateContainer,
   Frequency,
   DropdownHorarioContacto,
-  SubmitSolicitudButtonContainer
+  SubmitSolicitudButtonContainer,
+  ErrorShow
 } from "./styles";
 
 const opcionesHorarioContacto = [
@@ -103,8 +104,24 @@ const ServiceDetail = () => {
     contactHours: "",
     email: ""
   });
+  const [errorEmail, setErrorEmail] = useState("");
   const [isSubmitSolicitudDisabled, setIsSubmitSolicitudDisabled] =
     useState(false);
+
+  const validateEmail = (email) => {
+    const emailRegex = new RegExp(/^([A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4})$/i);
+
+    if (!emailRegex.test(email)) {
+      setErrorEmail("El email debe seguir el formato email@ejemplo.com");
+    } else {
+      setErrorEmail("");
+    }
+
+    setNewsolicitudContratacion((prevSolicitudContratacion) => ({
+      ...prevSolicitudContratacion,
+      email
+    }));
+  };
 
   useEffect(() => {
     const { name, comment, stars } = nuevoComentario;
@@ -127,10 +144,11 @@ const ServiceDetail = () => {
       phoneNumber.length === 0 ||
       comment.length === 0 ||
       email.length === 0 ||
+      errorEmail.length !== 0 ||
       contactHours.length === 0;
 
     setIsSubmitSolicitudDisabled(disableSolicitarContratacion);
-  }, [solicitudContratacion]);
+  }, [solicitudContratacion, errorEmail]);
 
   const fetchService = async (serviceId) => {
     try {
@@ -447,14 +465,10 @@ const ServiceDetail = () => {
             id="email-alumno-solicitud"
             placeholder="Email"
             value={solicitudContratacion.email}
-            onChange={(e) =>
-              setNewsolicitudContratacion((prevSolicitudContratacion) => ({
-                ...prevSolicitudContratacion,
-                email: e.target.value
-              }))
-            }
+            onChange={(e) => validateEmail(e.target.value)}
           />
         </InputSimpleSolicitudAlumnoContainer>
+        <ErrorShow>{errorEmail}</ErrorShow>
         <InputSimpleSolicitudAlumnoContainer>
           <LabelSimpleSolicitudAlumno htmlFor="horario-contacto-alumno-solicitud">
             Horario de Contacto
@@ -462,7 +476,7 @@ const ServiceDetail = () => {
           <DropdownHorarioContacto
             id="dropdown-horario-contacto"
             options={opcionesHorarioContacto}
-            placeholderOptionLabel="Categoría"
+            placeholderOptionLabel="Contacto"
             value={solicitudContratacion.contactHours}
             onChangeHandler={(e) =>
               setNewsolicitudContratacion((prevSolicitudContratacion) => ({

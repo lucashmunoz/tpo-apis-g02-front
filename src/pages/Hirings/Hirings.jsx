@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import CardSolicitud from "./CardSolicitud";
 import UserContext from "user-context";
 import axios from "axios";
+import { SinContratacionesContainer, SinContratacionesText } from "./styles";
 
 const translateEstadoSolicitud = (estadoNumerico) => {
   switch (estadoNumerico) {
@@ -101,6 +102,16 @@ const Hirings = () => {
   const cancelarSolicitud = (id) => {
     cambiarEstadoSolicitud(id, 3);
   };
+
+  if (solicitudes.length === 0) {
+    return (
+      <SinContratacionesContainer>
+        <SinContratacionesText>
+          Sin contrataciones por el momento
+        </SinContratacionesText>
+      </SinContratacionesContainer>
+    );
+  }
 
   return (
     <div>

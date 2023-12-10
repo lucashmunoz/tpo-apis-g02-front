@@ -32,26 +32,31 @@ const Header = () => {
 
   const goToHirings = () => {
     setIsLoggedUserMenuVisible(false);
+    setIsMobileMenuItemsVisible(false);
     navigate(`/hirings`);
   };
 
   const goToMyServices = () => {
     setIsLoggedUserMenuVisible(false);
+    setIsMobileMenuItemsVisible(false);
     navigate("/myservices");
   };
 
   const goToSobreNosotros = () => {
     setIsMobileMenuItemsVisible(false);
+    setIsLoggedUserMenuVisible(false);
     navigate(`/about`);
   };
 
   const goToMyProfile = () => {
     setIsMobileMenuItemsVisible(false);
+    setIsLoggedUserMenuVisible(false);
     navigate("/myprofile");
   };
 
   const goToServicios = () => {
     setIsMobileMenuItemsVisible(false);
+    setIsLoggedUserMenuVisible(false);
     navigate("/services");
   };
 

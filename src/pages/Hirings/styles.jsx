@@ -139,3 +139,16 @@ export const Actions = styled.div`
     padding: 10px;
   }
 `;
+
+export const SinContratacionesContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+`;
+
+export const SinContratacionesText = styled.h2`
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+`;
