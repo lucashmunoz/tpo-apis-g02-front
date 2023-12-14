@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import CheckedStar from "assets/icons/star-filled.svg";
+import UserContext from "user-context";
 import StarRate from "components/StarRate";
 import PrimaryButton from "components/PrimaryButton";
 import sampleImage from "../../assets/icons/UserSampleIcon.png";
@@ -67,6 +68,8 @@ const opcionesHorarioContacto = [
 ];
 
 const ServiceDetail = () => {
+  const [loggedUser] = useContext(UserContext);
+
   const [serviceDetail, setServiceDetail] = useState({
     mentor: {
       name: "Ignacio",
@@ -321,7 +324,7 @@ const ServiceDetail = () => {
           </AcercaDe>
           <AcercaDe>
             <AcercaDeTitle>Sobre mí</AcercaDeTitle>
-            <AcercaDeContent>{serviceDetail?.service.aboutMe}</AcercaDeContent>
+            <AcercaDeContent>{`${loggedUser.title}\n${loggedUser.workExperience}`}</AcercaDeContent>
           </AcercaDe>
           <CommentsContainer>
             <CommentsLabel>Comentarios de clientes pasados</CommentsLabel>

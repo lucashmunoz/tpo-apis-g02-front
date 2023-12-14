@@ -188,14 +188,8 @@ const NewService = () => {
           <AcercaDe>
             <AcercaDeTitle>Sobre mí</AcercaDeTitle>
             <AcercaDeContent
-              placeholder="¡Comenta por qué eres la mejor elección!"
-              value={datosPublicacion.sobreMi}
-              onChange={(e) =>
-                setDatosPublicacion((prevDatos) => ({
-                  ...prevDatos,
-                  sobreMi: e.target.value
-                }))
-              }
+              disabled
+              value={`${loggedUser.title}\n${loggedUser.workExperience}`}
             />
           </AcercaDe>
 

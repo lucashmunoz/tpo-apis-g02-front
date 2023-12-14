@@ -11,7 +11,8 @@ import {
   ErrorShow,
   FormUpdate,
   Image,
-  TextFieldContainer
+  TextFieldContainer,
+  Experiencia
 } from "./styles";
 
 const MyProfile = () => {
@@ -22,21 +23,13 @@ const MyProfile = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [profilePicture, setProfilePicture] = useState("");
+  const [title, setTitle] = useState("");
+  const [experience, setExperience] = useState("");
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
   const [errorNames, setErrorNames] = useState({
     firstNameError: "",
     lastNameError: ""
   });
-  const [disableRegisterButton, setDisableRegisterButton] = useState(true);
-
-  useEffect(() => {
-    const shouldDisableRegisterButton =
-      UpdatePassword.length === 0 ||
-      firstName.length === 0 ||
-      lastName.length === 0;
-
-    setDisableRegisterButton(shouldDisableRegisterButton);
-  }, [lastName.length, firstName.length, UpdatePassword]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -67,12 +60,12 @@ const MyProfile = () => {
   }, []);
 
   const validatePassword = (clave) => {
-    if (clave.length < 8 || clave.length > 16)
+    if ((clave.length >= 8 && clave.length <= 16) || clave.length === 0) {
+      setPasswordErrorMessage("");
+    } else {
       setPasswordErrorMessage(
         "La contraseña debe tener entre 8 y 16 caracterees."
       );
-    else {
-      setPasswordErrorMessage("");
     }
 
     setUpdatePassword(clave);
@@ -97,16 +90,19 @@ const MyProfile = () => {
   const updateMentor = async (e) => {
     e.preventDefault();
 
-    if (UpdatePassword.length < 8) {
+    if (UpdatePassword.length < 8 && UpdatePassword.length !== 0) {
       setPasswordErrorMessage("La contraseña es muy corta.");
       return;
     }
 
     const formData = new FormData();
     formData.append("_id", loggedUser._id);
-    if (firstName) formData.append("name", firstName);
-    if (lastName) formData.append("lastName", lastName);
-    if (UpdatePassword) formData.append("password", UpdatePassword);
+    if (firstName.length !== 0) formData.append("name", firstName);
+    if (lastName.length !== 0) formData.append("lastName", lastName);
+    if (title.length !== 0) formData.append("title", title);
+    if (experience.length !== 0) formData.append("experience", experience);
+    if (UpdatePassword.length !== 0)
+      formData.append("password", UpdatePassword);
     if (profilePicture) formData.append("profilePhoto", profilePicture);
 
     try {
@@ -174,6 +170,26 @@ const MyProfile = () => {
             <ErrorShow>{passwordErrorMessage}</ErrorShow>
           </TextFieldContainer>
           <TextFieldContainer>
+            <Input
+              labelText="Titulo"
+              placeholder="Ingrese su título como tutor"
+              onChangeHandler={(e) => {
+                setTitle(e.target.value);
+              }}
+            />
+          </TextFieldContainer>
+          <TextFieldContainer>
+            <label htmlFor="registro-experiencia">Experiencia</label>
+            <Experiencia
+              id="registro-experiencia"
+              placeholder="Ingrese brevemente su experiencia"
+              value={experience}
+              onChange={(e) => {
+                setExperience(e.target.value);
+              }}
+            />
+          </TextFieldContainer>
+          <TextFieldContainer>
             <label htmlFor="registro-experiencia">Foto de perfil</label>
             <input
               type="file"
@@ -187,9 +203,7 @@ const MyProfile = () => {
             />
           </TextFieldContainer>
         </TextFieldsContainer>
-        <PrimaryButton isDisabled={disableRegisterButton} type="submit">
-          Actualizar
-        </PrimaryButton>
+        <PrimaryButton type="submit">Actualizar</PrimaryButton>
       </FormUpdate>
     </Wrapper>
   );
