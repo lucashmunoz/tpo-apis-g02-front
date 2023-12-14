@@ -50,6 +50,8 @@ const MyProfile = () => {
           setActualData(mentorResponse.data.mentor);
           setFirstName(mentorResponse.data.mentor.name);
           setLastName(mentorResponse.data.mentor.lastName);
+          setTitle(mentorResponse.data.mentor.title);
+          setExperience(mentorResponse.data.mentor.workExperience);
           setProfilePicture(mentorResponse.data.mentor.profilePhoto);
           console.log(actualData);
         }
@@ -100,7 +102,7 @@ const MyProfile = () => {
     if (firstName.length !== 0) formData.append("name", firstName);
     if (lastName.length !== 0) formData.append("lastName", lastName);
     if (title.length !== 0) formData.append("title", title);
-    if (experience.length !== 0) formData.append("experience", experience);
+    if (experience.length !== 0) formData.append("workExperience", experience);
     if (UpdatePassword.length !== 0)
       formData.append("password", UpdatePassword);
     if (profilePicture) formData.append("profilePhoto", profilePicture);
@@ -172,6 +174,7 @@ const MyProfile = () => {
           <TextFieldContainer>
             <Input
               labelText="Titulo"
+              value={title}
               placeholder="Ingrese su título como tutor"
               onChangeHandler={(e) => {
                 setTitle(e.target.value);
