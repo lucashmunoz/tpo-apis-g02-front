@@ -19,7 +19,7 @@ const placeholders = [
   "Ingresa lo que quieres aprender",
   "Matemáticas",
   "Inglés",
-  "Cocina Hogareña"
+  "Programación"
 ];
 
 /**

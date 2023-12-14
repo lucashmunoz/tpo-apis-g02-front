@@ -324,7 +324,7 @@ const ServiceDetail = () => {
           </AcercaDe>
           <AcercaDe>
             <AcercaDeTitle>Sobre mí</AcercaDeTitle>
-            <AcercaDeContent>{`${loggedUser.title}\n${loggedUser.workExperience}`}</AcercaDeContent>
+            <AcercaDeContent>{`${serviceDetail?.mentor?.title}\n${serviceDetail?.mentor?.workExperience}`}</AcercaDeContent>
           </AcercaDe>
           <CommentsContainer>
             <CommentsLabel>Comentarios de clientes pasados</CommentsLabel>
