@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import Input from "components/Input";
 import axios from "axios";
 import UserContext from "user-context";
@@ -12,7 +12,8 @@ import {
   ErrorShow,
   FormRegister,
   Image,
-  TextFieldContainer
+  TextFieldContainer,
+  Experiencia
 } from "./styles";
 
 const Register = () => {
@@ -21,7 +22,11 @@ const Register = () => {
   const [registerPassword, setRegisterPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [registerTitle, setRegisterTitle] = useState("");
+  const [registerExperience, setRegisterExperience] = useState("");
   const [profilePicture, setProfilePicture] = useState("");
+  const [errorRegisterTitle, setErrorRegisterTitle] = useState("");
+  const [errorRegisterExperience, setErrorRegisterExperience] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
   const [errorNames, setErrorNames] = useState({
@@ -29,19 +34,25 @@ const Register = () => {
     lastNameError: ""
   });
 
-  const [disableRegisterButton, setDisableRegisterButton] = useState(true);
-
   const [, setLoggedUser] = useContext(UserContext);
 
-  useEffect(() => {
-    const shouldDisableRegisterButton =
+  const disableRegisterButton = useMemo(
+    () =>
       registerMail.length === 0 ||
       registerPassword.length === 0 ||
       firstName.length === 0 ||
-      lastName.length === 0;
-
-    setDisableRegisterButton(shouldDisableRegisterButton);
-  }, [lastName.length, registerMail, firstName.length, registerPassword]);
+      lastName.length === 0 ||
+      registerTitle.length === 0 ||
+      registerExperience.length === 0,
+    [
+      lastName.length,
+      registerMail,
+      firstName.length,
+      registerPassword,
+      registerTitle.length,
+      registerExperience.length
+    ]
+  );
 
   const validateEmail = (email) => {
     const emailRegex = new RegExp(/^([A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4})$/i);
@@ -112,6 +123,7 @@ const Register = () => {
           email: response.data.loginmentor.Mentor.email,
           lastName: response.data.loginmentor.Mentor.lastName,
           title: response.data.loginmentor.Mentor.title,
+          workExperience: response.data.loginmentor.Mentor.workExperience,
           isUserLoggedIn: true,
           token: response.data.loginmentor.token,
           profilePhoto: response.data.loginmentor.Mentor.profilePhoto
@@ -136,13 +148,23 @@ const Register = () => {
       return;
     }
 
+    if (registerTitle.length === 0) {
+      setErrorRegisterTitle("Ingrese su título como tutor.");
+      return;
+    }
+
+    if (registerExperience.length === 0) {
+      setErrorRegisterExperience("Ingrese una breve experiencia como tutor.");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("name", firstName);
     formData.append("lastName", lastName);
     formData.append("email", registerMail);
     formData.append("password", registerPassword);
-    formData.append("title", "");
-    formData.append("workExperience", "");
+    formData.append("title", registerTitle);
+    formData.append("workExperience", registerExperience);
     formData.append("profilePhoto", profilePicture);
 
     try {
@@ -208,6 +230,28 @@ const Register = () => {
               type="password"
             />
             <ErrorShow>{passwordErrorMessage}</ErrorShow>
+          </TextFieldContainer>
+          <TextFieldContainer>
+            <Input
+              labelText="Titulo"
+              placeholder="Ingrese su título como tutor"
+              onChangeHandler={(e) => {
+                setRegisterTitle(e.target.value);
+              }}
+            />
+            <ErrorShow>{errorRegisterTitle}</ErrorShow>
+          </TextFieldContainer>
+          <TextFieldContainer>
+            <label htmlFor="registro-experiencia">Experiencia</label>
+            <Experiencia
+              id="registro-experiencia"
+              placeholder="Ingrese brevemente su experiencia"
+              value={registerExperience}
+              onChange={(e) => {
+                setRegisterExperience(e.target.value);
+              }}
+            />
+            <ErrorShow>{errorRegisterExperience}</ErrorShow>
           </TextFieldContainer>
           <TextFieldContainer>
             <label htmlFor="registro-experiencia">Foto de perfil</label>

@@ -363,13 +363,8 @@ const MyServiceDetails = () => {
           <AcercaDe>
             <AcercaDeTitle>Sobre mí</AcercaDeTitle>
             <AcercaDeContent
-              value={datosPublicacion.aboutMe}
-              onChange={(e) =>
-                setDatosPublicacion((prevDatos) => ({
-                  ...prevDatos,
-                  aboutMe: e.target.value
-                }))
-              }
+              disabled
+              value={`${loggedUser.title}\n${loggedUser.workExperience}`}
             />
           </AcercaDe>
 
