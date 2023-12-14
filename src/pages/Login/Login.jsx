@@ -105,8 +105,9 @@ const Login = () => {
   };
 
   const handleRecuperarClave = async () => {
+    let response;
     try {
-      await axios.post(
+      response = await axios.post(
         "http://localhost:4000/api/mentors/forgottenpass",
         {
           mail: loginEmail
@@ -119,7 +120,13 @@ const Login = () => {
         }
       );
     } catch (e) {
+      response = e.response;
       setErrorEmail(e.message);
+    }
+
+    if (response?.data?.status === 422) {
+      setErrorEmail("El email no se encuentra registrado.");
+      return;
     }
 
     setErrorEmail("Se envio un mail para recuperar la cuenta.");
